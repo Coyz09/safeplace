@@ -1,0 +1,24 @@
+NOTES:
+1. Report Should be categorized
+2. Lapay kailangan namin ng advise mo
+3. Sino magmamap ng crime rate and covid cases
+4. Number of police station per barangay
+
+
+Web Role:
+1. Barangay - AUTH, MANAGE REPORT IN BARANGAY LEVEL,
+2. Police Station - AUTH, MANAGE REPORT and POLICE
+3. Admin - Local Government
+4. Super Admin - All Functions
+
+
+Notes (Not Sure) 9/8/22:
+1. Recorded yung call sa user app
+2. After ng call yung recorded call macocopy sa database papuntang sa database ng police station
+
+
+Consultation 9/8/22:
+1. Sino talaga pwedeng maging admin?
+2. Included ba mga barangay tanod sa mobile app?
+3. Pwede ba palitan yung function na call to policemen gawing call to police station?
+
