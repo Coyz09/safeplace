@@ -90,7 +90,8 @@ class User extends Authenticatable implements JWTSubject
                 return false; 
             }
         }
-    public function isSuperAdmin()
+        
+        public function isSuperAdmin()
         {
             if($this->role === "superadmin")
             { 
@@ -101,5 +102,18 @@ class User extends Authenticatable implements JWTSubject
                 return false; 
             }
         }
+
+        public function isUser()
+        {
+            if($this->role === "unverified_user" || $this->role === "verified_user")
+            { 
+                return true; 
+            } 
+            else 
+            { 
+                return false; 
+            }
+        }
+
     
 }

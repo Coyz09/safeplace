@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class SuperAdmin
+class Users
 {
     /**
      * Handle an incoming request.
@@ -17,15 +17,18 @@ class SuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-       if (Auth::check())
-       {
+    //    if (!Auth::guard('web')->check())
+    //    {
     
-            if(Auth::guard('web')->user()->isSuperAdmin())
+            if(Auth::guard('web')->user()->isUser())
             {
                 return $next($request);
             }
-       }
+            else{
+                return redirect()->back()->with('error',"You do not have access!"); 
+            }
+    //    }
     
-       return redirect()->route('user.signin')->with('error',"Please Login!");
+       
     }
 }

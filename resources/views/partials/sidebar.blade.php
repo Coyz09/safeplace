@@ -85,7 +85,7 @@
          </a>
        </li> -->
        
-     @if(auth()->user()->role == 'superadmin')
+     @if(auth()->guard('web')->user()->role == 'superadmin')
        
         <li class="tooltip-element">
           <a href="/user">
@@ -97,7 +97,7 @@
           </a>
         </li>
 
-        @elseif(auth()->user()->role == 'admin')
+        @elseif(auth()->guard('web')->user()->role == 'admin')
             <!-- <div class="icon">
              
             </div>         -->

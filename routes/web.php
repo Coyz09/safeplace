@@ -37,32 +37,58 @@ Route::group(['prefix' => 'user'], function(){
                 'as' => 'user.signup',
            ]);
 
-        Route::get('signin', [
+        Route::get('login', [
                 'uses' => 'UserController@getSignin',
                 'as' => 'user.signin',
             ]);
 
-        Route::post('signin', [
+        Route::post('login', [
                 'uses' => 'LoginController@postSignin',
                 'as' => 'users.signin',
          ]);
 
     });
 
-    Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => 'auth:web'], function() {
+
+        // Route::get('profile', [
+        //     'uses' => 'UserController@getProfile',
+        //     'as' => 'user.profile',
+        // ]);
+  
+        Route::get('logout', [
+            'uses' => 'UserController@getLogout',
+            'as' => 'user.logout',
+            ]);
+        });
+    
+    // Route::group(['middleware' => 'role:unverified_user'], function() {
+
+    //     Route::get('profile', [
+    //         'uses' => 'UserController@getProfile',
+    //         'as' => 'user.profile',
+    //     ]);
+    // });
+
+    // Route::group(['middleware' =>  'role:verified_user'], function() {
+
+    //     Route::get('profile', [
+    //         'uses' => 'UserController@getProfile',
+    //         'as' => 'user.profile',
+    //     ]);
+    // });
+
+});
+
+ Route::group(['middleware' => 'normaluser'], function() {
 
         Route::get('profile', [
             'uses' => 'UserController@getProfile',
             'as' => 'user.profile',
         ]);
-
-   Route::get('logout', [
-        'uses' => 'UserController@getLogout',
-        'as' => 'user.logout',
-        ]);
     });
 
-});
+
 
 //SuperAdmin User
 Route::group(['middleware' => 'role:superadmin'], function() {

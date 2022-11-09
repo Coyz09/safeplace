@@ -12,7 +12,9 @@ use App\Models\UnverifiedUser;
 use App\Models\VerifiedUser;
 use App\Models\User;
 use Yajra\Datatables\Datatables;
-
+use Session;
+use Hash;
+use Cookie;
 class UserController extends Controller
 {
 
@@ -197,9 +199,21 @@ class UserController extends Controller
     // }
 
 
-    public function getLogout(){
+    public function getLogout(Request $request){
+      
+        // Session::flush();
+        // Session::forget();
+        // Session::invalidate();
+        // Session::regenerateToken();
         Auth::logout();
-        return redirect()->route('frontpage.index');
+        // $request->session()->flush();
+        // $request->session()->invalidate();
+
+        // $request->session()->regenerateToken(); // add this line here
+        // $rememberMeCookie = Auth::getRecallerName();
+        // // Tell Laravel to forget this cookie
+        // $cookie = Cookie::forget($rememberMeCookie);
+        return redirect()->route('user.signin') ->with('success','Successfully Logout');;
     }
 
 }
