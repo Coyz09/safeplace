@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UnverifiedUser;
 use App\Models\User;
 
+use DB;
 use Auth;
 use Hash;
 use JWTAuth;
@@ -64,6 +65,8 @@ class AuthController extends Controller
 
     }
 
+    
+
     public function register(Request $request) {
 
         $encryptedPass = Hash::make($request->password);
@@ -74,7 +77,7 @@ class AuthController extends Controller
 
         try{
             $user = User::create([
-                'name' => $request->name,
+                'name' => $request->fname.' '.$request->mname.' '.$request->lname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'unverified_user',
@@ -82,12 +85,12 @@ class AuthController extends Controller
             $user->save();
 
             $unverified_user->user_id = $user->id;
-            $unverified_user->name = $request->name;
-            $unverified_user->address = $request->address;
-            $unverified_user->birthdate = $request->birthdate;
-            $unverified_user->gender = $request->gender;
+            $unverified_user->fname = $request->fname;
+            $unverified_user->mname = $request->mname;
+            $unverified_user->lname = $request->lname;
             $unverified_user->email = $request->email;
-            $unverified_user->contact = $request->contact;
+
+
             $unverified_user->status = 'Pending';
             $unverified_user->save();
 
@@ -122,4 +125,26 @@ class AuthController extends Controller
         }
     }
 
+    public function save_user_info(Request $request){
+
+        // $unverified_user = new UnverifiedUser;
+        $user = User::find(Auth::user()->id);
+    
+        $unverified_user = DB::table('unverified_users')
+        ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+        ->select('unverified_users.user_id')
+        ->where('unverified_users.user_id', '=',  $user->id )
+        ->update(['address'=>$request->address,'birthdate'=>$request->birthdate,'gender'=>$request->gender,'contact'=>$request->contact]);
+    
+        return response()->json([
+            'success' => true,
+            // 'photo' => $photo
+            "info" => $unverified_user
+        ]);
+    
+    }
+
 }
+
+
+
