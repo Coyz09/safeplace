@@ -133,13 +133,11 @@ class AuthController extends Controller
             $img = '';
 
             if($request->img!=''){
-                $img = time().'.jpg';
-                file_put_contents('storage/images/'.$img,base64_decode($request->img));
+                $img = 'storage/images/'.time().'.jpg';
+                file_put_contents($img,base64_decode($request->img));
                 $user->img = $img;
             }
             $user->update();
-
-
 
 
             $unverified_user = DB::table('unverified_users')
