@@ -11,6 +11,7 @@ use DB;
 use Auth;
 use Hash;
 use JWTAuth;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -21,6 +22,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $token = auth()->guard('api')->attempt($credentials);
 
+
         if ($token) {
 
             if (auth()->guard('api')->user()->role == 'admin') {
@@ -30,14 +32,21 @@ class AuthController extends Controller
                 ]);
             }
 
-            if (auth()->guard('api')->user()->role == 'barangay') {
+            elseif (auth()->guard('api')->user()->role == 'superadmin') {
                 return response()->json([
                     'status' => false,
                     'message' => 'Unauthorized',
                 ]);
             }
 
-            if (auth()->guard('api')->user()->role == 'police') {
+            elseif (auth()->guard('api')->user()->role == 'barangay') {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Unauthorized',
+                ]);
+            }
+
+            elseif (auth()->guard('api')->user()->role == 'police') {
                 return response()->json([
                     'status' => false,
                     'message' => 'Unauthorized',
@@ -45,15 +54,27 @@ class AuthController extends Controller
             }
 
             else{
+
+
+                $user = User::find(Auth::user()->id);
+
+
+                $user = DB::table('unverified_users')
+                ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+                ->select('unverified_users.*','users.img')
+                ->where('unverified_users.user_id', '=',  $user->id )->get();
+
                 return response()->json([
                     'success' => true,
                     'token' => $token,
-                    'user' => auth()->guard('api')->user()
+                    'user' => $user
                 ]);
             }
         }
 
         else{
+
+
             return response()->json([
                 'status' => false,
                 'message' => 'Invalid Credentials',
@@ -76,6 +97,7 @@ class AuthController extends Controller
 
 
         try{
+
             $user = User::create([
                 // 'name' => $request->fname.' '.$request->mname.' '.$request->lname,
                 'email' => $request->email,
@@ -117,7 +139,8 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'logout success'
             ]);
-        } catch(Exception $e){
+        }
+        catch(Exception $e){
             return response()->json([
                 'success' => false,
                 'message' => ''.$e
@@ -126,8 +149,6 @@ class AuthController extends Controller
     }
 
     public function save_user_info(Request $request){
-
-
             $user = User::find(Auth::user()->id);
 
             $img = '';
@@ -140,6 +161,7 @@ class AuthController extends Controller
             $user->update();
 
 
+
             $unverified_user = DB::table('unverified_users')
             ->join('users', 'unverified_users.user_id',  '=', 'users.id')
             ->select('unverified_users.user_id')
@@ -150,17 +172,35 @@ class AuthController extends Controller
                 'gender'=>$request->gender,
                 'contact'=>$request->contact]);
 
-
+            $user = DB::table('unverified_users')
+            ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+            ->select('unverified_users.*','users.img')
+            ->where('unverified_users.user_id', '=',  $user->id )->get();
 
 
 
             return response()->json([
                 'success' => true,
                 'user' => $user,
-                'img' => $img
+                'img' => $img,
             ]);
+    }
+
+    public function get_user_info(Request $request){
+        $user = User::find(Auth::user()->id);
+
+        $user = DB::table('unverified_users')
+            ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+            ->select('unverified_users.*','users.img')
+            ->where('unverified_users.user_id', '=',  $user->id )->get();
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+        ]);
 
     }
+
 
 }
 
