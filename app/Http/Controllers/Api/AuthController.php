@@ -77,7 +77,7 @@ class AuthController extends Controller
 
         try{
             $user = User::create([
-                'name' => $request->fname.' '.$request->mname.' '.$request->lname,
+                // 'name' => $request->fname.' '.$request->mname.' '.$request->lname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'unverified_user',
