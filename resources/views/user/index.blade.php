@@ -43,12 +43,13 @@
                   <div class="col-sm-6">
                       <a href="{{ route('user.create') }}" class="btn btn-secondary"><i class='bx bxs-plus-circle'></i><span>Create New Record</span></a>
                   </div>
-                
+
               </div>
           </div>
           <table id="user-table" class="table table-striped table-hover">
               <thead>
                   <tr>
+
 
                       <th scope="col">User ID</th>
                       <th scope="col">User Name</th>
@@ -58,9 +59,9 @@
                       <th style="width: 100px">Action</th>
                   </tr>
               </thead>
-             
+
           </table>
-         
+
   </div>
 </div>
 @endsection
@@ -70,7 +71,7 @@
 
 @section('scripts')
   <script >
-    $(document).ready(function() 
+    $(document).ready(function()
     {
       $('#user-table').DataTable({
             processing: true,
@@ -86,10 +87,12 @@
                   return "<img src=\"" + data + "\" height=\"100\" width=\"100\"/>";
               },orderable: false},
               { data: 'action', name: 'action', orderable: false},
-              
+
              ]
         });
   });
+
+
 
   </script>
   @endsection
