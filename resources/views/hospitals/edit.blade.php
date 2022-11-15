@@ -213,12 +213,27 @@
              </div>
     
              {{-- Hospital Location --}}
+            
               <div class="input-box">
-                <div class="form-group">
-                  {!!Form::label('Hospital Location:')!!}
-                  {!! Form::text('hospital_location',$hospital->hospital_location,array('class' => 'form-control')) !!}
-                </div>
-              </div>
+             <div class="form-group">
+             {!!Form::label('Hospital Location:')!!}
+              <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="hospital_location" id="address" value="{{$hospital->hospital_location}}">
+                <input type="hidden" name="latitude" id="address-latitude" value="{{ $hospital->latitude ?? '0' }}" />
+                <input type="hidden" name="longitude" id="address-longitude" value="{{  $hospital->longitude ?? '0' }}" />
+                @if($errors->has('address'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('address') }}
+                    </div>
+                @endif
+           
+            </div>  
+            </div>
+
+                 
+            <div id="address-map-container" class="mb-2" style="width:100%;height:400px; ">
+                <div style="width: 100%; height: 100%" id="address-map"></div>
+            </div>
+
 
               {{-- Hospital Schedule --}}
              <div class="input-box">
@@ -248,6 +263,11 @@
     
   </div>
 </div>
+@endsection
+@section('scripts')
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
+<script src="/js/mapInput.js"></script>
+
 @endsection
 
 

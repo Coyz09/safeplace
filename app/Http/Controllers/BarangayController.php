@@ -42,7 +42,8 @@ class BarangayController extends Controller
       $rules =[
         'barangay_name' => 'required|min:2|max:100',
         'barangay_captain' => 'required',
-        'barangay_location' => 'required',
+        // 'barangay_location' => 'required',
+        'address' => 'required',
         'barangay_schedule' => 'required',
         'barangay_contact' => 'numeric',
           ];
@@ -53,6 +54,7 @@ class BarangayController extends Controller
         'max' => '*Too Long!', 
         'numeric' => '*Numbers Only',
         'barangay_name.required' => '*Barangay Name Required',
+        'address.required' => '*Barangay Address Required',
       ];
 
       $validator = Validator::make($request->all(), $rules,$messages);
@@ -75,7 +77,10 @@ class BarangayController extends Controller
           $barangay = new Barangay; 
           $barangay->barangay_name = $request->barangay_name;
           $barangay->barangay_captain = $request->barangay_captain;
-          $barangay->barangay_location= $request->barangay_location;
+          // $barangay->barangay_location= $request->barangay_location;
+          $barangay->barangay_location= $request->input('address');
+          $barangay->latitude= $request->input('latitude');
+          $barangay->longitude= $request->input('longitude');
           $barangay->barangay_schedule= $request->barangay_schedule;
           $barangay->barangay_contact= $request->barangay_contact;
           $barangay->user_id = $user->id;

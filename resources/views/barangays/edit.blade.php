@@ -202,12 +202,30 @@
               </div>
     
               {{-- Barangay Location --}}
-              <div class="input-box">
+              <!-- <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Barangay Location:')!!}
                   {!! Form::text('barangay_location',$barangay->barangay_location,array('class' => 'form-control')) !!}
                 </div>
-              </div>
+              </div> -->
+              <div class="input-box">
+             <div class="form-group">
+              {!!Form::label('Barangay Location:')!!}
+              <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="barangay_location" id="address" value="{{$barangay->barangay_location}}">
+                <input type="hidden" name="latitude" id="address-latitude" value="{{ $barangay->latitude ?? '0' }}" />
+                <input type="hidden" name="longitude" id="address-longitude" value="{{  $barangay->longitude ?? '0' }}" />
+                @if($errors->has('address'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('address') }}
+                    </div>
+                @endif
+           
+            </div>  
+            </div>
+            
+            <div id="address-map-container" class="mb-2" style="width:100%;height:400px; ">
+                <div style="width: 100%; height: 100%" id="address-map"></div>
+            </div>
 
               
               {{-- Barangay Schedule --}}
@@ -239,9 +257,10 @@
               {{-- Barangay Password --}}
               <div class="input-box">
               @foreach ($passwords as $password)
+           
                 <div class="form-group">
                   {!!Form::label('Barangay Password:')!!}
-                  {!! Form::password('password',null,array('class' => 'form-control')) !!}
+                  {!! Form::text('password',null,array('class' => 'form-control')) !!}
                 </div>
                 @endforeach
               </div>
@@ -251,12 +270,8 @@
                   {!! Form::hidden('user_id',$barangay->user_id,array('class' => 'form-control')) !!}
                 </div>
               </div>
-
-              
     
       </div>
-
-
 
     <div class="button">
       {{ Form::submit('Update',['class'=>'btn btn-primary']) }}
@@ -270,3 +285,10 @@
   </div>
 </div>
 @endsection
+
+@section('scripts')
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
+<script src="/js/mapInput.js"></script>
+
+@endsection
+
