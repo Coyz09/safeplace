@@ -121,6 +121,45 @@ class UserController extends Controller
         public function destroy($id)
          {
              $user = User::find($id);
+
+             if ($user->role == "unverified_user"){
+
+                $delete_unverified_user = DB::table('unverified_users')
+                ->select('user_id')
+                ->where('user_id', '=', $id)
+                 ->delete();    
+             }
+
+             elseif ($user->role == "verified_user"){
+                $delete_verified_user = DB::table('verified_users')
+                ->select('user_id')
+                ->where('user_id', '=', $id)
+                  ->delete();  
+                // ->get();
+               
+                //  dd ($delete_verified_user);
+            }
+
+             elseif ($user->role == "barangay"){
+                $delete_barangay = DB::table('barangays')
+                ->select('user_id')
+                ->where('user_id', '=', $id)
+                  ->delete();  
+                // ->get();
+               
+                //  dd ($delete_barangay );
+             }
+
+             elseif ($user->role == "police_station"){
+                $delete_police_station = DB::table('police_stations')
+                ->select('user_id')
+                ->where('user_id', '=', $id)
+                  ->delete();  
+                // ->get();
+               
+                //  dd ($delete_police_station );
+            }
+
              $user->delete();
              
               return Redirect::to('user')->with('success','User deleted!');
