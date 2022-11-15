@@ -19,6 +19,8 @@ class CreateHospitalsTable extends Migration
             $table->string('hospital_type');
             $table->string('hospital_medical_director');
             $table->string('hospital_location');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->string('hospital_schedule');
             $table->string('hospital_contact');
             $table->timestamps();

@@ -50,12 +50,13 @@
               <thead>
                   <tr>
 
-                    <th scope="col">User ID</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">User Email</th>
-                    <th scope="col">User Role</th>
-                    <th scope="col">User Image</th>
-                    <th style="width: 100px">Action</th>
+
+                      <th scope="col">User ID</th>
+                      <th scope="col">User Name</th>
+                      <th scope="col">User Email</th>
+                      <th scope="col">User Role</th>
+                      <th scope="col">User Image</th>
+                      <th style="width: 100px">Action</th>
                   </tr>
               </thead>
 

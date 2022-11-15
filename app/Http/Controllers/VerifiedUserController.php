@@ -54,7 +54,7 @@ class VerifiedUserController extends Controller
         $verifieduser = VerifiedUser::find($id);
 
         $passwords = DB::table('users')
-        ->join('police_stations', 'users.id', '=', 'police_stations.user_id')
+        ->join('verified_users', 'users.id', '=', 'verified_users.user_id')
         ->select('users.id','users.password')
         ->pluck('users.password','users.id');
 

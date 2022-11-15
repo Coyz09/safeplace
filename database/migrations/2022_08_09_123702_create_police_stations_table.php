@@ -18,6 +18,8 @@ class CreatePoliceStationsTable extends Migration
             $table->string('policestation_name');
             $table->string('policestation_commander');
             $table->string('policestation_location');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->string('policestation_schedule');
             $table->string('policestation_contact');
             $table->string('user_id');
