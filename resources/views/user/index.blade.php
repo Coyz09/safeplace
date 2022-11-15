@@ -54,6 +54,7 @@
                       <th scope="col">User Name</th>
                       <th scope="col">User Email</th>
                       <th scope="col">User Role</th>
+                      <th scope="col">User Image</th>
                       <th style="width: 100px">Action</th>
                   </tr>
               </thead>
@@ -80,7 +81,12 @@
               { data: 'name', name: 'name' },
               { data: 'email', name: 'email' },
               { data: 'role', name: 'role' },
+              { data: 'img', name: 'img',
+              "render": function (data, type, full, meta) {
+                  return "<img src=\"" + data + "\" height=\"100\" width=\"100\"/>";
+              },orderable: false},
               { data: 'action', name: 'action', orderable: false},
+              
              ]
         });
   });

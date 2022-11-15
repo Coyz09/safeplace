@@ -9,7 +9,8 @@ class PoliceStation extends Model
 {
     use HasFactory;
     public $table = 'police_stations';
-   protected $fillable = ['policestation_name','policestation_commander','policestation_location','policestation_schedule','policestation_contact','user_id'];
+   protected $fillable = ['policestation_name','policestation_commander','policestation_location','latitude',
+   'longitude','policestation_schedule','policestation_contact','user_id'];
    public $timestamps =true;
    public $primaryKey = 'id';
 

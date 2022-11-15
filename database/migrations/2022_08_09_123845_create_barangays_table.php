@@ -18,6 +18,8 @@ class CreateBarangaysTable extends Migration
             $table->string('barangay_name');
             $table->string('barangay_captain');
             $table->string('barangay_location');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->string('barangay_schedule');
             $table->string('barangay_contact');
             $table->string('user_id');

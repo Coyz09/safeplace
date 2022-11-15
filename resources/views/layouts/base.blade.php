@@ -1,8 +1,10 @@
-<!doctype html>
- <html lang="en">
+<!DOCTYPE html>
+ <html>
         <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
 
                 <title></title>
                 <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -15,11 +17,11 @@
                 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
                 <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
 
-
+                @yield('styles')
         </head>
-    <body>
+ 
 
-
+        @yield('scripts')
     <div class="container">
         @yield('content')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js?fbclid=IwAR3yFSufp9dyKjMyZjF3_dGB6Vd-ikO7BH0M8TXV-00DyglDblGq4C4kRak"></script>

@@ -133,6 +133,8 @@ class UserController extends Controller
      public function postSignup(Request $request){
         $this->validate($request, [
             'fname' => 'required| min:4',
+            'mname' => 'required| min:4',
+            'lname' => 'required| min:4',
             'email' => 'email|required|unique:users',
             'password' => 'required| min:4',
             'gender'=> 'required|min:2|max:20',
@@ -151,7 +153,7 @@ class UserController extends Controller
            
            $input['img'] = 'storage/images/'.$img;
 
-           $user = new User([
+           $user = User::create([
             'name' => $request->input('fname').' '.$request->mname.' '.$request->lname,
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
@@ -160,6 +162,13 @@ class UserController extends Controller
          ]);
          $user->save();
         }
+
+        //  $login = new User([
+        //     'email' => $request->input('email'),
+        //     'password' => bcrypt($request->input('password')),
+ 
+        //  ]);
+         Auth::guard('web')->login($user);
             // dd($input['img'] );  
 
          $unverified_user = new UnverifiedUser;
@@ -175,7 +184,6 @@ class UserController extends Controller
          $unverified_user->status = 'Pending';
          $unverified_user->save();
 
-        //  Auth::login($user);
          return redirect()->route('user.profile')->with('success',"Successfully Signup!");
     }
 

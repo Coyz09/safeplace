@@ -37,7 +37,7 @@ class PoliceStationController extends Controller
          $rules =[
           'policestation_name' => 'required|min:2|max:100',
           'policestation_commander' => 'required',
-          'policestation_location' => 'required',
+          'address' => 'required',
           'policestation_schedule' => 'required',
           'policestation_contact' => 'numeric',
                   ];
@@ -48,6 +48,7 @@ class PoliceStationController extends Controller
             'max' => '*Too Long!', 
             'numeric' => '*Numbers Only',
             'policestation_name.required' => '*Police Station Name Required',
+            'address.required' => '*Police Station Address Required',
           ];
 
       $validator = Validator::make($request->all(), $rules,$messages);
@@ -69,7 +70,9 @@ class PoliceStationController extends Controller
         $policestation = new  PoliceStation; 
         $policestation->policestation_name = $request->policestation_name;
         $policestation->policestation_commander= $request->policestation_commander;
-        $policestation->policestation_location= $request->policestation_location;
+        $policestation->policestation_location= $request->input('address');
+        $policestation->latitude= $request->input('latitude');
+        $policestation->longitude= $request->input('longitude');
         $policestation->policestation_schedule= $request->policestation_schedule;
         $policestation->policestation_contact= $request->policestation_contact;
         $policestation->user_id = $user->id;
@@ -123,6 +126,7 @@ class PoliceStationController extends Controller
           'max' => '*Too Long!', 
           'numeric' => '*Numbers Only',
           'policestation_name.required' => '*Police Station Name Required',
+          'policestation_location.required' => '*Police Station Address Required',
         ];
 
       $validator = Validator::make($request->all(), $rules,$messages);
