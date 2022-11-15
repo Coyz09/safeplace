@@ -269,7 +269,7 @@
               @foreach ($passwords as $password)
                 <div class="form-group">
                   {!!Form::label('PoliceStation Password:')!!}
-                  {!! Form::password('password',null,array('class' => 'form-control')) !!}
+                  {!! Form::text('password',null,array('class' => 'form-control')) !!}
                 </div>
                 @endforeach
               </div>
