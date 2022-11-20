@@ -22,7 +22,7 @@ class CreatePoliceStationsTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('policestation_schedule');
             $table->string('policestation_contact');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->string('user_id');
             $table->timestamps();
         });

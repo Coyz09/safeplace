@@ -23,7 +23,7 @@ class CreateHospitalsTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('hospital_schedule');
             $table->string('hospital_contact');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }
