@@ -10,7 +10,7 @@ class Barangay extends Model
    use HasFactory;
    public $table = 'barangays';
    protected $fillable = ['barangay_name','barangay_captain','barangay_location','latitude',
-   'longitude','barangay_schedule','barangay_contact','user_id'];
+   'longitude','barangay_schedule','barangay_contact','img','user_id'];
    public $timestamps =true;
    public $primaryKey = 'id';
    
