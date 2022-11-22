@@ -203,7 +203,9 @@ class AuthController extends Controller
 
     }
 
-    public function change_password(Request $request){
+
+public function change_password(Request $request){
+
         $user = User::find(Auth::user()->id);
 
         $validator = Validator::make($request->all(),[
@@ -253,14 +255,6 @@ class AuthController extends Controller
                 'message' => 'Old Password does not match. Please try again.',
             ],422);
         }
-
- }
-
-
-
-
-
-
 
 }
 
