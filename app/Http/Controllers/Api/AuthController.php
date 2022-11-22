@@ -67,7 +67,9 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => true,
                     'token' => $token,
-                    'user' => $user
+                    'user' => $user,
+                    'expires_in' => auth()->factory()->getTTL()*60
+
                 ]);
             }
         }
@@ -99,7 +101,7 @@ class AuthController extends Controller
         try{
 
             $user = User::create([
-                // 'name' => $request->fname.' '.$request->mname.' '.$request->lname,
+                'name' => $request->fname.' '.$request->mname.' '.$request->lname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'unverified_user',
@@ -201,7 +203,9 @@ class AuthController extends Controller
 
     }
 
+
 public function change_password(Request $request){
+
         $user = User::find(Auth::user()->id);
 
         $validator = Validator::make($request->all(),[
@@ -218,7 +222,7 @@ public function change_password(Request $request){
         }
 
         if(Hash::check($request->old_password,$user->password)){
-   
+
             if(Hash::check($request->password, $user->password)){
                 return response()->json([
                     'success' => false  ,
@@ -251,8 +255,6 @@ public function change_password(Request $request){
                 'message' => 'Old Password does not match. Please try again.',
             ],422);
         }
-    
- } 
 
 }
 

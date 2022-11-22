@@ -27,6 +27,7 @@ Route::get('get_user_info', 'Api\AuthController@get_user_info')->middleware('jwt
 Route::post('change_password', 'Api\AuthController@change_password')->middleware('jwtAuth');
 
 
+
 Route::resource('hospitals', 'Api\HospitalAPIController');
 Route::resource('police_stations', 'Api\PoliceStationAPIController');
 Route::resource('barangays', 'Api\BarangayAPIController');
