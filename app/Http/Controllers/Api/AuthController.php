@@ -260,3 +260,4 @@ public function change_password(Request $request){
 
 
 
+}
