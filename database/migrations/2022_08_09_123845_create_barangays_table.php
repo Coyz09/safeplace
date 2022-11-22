@@ -22,6 +22,7 @@ class CreateBarangaysTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('barangay_schedule');
             $table->string('barangay_contact');
+            $table->string('img')->nullable();
             $table->string('user_id');
             $table->timestamps();
         });
