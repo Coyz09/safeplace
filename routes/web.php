@@ -20,6 +20,13 @@ Route::get('/',[
     'as' => 'frontpage.index'
 ]);
 
+// Route::get('firebase', [FirebaseController::class, 'index']);
+
+Route::get('firebase',[
+    'uses' => 'FirebaseController@index',
+    'as' => 'firebase.index'
+]);
+
 
 
 

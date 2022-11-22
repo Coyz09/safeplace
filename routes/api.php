@@ -24,7 +24,7 @@ Route::post('register', 'Api\AuthController@register');
 Route::get('logout', 'Api\AuthController@logout');
 Route::post('save_user_info', 'Api\AuthController@save_user_info')->middleware('jwtAuth');
 Route::get('get_user_info', 'Api\AuthController@get_user_info')->middleware('jwtAuth');
-
+Route::post('change_password', 'Api\AuthController@change_password')->middleware('jwtAuth');
 
 
 Route::resource('hospitals', 'Api\HospitalAPIController');
