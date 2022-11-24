@@ -179,7 +179,7 @@ class UserController extends Controller
             'gender'=> 'required|min:2|max:20',
             'birthdate'=> 'required',
             'address' => 'required',
-            'contact' => 'numeric',             
+            'contact' => 'required|numeric',             
             'email'=> 'required|min:2|max:20',
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
         ]);
