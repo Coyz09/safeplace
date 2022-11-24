@@ -31,15 +31,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
-
         @yield('body')
 
 
-
         @yield('scripts')
+           
 
     </div>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
 
     </body>
 

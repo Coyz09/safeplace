@@ -15,25 +15,25 @@
         <div class="alert alert-success hide" id="sent-message"></div>
         <div class="card">
             <div class="card-body">
-                <form>
+           
                     <div class="mb-3">
                         <label for="phone-number" class="form-label">Phone Number:</label>
                         <input type="text" id="phone-number" class="form-control" placeholder="+639XXXXXXXXXX">
                     </div>
                     <div id="recaptcha-container"></div>
                     <button type="button" class="btn btn-info" onclick="otpSend();">Send OTP</button>
-                </form>
+               
             </div>
         </div>
         <div class="card mt-3">
             <div class="card-body">
-                <form>
+             
                     <div class="mb-3">
                         <label for="otp-code" class="form-label">OTP code:</label>
                         <input type="text" id="otp-code" class="form-control" placeholder="Enter OTP Code">
                     </div>
                     <button type="button" class="btn btn-info" onclick="otpVerify();">Verify OTP</button>
-                </form>
+            
             </div>
         </div>
     </div>  
