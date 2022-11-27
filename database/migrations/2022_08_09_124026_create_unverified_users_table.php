@@ -18,10 +18,10 @@ class CreateUnverifiedUsersTable extends Migration
             $table->string('fname');
             $table->string('mname');
             $table->string('lname');
-            $table->string('gender');
-            $table->date('birthdate');
-            $table->string('address');
-            $table->string('contact');
+            $table->string('gender')->nullable();
+            $table->date('birthdate')->nullable();
+            $table->string('address')->nullable();
+            $table->string('contact')->nullable();
             $table->string('email');
             $table->string('id_type')->nullable();
             $table->string('id_number')->nullable();
