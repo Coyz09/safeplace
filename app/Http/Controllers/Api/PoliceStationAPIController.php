@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PoliceStation;
+use DB;
 
 class PoliceStationAPIController extends Controller
 {
@@ -43,6 +44,21 @@ class PoliceStationAPIController extends Controller
 
         $police_station = PoliceStation::create($request->all());
         return response()->json($police_station, 200);
+    }
+
+
+    public function location(Request $request){
+
+        $police_station_location = DB::table('police_stations')
+        ->select('police_stations.id','police_stations.policestation_name','latitude','longitude')
+        ->get();
+
+        return response()->json([
+            'success' => true,
+            'police_station' => $police_station_location
+        ]);
+
+
     }
 
 

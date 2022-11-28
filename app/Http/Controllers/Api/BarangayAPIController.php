@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Barangay;
+use DB;
+
 
 class BarangayAPIController extends Controller
 {
@@ -43,6 +45,20 @@ class BarangayAPIController extends Controller
 
         $barangay = Barangay::create($request->all());
         return response()->json($barangay, 200);
+    }
+
+    public function location(Request $request){
+
+        $barangay_location = DB::table('barangays')
+        ->select('barangays.id','barangays.barangay_name','latitude','longitude')
+        ->get();
+
+        return response()->json([
+            'success' => true,
+            'barangay' => $barangay_location
+        ]);
+
+
     }
 
 }
