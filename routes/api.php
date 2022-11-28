@@ -35,4 +35,6 @@ Route::resource('hospitals', 'Api\HospitalAPIController');
 Route::resource('police_stations', 'Api\PoliceStationAPIController');
 Route::resource('barangays', 'Api\BarangayAPIController');
 
-
+Route::get('hospitals_location', 'Api\HospitalAPIController@location');
+Route::get('barangays_location', 'Api\BarangayAPIController@location');
+Route::get('policestations_location', 'Api\PoliceStationAPIController@location');
