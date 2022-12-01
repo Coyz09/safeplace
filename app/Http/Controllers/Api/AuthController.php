@@ -128,7 +128,7 @@ class AuthController extends Controller
             $unverified_user->email = $request->email;
 
 
-            $unverified_user->status = 'Pending';
+            $unverified_user->status = 'Unverified';
             $unverified_user->save();
 
 
