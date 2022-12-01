@@ -184,8 +184,11 @@
     
       <div class="image-holder"></div>
 
-      {!! Form::open(['route' => 'user.store']) !!}
-      @csrf
+      <!-- {!! Form::open(['route' => 'user.store']) !!}
+      @csrf -->
+      {!! Form::open(['route' => 'user.store', 'files' => true]) !!}
+          {{ csrf_field() }}
+
 
       <div class="title">Add New Record</div>
 
@@ -194,14 +197,14 @@
       <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Name:')!!}
-                  {!! Form::text('name',null,['class' => 'form-control'])!!}
+                  {!! Form::text('name',old('name'),['class' => 'form-control'])!!}
                 </div>
               </div>
 
               <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Email:')!!}
-                  {!! Form::text('email',null,['class' => 'form-control']) !!}
+                  {!! Form::text('email',old('email'),['class' => 'form-control']) !!}
                 </div>
               </div>
 
@@ -212,12 +215,30 @@
                 </div>
               </div>
 
-              <div class="input-box">
+              <!-- <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Role:')!!}
-                  {!! Form::text('role',null,array('class' => 'form-control')) !!}
+                  {!! Form::text('role',old('role'),array('class' => 'form-control')) !!}
                 </div>
-              </div> 
+              </div>  -->
+              <div class="input-box">
+              <div class="form-group">
+                    <label for="role">Role: </label>
+                  
+                    {!! Form::select('role',array('' => 'Choose the role:','unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'barangay' => 'barangay', 'police_station' => 'police_station','admin' => 'admin','superadmin' => 'superadmin'), old('role') ,['class' => 'form-control']) !!}
+                </div>
+                </div> 
+              
+                <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
+
     
       </div>
     

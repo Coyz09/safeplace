@@ -40,38 +40,34 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $rules =[
-            'name' => 'required|min:2|max:200',          
-            'email'=> 'required|min:2|max:200',
-            'password'=> 'required|min:2|max:200',
-            'role'=> 'required|min:2|max:200',
-              ];
 
-        $messages = [
-            'required' => '*Field Empty',
-            'min' => '*Too Short!',
-            'max' => '*Too Long!',
-            'numeric' => '*Numbers Only',
-            'name.required' => '*User Name Required',
-          ];
+        $this->validate($request, [
+          'name' => 'required|min:2|max:200',          
+          'email'=> 'required|min:2|max:200',
+          'password'=> 'required|min:2|max:200',
+          'role'=> 'required|min:2|max:200',
+          'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+      ]);
 
-      $validator = Validator::make($request->all(), $rules,$messages);
-      if($validator->fails())
-      {
-        return redirect()->back()->withInput()->withErrors($validator);
-         
-      }
-      else{
 
-        $user = new User([
-          'name' => $request->input('name'),
-          'email' => $request->input('email'),
-          'password' => bcrypt($request->input('password')),
-          'role' => $request->input('role')]);
-          $user->save();
+        if($request->hasFile('img')){
+          $img = $request->file('img')->getClientOriginalName();
+          
+          $request->file('img')->storeAs('public/images', $img);
+          
+          $input['img'] = 'storage/images/'.$img;
+
+          $user = new User([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'role' => $request->input('role'),
+            'img' => $input['img'] ]);      
+         $user->save();
+       }
 
         return Redirect::to('user')->with('success','New User added!');
-        }
+        // }
     }
 
 
@@ -83,39 +79,40 @@ class UserController extends Controller
 
          public function update(Request $request, $id)
          {
-             $rules =[
-                     'name' => 'required|min:2|max:200',          
-                     'email'=> 'required|min:2|max:200',
-                     'password'=> 'required|min:2|max:200',
-                     'role'=> 'required|min:2|max:200',
-                       ];
-     
-             $messages = [
-                 'required' => '*Field Empty',
-                 'min' => '*Too Short!',
-                 'max' => '*Too Long!',
-                 'numeric' => '*Numbers Only',
-                 'name.required' => '*User Name Required',
-               ];
-           
-              $user = User::find($id);
 
-              $data = [
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
-                'role' => $request->input('role'),
-              ];
+               $this->validate($request, [
+                'name' => 'required|min:2|max:200',          
+                'email'=> 'required|min:2|max:200',
+                'password'=> 'required|min:2|max:200',
+                'role'=> 'required|min:2|max:200',
+                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+            ]);
 
-            //   dd($data);
-            //   $user->update();
-            
+       
+                if($request->hasFile('img')){
+                  $img = $request->file('img')->getClientOriginalName();
+                  
+                  $request->file('img')->storeAs('public/images', $img);
+                  
+                  $input['img'] = 'storage/images/'.$img;
+        
+                  $user = User::find($id);
 
-            $user->update($data);
-     
+                  $data = [
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'password' => bcrypt($request->input('password')),
+                    'role' => $request->input('role'),
+                    'img' => $input['img'],
+                  ];
+    
+       
+    
+                $user->update($data);
+               }
      
               return Redirect::to('user')->with('success','User updated!');
-             
+       
          }
      
         public function destroy($id)
@@ -247,19 +244,7 @@ class UserController extends Controller
 
 
     public function getLogout(Request $request){
-      
-        // Session::flush();
-        // Session::forget();
-        // Session::invalidate();
-        // Session::regenerateToken();
         Auth::logout();
-        // $request->session()->flush();
-        // $request->session()->invalidate();
-
-        // $request->session()->regenerateToken(); // add this line here
-        // $rememberMeCookie = Auth::getRecallerName();
-        // // Tell Laravel to forget this cookie
-        // $cookie = Cookie::forget($rememberMeCookie);
         return redirect()->route('user.signin') ->with('success','Successfully Logout');;
     }
 
