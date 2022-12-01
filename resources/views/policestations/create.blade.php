@@ -196,7 +196,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('PoliceStation Name:')!!}
-                 {!! Form::text('policestation_name',null , ['class' => 'form-control']); !!}
+                 {!! Form::text('policestation_name',old('policestation_name') , ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -204,7 +204,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('PoliceStation Commander:')!!}
-                 {!! Form::text('policestation_commander',null , ['class' => 'form-control']); !!}
+                 {!! Form::text('policestation_commander',old('policestation_commander') , ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -238,7 +238,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('PoliceStation Schedule:')!!}
-                 {!! Form::text('policestation_schedule',null, ['class' => 'form-control']); !!}
+                 {!! Form::text('policestation_schedule', old('policestation_schedule'), ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -246,7 +246,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('PoliceStation Contact:')!!}
-                 {!! Form::text('policestation_contact', null, ['class' => 'form-control']); !!}
+                 {!! Form::text('policestation_contact', old('policestation_contact'), ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -255,7 +255,7 @@
              <div class="input-box">
              <div class="form-group">
                     <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" class="form-control">
+                    <input type="text" name="email" id="email" value= "{{ old('email')}}" class="form-control">
              </div>
              </div>
 
