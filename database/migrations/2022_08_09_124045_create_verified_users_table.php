@@ -23,7 +23,8 @@ class CreateVerifiedUsersTable extends Migration
             $table->string('address');
             $table->string('contact');
             $table->string('email');
-            $table->string('id_picture')->nullable();
+            $table->string('id_picture_front')->nullable();
+            $table->string('id_picture_back')->nullable();
             $table->string('id_type')->nullable();
             $table->string('id_number')->nullable();
             $table->string('status');
