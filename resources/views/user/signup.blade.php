@@ -30,28 +30,28 @@
 
                  <div class="form-group">
                     <label for="fname">First Name: </label>
-                    <input type="text" name="fname" id="fname" class="form-control">
+                    <input type="text" name="fname" id="fname" value= "{{ old('fname')}}"  class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="lname">Middle Name: </label>
-                    <input type="text" name="mname" id="mname" class="form-control">
+                    <input type="text" name="mname" id="mname" value= "{{ old('mname')}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="lname">Last Name: </label>
-                    <input type="text" name="lname" id="lname" class="form-control">
+                    <input type="text" name="lname" id="lname" value= "{{ old('lname')}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="birthdate">Birthdate: </label>
-                    <input type="date" name="birthdate" id="birthdate" class="form-control">
+                    <input type="date" name="birthdate" id="birthdate" value= "{{ old('birthdate')}}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="gender">Gender: </label>
                   
-                    {!! Form::select('gender',array('' => 'Choose your Gender:','Male' => 'Male', 'Female' => 'Female'), null ,['class' => 'form-control']) !!}
+                    {!! Form::select('gender',array('' => 'Choose your Gender:','Male' => 'Male', 'Female' => 'Female'), old('gender') ,['class' => 'form-control']) !!}
                 </div>
 
                 <!-- <div class="form-group">
@@ -62,17 +62,17 @@
             <div class="form-group">
                   <div class="card mt-3">
                      <div class="card-body">
-                   
+                    <h4>Please Verify Phone number to proceed.</h4>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Phone Number:</label>
-                                <input type="text" id="contact" name="contact"  class="form-control" placeholder="+639XXXXXXXXXX">
+                                <input type="text" id="contact" name="contact" value= "{{ old('contact')}}"  class="form-control" placeholder="+639XXXXXXXXXX">
                             </div>
                             <div id="recaptcha-container"></div>
-                            <button type="button" class="btn btn-info" onclick="otpSend();">Verify Phone Number</button>
+                            <button type="button" id="otp-button" class="btn btn-info" onclick="otpSend();">Verify Phone Number</button>
                         
                     </div>
                 </div>
-                <div class="card mt-3">
+                <div id="otp-codes" class="card mt-3 hide">
                     <div class="card-body">
                        
                             <div class="mb-3">
@@ -125,12 +125,14 @@
                                         document.getElementById("error-message").classList.remove("d-block");
                                         // document.getElementById("signup").disabled = false;
                                         // document.getElementById("signup").setAttribute("type", "submit");
+                                         document.getElementById("otp-codes").classList.add("d-block");
                                     }).catch((error) => {
                                         document.getElementById("error-message").innerHTML = error.message;
                                         document.getElementById("error-message").classList.add("d-block");
                                         document.getElementById("sent-message").classList.remove("d-block");
                                         document.getElementById("signup").disabled = true;
                                         document.getElementById("signup").setAttribute("type", "hidden");
+                                        document.getElementById("otp-codes").classList.remove("d-block");
                                     });
                             }
 
@@ -145,6 +147,9 @@
                                     document.getElementById("error-message").classList.remove("d-block");
                                     document.getElementById("signup").disabled = false;
                                     document.getElementById("signup").setAttribute("type", "submit");
+                                    document.getElementById("otp-codes").classList.remove("d-block");
+                                    document.getElementById("otp-button").style.visibility = 'hidden';
+                                    document.getElementById("otp-button").disabled = true;
                         
                                 }).catch(function (error) {
                                     document.getElementById("error-message").innerHTML = error.message;
@@ -152,6 +157,7 @@
                                     document.getElementById("sent-message").classList.remove("d-block");
                                     document.getElementById("signup").disabled = true;
                                     document.getElementById("signup").setAttribute("type", "hidden");
+                                   
                                 });
                             }
                         </script>
@@ -159,13 +165,13 @@
     
                 <div class="form-group">
                     <label for="address">Address: </label>
-                    <input type="text" name="address" id="address" class="form-control">
+                    <input type="text" name="address" id="address" value= "{{ old('address')}}" class="form-control">
                 </div>
 
 
                 <div class="form-group">
                     <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" class="form-control">
+                    <input type="text" name="email" id="email" "{{ old('email')}}" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -178,7 +184,7 @@
                     <!-- <label for="password">Password: </label>
                     <input type="file" name="img" id="img" class="form-control"> -->
                     {!!Form::label('Select image to upload:')!!}
-                    {!! Form::file('img', ['class' => 'form-control']); !!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
                     @if($errors->has('img'))
                     <a>{{ $errors->first('img') }}</a>
                     @endif
