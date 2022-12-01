@@ -194,7 +194,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Barangay Name:')!!}
-                 {!! Form::text('barangay_name',null , ['class' => 'form-control']); !!}
+                 {!! Form::text('barangay_name',old('barangay_name'), ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -202,7 +202,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Barangay Captain:')!!}
-                 {!! Form::text('barangay_captain',null  , ['class' => 'form-control']); !!}
+                 {!! Form::text('barangay_captain',old('barangay_captain') , ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -236,7 +236,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Barangay Schedule:')!!}
-                 {!! Form::text('barangay_schedule',null  , ['class' => 'form-control']); !!}
+                 {!! Form::text('barangay_schedule',old('barangay_schedule') , ['class' => 'form-control']); !!}
                </div>
              </div>
 
@@ -244,14 +244,14 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Barangay Contact:')!!}
-                 {!! Form::text('barangay_contact', null, ['class' => 'form-control']); !!}
+                 {!! Form::text('barangay_contact', old('barangay_contact'), ['class' => 'form-control']); !!}
                </div>
              </div>
 
              <div class="input-box">
              <div class="form-group">
                     <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" class="form-control">
+                    <input type="text" name="email" id="email"  value="{{ old('email')}}" class="form-control">
              </div>
              </div>
 

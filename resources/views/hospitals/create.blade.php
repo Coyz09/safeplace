@@ -193,7 +193,7 @@
               <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Hospital Name:')!!}
-                  {!! Form::text('hospital_name', null, ['class' => 'form-control']); !!}
+                  {!! Form::text('hospital_name', old('hospital_name'), ['class' => 'form-control']); !!}
                 </div>
               </div>
 
@@ -202,7 +202,7 @@
                <div class="form-group">
                  {!!Form::label('Hospital Type:')!!}
                  <!-- Form::text('hospital_type', null , ['class' => 'form-control']);  -->
-                 {!! Form::select('hospital_type',array('Public' => 'Public', 'Private' => 'Private'), null,['class' => 'form-control']) !!}
+                 {!! Form::select('hospital_type',array(''=> 'Select Hospital type', 'Public' => 'Public', 'Private' => 'Private'), old('hospital_type'),['class' => 'form-control']) !!}
                </div>
              </div>
              
@@ -210,7 +210,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Hospital Medical Director:')!!}
-                 {!! Form::text('hospital_medical_director', null , ['class' => 'form-control']); !!}
+                 {!! Form::text('hospital_medical_director', old('hospital_medical_director') , ['class' => 'form-control']); !!}
                </div>
              </div>
     
@@ -244,7 +244,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Hospital Schedule:')!!}
-                 {!! Form::text('hospital_schedule',null , ['class' => 'form-control']); !!}
+                 {!! Form::text('hospital_schedule',old('hospital_schedule') , ['class' => 'form-control']); !!}
                </div>
              </div>
     
@@ -252,7 +252,7 @@
               <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Hospital Contact:')!!}
-                  {!! Form::text('hospital_contact', null, ['class' => 'form-control']); !!}
+                  {!! Form::text('hospital_contact', old('hospital_contact'), ['class' => 'form-control']); !!}
                 </div>
               </div>
          
