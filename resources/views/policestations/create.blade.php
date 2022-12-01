@@ -238,7 +238,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('PoliceStation Schedule:')!!}
-                 {!! Form::text('policestation_schedule',null , ['class' => 'form-control']); !!}
+                 {!! Form::text('policestation_schedule',null, ['class' => 'form-control']); !!}
                </div>
              </div>
 
