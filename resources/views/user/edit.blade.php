@@ -192,6 +192,16 @@
 </style>
 
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 
 <div class="input-form">
@@ -200,8 +210,10 @@
     
       <div class="image-holder"></div>
       
-      <form action="{{route('user.update',$user->id)}}" method="POST" >
-        @csrf
+      <form action="{{route('user.update',$user->id)}}" method="POST" enctype="multipart/form-data">
+
+       @csrf
+        
         @method('PUT')
 
       <div class="title">Update Record</div>
@@ -229,13 +241,30 @@
                 </div>
               </div>
 
-              <div class="input-box">
+              <!-- <div class="input-box">
                 <div class="form-group">
                   {!!Form::label('Role:')!!}
                   {!! Form::text('role',$user->role,array('class' => 'form-control')) !!}
                 </div>
-              </div>
+              </div> -->
 
+              <div class="input-box">
+              <div class="form-group">
+                    <label for="role">Role: </label>
+                  
+                    {!! Form::select('role',array('' => 'Choose the role:','unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'barangay' => 'barangay', 'police_station' => 'police_station','admin' => 'admin','superadmin' => 'superadmin'), $user->role ,['class' => 'form-control']) !!}
+                </div>
+                </div> 
+
+                <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
 
       <div class="button">
         {{ Form::submit('Update',['class'=>'btn btn-primary']) }}

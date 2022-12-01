@@ -296,7 +296,7 @@
         @csrf
         @method('PUT')
         <div class="buttonreject">
-        {{ Form::submit('Reject Again',['class'=>'btn btn-primary']) }}
+        {{ Form::submit('Rejected Again',['class'=>'btn btn-primary']) }}
        </div>
       </form> 
       @endif
