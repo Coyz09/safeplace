@@ -139,7 +139,7 @@ class VerificationController extends Controller
 
         $user = DB::table('unverified_users')
         ->join('users', 'unverified_users.user_id',  '=', 'users.id')
-        ->select('unverified_users.id_type','unverified_users.id_number')
+        ->select('unverified_users.*')
         ->where('unverified_users.user_id', '=',  $user->id )->get();
 
         return response()->json([
