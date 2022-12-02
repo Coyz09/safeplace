@@ -38,3 +38,9 @@ Route::resource('barangays', 'Api\BarangayAPIController');
 Route::get('hospitals_location', 'Api\HospitalAPIController@location');
 Route::get('barangays_location', 'Api\BarangayAPIController@location');
 Route::get('policestations_location', 'Api\PoliceStationAPIController@location');
+
+
+Route::post('verification_frontId', 'Api\VerificationController@verification_frontId')->middleware('jwtAuth');
+Route::post('verification_backId', 'Api\VerificationController@verification_backId')->middleware('jwtAuth');
+Route::post('verification_faceImage', 'Api\VerificationController@verification_faceImage')->middleware('jwtAuth');
+Route::post('verification_idDetails', 'Api\VerificationController@verification_idDetails')->middleware('jwtAuth');
