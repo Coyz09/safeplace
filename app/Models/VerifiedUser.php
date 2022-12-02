@@ -9,7 +9,8 @@ class VerifiedUser extends Model
 {
     use HasFactory;
    public $table = 'verified_users';
-   protected $fillable = ['fname','mname','lname','gender','birthdate','address','contact','email','user_id'];
+//    protected $fillable = ['fname','mname','lname','gender','birthdate','address','contact','email','user_id'];
+   protected $fillable = ['fname','mname','lname','gender','birthdate','address','contact','email','id_picture_front','id_picture_back','id_type','id_number','face_img','status','user_id'];
    public $timestamps =true;
    public $primaryKey = 'id';
 
