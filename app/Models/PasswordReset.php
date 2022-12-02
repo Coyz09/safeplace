@@ -10,7 +10,7 @@ class PasswordReset extends Model
     use HasFactory;
     public $table = 'password_resets';
     public $timestamps = false;
-    protected $primaryKey = 'email';
+    // public $primaryKey = 'email';
 
 
     protected $fillable = [

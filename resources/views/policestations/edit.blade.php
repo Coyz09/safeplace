@@ -197,7 +197,7 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('PoliceStation Name:')!!}
-                 {!! Form::text('policestation_name',$policestation-> policestation_name, ['class' => 'form-control']); !!}
+                 {!! Form::text('policestation_name',$policestation->policestation_name, ['class' => 'form-control']); !!}
                </div>
              </div>
 
