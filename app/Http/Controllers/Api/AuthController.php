@@ -361,11 +361,23 @@ class AuthController extends Controller
 
     public function resetPasswordLoad(Request $request){
         $resetData = PasswordReset::where('token',$request->token)->get();
-
-
+        //  dd($resetData);
+         
+         $data = $resetData[0]['email'];
+             
+        //  dd($data);
         if(isset($request->token) && count($resetData) > 0){
 
+            // $user = User::where('email', $resetData->email)->get();
+            
+            //  $user = DB::table('users')
+            // ->select('email')
+            // ->where('email', '=', $data)
+            // ->get();
+            
             $user = User::where('email', $resetData[0]['email'])->get();
+            
+            //   dd($user);
             return view('resetPassword',compact('user'));
 
         }

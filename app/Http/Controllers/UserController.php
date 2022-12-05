@@ -51,9 +51,9 @@ class UserController extends Controller
 
 
         if($request->hasFile('img')){
-          $img = $request->file('img')->getClientOriginalName();
-          
-          $request->file('img')->storeAs('public/images', $img);
+
+          $img  = time().'.'.$request->file('img')->extension();  
+          $request->file('img')->move(public_path('images'), $img);   
           
           $input['img'] = 'storage/images/'.$img;
 
@@ -90,9 +90,8 @@ class UserController extends Controller
 
        
                 if($request->hasFile('img')){
-                  $img = $request->file('img')->getClientOriginalName();
-                  
-                  $request->file('img')->storeAs('public/images', $img);
+                  $img  = time().'.'.$request->file('img')->extension();  
+                  $request->file('img')->move(public_path('images'), $img);   
                   
                   $input['img'] = 'storage/images/'.$img;
         
@@ -171,21 +170,23 @@ class UserController extends Controller
             'fname' => 'required| min:4',
             'mname' => 'required| min:4',
             'lname' => 'required| min:4',
-            'email' => 'email|required|unique:users',
+            'email'=> 'email|required|unique:users|min:2|max:200',
             'password' => 'required| min:4',
             'gender'=> 'required|min:2|max:20',
             'birthdate'=> 'required',
             'address' => 'required',
             'contact' => 'required|numeric',             
-            'email'=> 'required|min:2|max:20',
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
         ]);
 
         // $input = $request->all();
         if($request->hasFile('img')){
-           $img = $request->file('img')->getClientOriginalName();
+          //  $img = time().'.'.$request->file('img')->getClientOriginalName();
            
-           $request->file('img')->storeAs('public/images', $img);
+          //  $request->file('img')->move(public_path('/storage/images'.$img));
+
+           $img  = time().'.'.$request->file('img')->extension();  
+           $request->file('img')->move(public_path('images'), $img);   
            
            $input['img'] = 'storage/images/'.$img;
 
@@ -217,7 +218,7 @@ class UserController extends Controller
          $unverified_user->gender = $request->gender;
          $unverified_user->email = $request->email;
          $unverified_user->contact = $request->contact;
-         $unverified_user->status = 'Pending';
+         $unverified_user->status = 'Unverified';
          $unverified_user->save();
 
          return redirect()->route('user.profile')->with('success',"Successfully Signup!");
