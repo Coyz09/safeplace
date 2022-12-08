@@ -107,7 +107,8 @@ class VerificationController extends Controller
             ->where('unverified_users.user_id', '=',  $user->id )
             ->update([
 
-                'face_img'=> $user->face_img = $face_img
+                'face_img'=> $user->face_img = $face_img,
+                'status'=>'Pending'
 
             ]);
 
