@@ -67,11 +67,13 @@ class Role
     // }
     foreach($roles as $role) {
         // Check if user has the role This check will depend on how your roles are set up
-        if($user->role == $role || $user->isSuperAdmin()){
+        if($user->role == $role || $user->isSuperAdmin() || $user->isAdmin()){
+            // dd($user->role);
             return $next($request);
         }
             elseif($user->role != $role)
             {
+                // dd($user->role); 
                 return redirect()->back()->with('error',"You do not have access!"); 
             }
             

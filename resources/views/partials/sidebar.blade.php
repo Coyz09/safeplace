@@ -23,7 +23,8 @@
             <span>Dashboard</span>
           </a>
         </li>
-
+        
+      @if(auth()->guard('web')->user()->role == 'user_admin')
         <li class="tooltip-element">
           <a href="/verifieduser">
             <div class="icon">
@@ -42,8 +43,20 @@
             </div>
             <span>Unverified Users</span>
           </a>
-        </li>
+        </li> 
 
+        <li class="tooltip-element">
+          <a href="/useradmin">
+            <div class="icon">
+              <i class='bx bxs-user' ></i>
+              <i class='bx bxs-user' ></i>
+            </div>
+            <span>User Accounts</span>
+          </a>
+        </li>
+        @endif
+        
+        @if(auth()->guard('web')->user()->role == 'barangay_admin')
         <li class="tooltip-element">
           <a href="/barangay">
             <div class="icon">
@@ -55,6 +68,19 @@
         </li>
 
         <li class="tooltip-element">
+          <a href="/barangayadmin">
+            <div class="icon">
+              <i class='bx bxs-user' ></i>
+              <i class='bx bxs-user' ></i>
+            </div>
+            <span>Barangay Accounts</span>
+          </a>
+        </li>
+
+        @endif
+
+      @if(auth()->guard('web')->user()->role == 'hospital_admin')
+        <li class="tooltip-element">
           <a href="/hospital">
             <div class="icon">
               <i class='bx bxs-clinic'></i>
@@ -63,7 +89,9 @@
             <span>Hospitals</span>
           </a>
         </li>
+        @endif
 
+        @if(auth()->guard('web')->user()->role == 'policestation_admin')
         <li class="tooltip-element">
           <a href="/policestation">
             <div class="icon">
@@ -74,19 +102,70 @@
           </a>
         </li>
 
-       
-       <!-- <li class="tooltip-element">
-         <a href="/user">
-           <div class="icon">
-             <i class='bx bxs-user' ></i>
-             <i class='bx bxs-user' ></i>
-           </div>
-           <span>Users</span>
-         </a>
-       </li> -->
+        <li class="tooltip-element">
+          <a href="/policestationadmin">
+            <div class="icon">
+              <i class='bx bxs-user' ></i>
+              <i class='bx bxs-user' ></i>
+            </div>
+            <span>Police Accounts</span>
+          </a>
+        </li>
+        @endif
+
        
      @if(auth()->guard('web')->user()->role == 'superadmin')
-       
+
+     <li class="tooltip-element">
+          <a href="/verifieduser">
+            <div class="icon">
+              <i class='bx bxs-user-check'></i>
+              <i class='bx bxs-user-check'></i>
+            </div>
+            <span>Verified Users</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element">
+          <a href="/unverifieduser">
+            <div class="icon">
+              <i class='bx bxs-user-x' ></i>
+              <i class='bx bxs-user-x' ></i>
+            </div>
+            <span>Unverified Users</span>
+          </a>
+        </li> 
+
+     <li class="tooltip-element">
+          <a href="/barangay">
+            <div class="icon">
+              <i class='bx bxs-institution'></i>
+              <i class='bx bxs-institution'></i>
+            </div>
+            <span>Barangays</span>
+          </a>
+        </li>
+
+     <li class="tooltip-element">
+          <a href="/hospital">
+            <div class="icon">
+              <i class='bx bxs-clinic'></i>
+              <i class='bx bxs-clinic'></i>
+            </div>
+            <span>Hospitals</span>
+          </a>
+        </li>
+
+     <li class="tooltip-element">
+          <a href="/policestation">
+            <div class="icon">
+              <i class='bx bxs-bank' ></i>
+              <i class='bx bxs-bank' ></i>
+            </div>
+            <span>Police Stations</span>
+          </a>
+        </li>
+
         <li class="tooltip-element">
           <a href="/user">
             <div class="icon">
@@ -98,9 +177,56 @@
         </li>
 
         @elseif(auth()->guard('web')->user()->role == 'admin')
-            <!-- <div class="icon">
-             
-            </div>         -->
+        <li class="tooltip-element">
+          <a href="/verifieduser">
+            <div class="icon">
+              <i class='bx bxs-user-check'></i>
+              <i class='bx bxs-user-check'></i>
+            </div>
+            <span>Verified Users</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element">
+          <a href="/unverifieduser">
+            <div class="icon">
+              <i class='bx bxs-user-x' ></i>
+              <i class='bx bxs-user-x' ></i>
+            </div>
+            <span>Unverified Users</span>
+          </a>
+        </li> 
+
+     <li class="tooltip-element">
+          <a href="/barangay">
+            <div class="icon">
+              <i class='bx bxs-institution'></i>
+              <i class='bx bxs-institution'></i>
+            </div>
+            <span>Barangays</span>
+          </a>
+        </li>
+
+     <li class="tooltip-element">
+          <a href="/hospital">
+            <div class="icon">
+              <i class='bx bxs-clinic'></i>
+              <i class='bx bxs-clinic'></i>
+            </div>
+            <span>Hospitals</span>
+          </a>
+        </li>
+
+     <li class="tooltip-element">
+          <a href="/policestation">
+            <div class="icon">
+              <i class='bx bxs-bank' ></i>
+              <i class='bx bxs-bank' ></i>
+            </div>
+            <span>Police Stations</span>
+          </a>
+        </li>
+
          @endif
 
       </ul>

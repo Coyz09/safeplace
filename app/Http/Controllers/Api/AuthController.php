@@ -370,7 +370,7 @@ class AuthController extends Controller
 
             // $user = User::where('email', $resetData->email)->get();
             
-            //  $user = DB::table('users')
+            //  $user = DB::table('users')x
             // ->select('email')
             // ->where('email', '=', $data)
             // ->get();

@@ -169,7 +169,7 @@ Route::group(['middleware' => 'role:superadmin'], function() {
   });
 
 //Admin User
-Route::group(['middleware' => 'role:admin'], function() {
+Route::group(['middleware' => 'admin'], function() {
 
   //BARANGAY CRUD
   Route::resource('barangay', BarangayController::class);
@@ -192,6 +192,50 @@ Route::group(['middleware' => 'role:admin'], function() {
 
 //   Route::resource('user', UserController::class);
 //   Route::get('/get-user',[ 'uses'=>'UserController@getUser','as' => 'users.getUser']);
+
+});
+
+Route::group(['middleware' => 'role:barangay_admin'], function() {
+
+    //BARANGAY CRUD
+    Route::resource('barangay', BarangayController::class);
+    Route::get('/get-barangay',[ 'uses'=>'BarangayController@getBarangay','as' => 'barangays.getBarangay']);
+  
+    Route::resource('barangayadmin', BarangayAdminController::class);
+    Route::get('/get-barangayaccounts',[ 'uses'=>'BarangayAdminController@getBarangayAccounts','as' => 'barangayaccounts.getBarangayAccounts']);
+  
+});
+
+Route::group(['middleware' => 'role:policestation_admin'], function() {
+
+    //POLICESTATION CRUD
+    Route::resource('policestation', PoliceStationController::class);
+    Route::get('/get-policestation',[ 'uses'=>'PoliceStationController@getPoliceStation','as' => 'policestations.getPoliceStation']);
+  
+    Route::resource('policestationadmin', PoliceStationAdminController::class);
+    Route::get('/get-policestationaccounts',[ 'uses'=>'PoliceStationAdminController@getPoliceStationAccounts','as' => 'policestationaccounts.getPoliceStationAccounts']);
+  
+});
+
+Route::group(['middleware' => 'role:user_admin'], function() {
+
+    Route::resource('unverifieduser', UnverifiedUserController::class);
+    Route::get('/get-unverifieduser',[ 'uses'=>'UnverifiedUserController@getUnverifiedUser','as' => 'unverifiedusers.getUnverifiedUser']);
+    Route::put('/reject/{id}',[ 'uses'=>'UnverifiedUserController@reject','as' => 'unverifieduser.reject']);
+
+    Route::resource('verifieduser', VerifiedUserController::class);
+    Route::get('/get-verifieduser',[ 'uses'=>'VerifiedUserController@getVerifiedUser','as' => 'verifiedusers.getVerifiedUser']);
+
+    Route::resource('useradmin', UserAdminController::class);
+    Route::get('/get-useraccounts',[ 'uses'=>'UserAdminController@getUserAccounts','as' => 'useraccounts.getUserAccounts']);
+  
+});
+
+Route::group(['middleware' => 'role:hospital_admin'], function() {
+
+     //HOSPITALS CRUD
+    Route::resource('hospital', HospitalController::class);
+    Route::get('/get-hospital',[ 'uses'=>'HospitalController@getHospital','as' => 'hospitals.getHospital']);
 
 });
 

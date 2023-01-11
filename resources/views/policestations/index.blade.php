@@ -57,6 +57,7 @@
                       <th scope="col">Police Station Location</th>
                       <th scope="col">Police Station Schedule</th>
                       <th scope="col">Police Station Contact</th>
+                      <th scope="col">Police Station Image</th>
                       <th style="width: 100px">Action</th>
                   </tr>
               </thead>  
@@ -82,6 +83,10 @@
               { data: 'policestation_location', name: 'policestation_location' },
               { data: 'policestation_schedule', name: 'policestation_schedule' },
               { data: 'policestation_contact', name: 'policestation_contact' },
+              { data: 'img', name: 'img',
+              "render": function (data, type, full, meta) {
+                  return "<img src=\"" + data + "\" height=\"100\" width=\"100\"/>";
+              },orderable: false},
               { data: 'action', name: 'action', orderable: false},
              ]
         });

@@ -17,14 +17,15 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-       if (Auth::check())
-       {
-    
+    //    if (!Auth::guard('web')->check())
+    //    {
+        $user = Auth::guard('web')->user();
             if(Auth::guard('web')->user()->isAdmin())
             {
+                dd($user->role); 
                 return $next($request);
             }
-       }
+    //    }
     
        return redirect()->route('user.signin')->with('error',"Please Login!");
     }

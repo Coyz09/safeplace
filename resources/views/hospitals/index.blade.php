@@ -55,6 +55,7 @@
                       <th scope="col">Hospital Location</th>
                       <th scope="col">Hospital Schedule</th>
                       <th scope="col">Hospital Contact</th>
+                      <th scope="col">Hospital Image</th>
 
                       <th style="width: 100px">Action</th>
                   </tr>
@@ -85,6 +86,10 @@
               { data: 'hospital_location', name: 'hospital_location' },
               { data: 'hospital_schedule', name: 'hospital_schedule' },
               { data: 'hospital_contact', name: 'hospital_contact' },
+              { data: 'img', name: 'img',
+              "render": function (data, type, full, meta) {
+                  return "<img src=\"" + data + "\" height=\"100\" width=\"100\"/>";
+              },orderable: false},
               { data: 'action', name: 'action', orderable: false},
              ]
         });

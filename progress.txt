@@ -1,0 +1,19 @@
+*Implementation of OTP when signing up in the web. 
+*The OTP used is from the authentication function of Firebase.
+*Implementation of maps for the location of police stations, barangays and 
+hospitals.
+*Implementation of different roles of the system.
+*Fixed the error messages that is seen when an invalid input is inputted by the user. It sometimes don't reload when valid input is inputted.
+*Fixed storage link for images to be saved in the system. The problem is the images is not saved in the storage in public folder.
+
+
+
+*Make the website online for faster getting of API from Laravel.
+*Fixed the image saving for the users.
+*Insert a signup authentication function that sends OTP to the user when signing up.
+*Make the images public so it can be seen by the system.
+*Seperated different admin roles in the system. 
+*Making admin for users, admin for hospitals, admin for policestations, admin for barangays.
+
+
+*NOTE: ADMIN LOGIN SHOULD BE FIX

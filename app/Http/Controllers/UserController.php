@@ -53,7 +53,7 @@ class UserController extends Controller
         if($request->hasFile('img')){
 
           $img  = time().'.'.$request->file('img')->extension();  
-          $request->file('img')->move(public_path('images'), $img);   
+          $request->file('img')->move(public_path('storage/images'), $img);   
           
           $input['img'] = 'storage/images/'.$img;
 
@@ -91,7 +91,7 @@ class UserController extends Controller
        
                 if($request->hasFile('img')){
                   $img  = time().'.'.$request->file('img')->extension();  
-                  $request->file('img')->move(public_path('images'), $img);   
+                  $request->file('img')->move(public_path('storage/images'), $img);   
                   
                   $input['img'] = 'storage/images/'.$img;
         
@@ -179,14 +179,10 @@ class UserController extends Controller
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
         ]);
 
-        // $input = $request->all();
         if($request->hasFile('img')){
-          //  $img = time().'.'.$request->file('img')->getClientOriginalName();
-           
-          //  $request->file('img')->move(public_path('/storage/images'.$img));
 
            $img  = time().'.'.$request->file('img')->extension();  
-           $request->file('img')->move(public_path('images'), $img);   
+           $request->file('img')->move(public_path('storage/images'), $img);   
            
            $input['img'] = 'storage/images/'.$img;
 
@@ -200,13 +196,7 @@ class UserController extends Controller
          $user->save();
         }
 
-        //  $login = new User([
-        //     'email' => $request->input('email'),
-        //     'password' => bcrypt($request->input('password')),
- 
-        //  ]);
          Auth::guard('web')->login($user);
-            // dd($input['img'] );  
 
          $unverified_user = new UnverifiedUser;
          $unverified_user->user_id = $user->id;

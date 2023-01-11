@@ -170,7 +170,16 @@
 
 </style>
 
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 
 <div class="input-form">
@@ -179,7 +188,7 @@
     
       <div class="image-holder"></div>
 
-      <form action="{{route('hospital.update',$hospital->id)}}" method="POST" >
+      <form action="{{route('hospital.update',$hospital->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -208,16 +217,15 @@
              <div class="input-box">
                <div class="form-group">
                  {!!Form::label('Hospital Medical Director:')!!}
-                 {!! Form::text('hospital_medical_director', $hospital->hospital_medical_director , ['class' => 'form-control']); !!}
+                 {!! Form::text('hospital_medical_director', $hospital->hospital_medical_director, ['class' => 'form-control']); !!}
                </div>
              </div>
     
              {{-- Hospital Location --}}
-            
               <div class="input-box">
              <div class="form-group">
              {!!Form::label('Hospital Location:')!!}
-              <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="hospital_location" id="address" value="{{$hospital->hospital_location}}">
+              <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="address" id="address" value="{{$hospital->hospital_location}}">
                 <input type="hidden" name="latitude" id="address-latitude" value="{{ $hospital->latitude ?? '0' }}" />
                 <input type="hidden" name="longitude" id="address-longitude" value="{{  $hospital->longitude ?? '0' }}" />
                 @if($errors->has('address'))
@@ -250,6 +258,16 @@
                   {!! Form::text('hospital_contact', $hospital->hospital_contact, ['class' => 'form-control']); !!}
                 </div>
               </div>
+
+              <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
 
       </div>
     

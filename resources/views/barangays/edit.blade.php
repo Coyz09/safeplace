@@ -169,7 +169,16 @@
 
 </style>
 
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="input-form">
 
@@ -177,7 +186,7 @@
     
       <div class="image-holder"></div>
 
-      <form action="{{route('barangay.update',$barangay->id)}}" method="POST" >
+      <form action="{{route('barangay.update',$barangay->id)}}" method="POST" enctype="multipart/form-data" >
         @csrf
         @method('PUT')
 
@@ -211,7 +220,7 @@
               <div class="input-box">
              <div class="form-group">
               {!!Form::label('Barangay Location:')!!}
-              <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="barangay_location" id="address" value="{{$barangay->barangay_location}}">
+              <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="address" id="address" value="{{$barangay->barangay_location}}">
                 <input type="hidden" name="latitude" id="address-latitude" value="{{ $barangay->latitude ?? '0' }}" />
                 <input type="hidden" name="longitude" id="address-longitude" value="{{  $barangay->longitude ?? '0' }}" />
                 @if($errors->has('address'))
@@ -270,6 +279,16 @@
                   {!! Form::hidden('user_id',$barangay->user_id,array('class' => 'form-control')) !!}
                 </div>
               </div>
+
+              <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
     
       </div>
 

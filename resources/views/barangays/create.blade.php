@@ -183,7 +183,7 @@
 
      <div class="image-holder"></div>
 
-     {!! Form::open(['route' => 'barangay.store']) !!}
+     {!! Form::open(['route' => 'barangay.store', 'files' => true]) !!}
      @csrf
 
      <div class="title">Add New Record</div>
@@ -262,6 +262,16 @@
               </div>
 
               </div>
+              
+              <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
 
 
 

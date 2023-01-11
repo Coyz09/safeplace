@@ -25,6 +25,22 @@ class LoginController extends Controller
 		    if (auth()->guard('web')->user()->role == 'admin') {
 		        return redirect()->route('verifieduser.index');
             }
+
+            elseif(auth()->guard('web')->user()->role == 'barangay_admin') {
+                return redirect()->route('barangay.index');
+            }
+            
+            elseif(auth()->guard('web')->user()->role == 'policestation_admin') {
+                return redirect()->route('policestation.index');
+            }
+
+            elseif(auth()->guard('web')->user()->role == 'user_admin') {
+                return redirect()->route('useradmin.index');
+            }
+
+            elseif(auth()->guard('web')->user()->role == 'hospital_admin') {
+                return redirect()->route('hospital.index');
+            }
         
             elseif(auth()->guard('web')->user()->role == 'barangay') {
                 return redirect()->route('barangay_user.index');
@@ -36,7 +52,7 @@ class LoginController extends Controller
 
             elseif(auth()->guard('web')->user()->role == 'superadmin') {
                 return redirect()->route('user.index');
-            }
+            }       
 
             else {
                 return redirect()->route('user.profile');

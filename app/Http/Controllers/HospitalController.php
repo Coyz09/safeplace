@@ -64,18 +64,25 @@ class HospitalController extends Controller
       }
       else{
         // Hospital::create($request->all());
+        if($request->hasFile('img')){
 
-        $hospital = new Hospital; 
-        $hospital->hospital_name = $request->hospital_name;
-        $hospital->hospital_type = $request->hospital_type;
-        $hospital->hospital_medical_director = $request-> hospital_medical_director;
-        $hospital->hospital_location= $request->input('address');
-        $hospital->latitude= $request->input('latitude');
-        $hospital->longitude= $request->input('longitude');
-        $hospital->hospital_schedule= $request->hospital_schedule;
-        $hospital->hospital_contact= $request->hospital_contact;
-        $hospital->save();
-
+            $img  = time().'.'.$request->file('img')->extension();  
+            $request->file('img')->move(public_path('storage/images'), $img);   
+            
+            $input['img'] = 'storage/images/'.$img;
+  
+            $hospital = new Hospital; 
+            $hospital->hospital_name = $request->hospital_name;
+            $hospital->hospital_type = $request->hospital_type;
+            $hospital->hospital_medical_director = $request-> hospital_medical_director;
+            $hospital->hospital_location= $request->input('address');
+            $hospital->latitude= $request->input('latitude');
+            $hospital->longitude= $request->input('longitude');
+            $hospital->hospital_schedule= $request->hospital_schedule;
+            $hospital->hospital_contact= $request->hospital_contact;
+            $hospital->img = $input['img'];
+            $hospital->save();
+        }
         return Redirect::to('hospital')->with('success','New Hospital added!');
         }
     }
@@ -101,7 +108,7 @@ class HospitalController extends Controller
             'hospital_name' => 'required|min:2|max:100',
             'hospital_type' => 'required',
             'hospital_medical_director' => 'required',
-            'hospital_location' => 'required',
+            'address' => 'required',
             'hospital_schedule' => 'required',
             'hospital_contact' => 'numeric',
               ];
@@ -121,8 +128,30 @@ class HospitalController extends Controller
 
       }
       else{
+        if($request->hasFile('img')){
+
+            $img  = time().'.'.$request->file('img')->extension();  
+            $request->file('img')->move(public_path('storage/images'), $img);   
+            
+            $input['img'] = 'storage/images/'.$img;
+
           $hospital = Hospital::find($id);
-          $hospital ->update($request->all());
+
+          $data = [
+            "hospital_name" => $request->hospital_name,
+            "hospital_type" => $request->hospital_type,
+             "hospital_medical_director" => $request-> hospital_medical_director,
+             "hospital_location"=> $request->input('address'),
+             "latitude"=> $request->input('latitude'),
+             "longitude"=>$request->input('longitude'),
+             "hospital_schedule"=> $request->hospital_schedule,
+             "hospital_contact"=> $request->hospital_contact,
+             "img" => $input['img'],
+          ];
+
+          $hospital ->update($data);
+        //   $hospital ->update($request->all());
+        }
          return Redirect::to('hospital')->with('success','Hospital updated!');
         }
     }
