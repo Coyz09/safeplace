@@ -362,21 +362,21 @@ class AuthController extends Controller
     public function resetPasswordLoad(Request $request){
         $resetData = PasswordReset::where('token',$request->token)->get();
         //  dd($resetData);
-         
+
          $data = $resetData[0]['email'];
-             
+
         //  dd($data);
         if(isset($request->token) && count($resetData) > 0){
 
             // $user = User::where('email', $resetData->email)->get();
-            
+
             //  $user = DB::table('users')
             // ->select('email')
             // ->where('email', '=', $data)
             // ->get();
-            
+
             $user = User::where('email', $resetData[0]['email'])->get();
-            
+
             //   dd($user);
             return view('resetPassword',compact('user'));
 
@@ -405,5 +405,29 @@ class AuthController extends Controller
 
 
     }
+
+    public function update_profile_picture(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+        $img = '';
+
+        if($request->img!=''){
+            $img = 'storage/images/'.time().'.jpg';
+            file_put_contents($img,base64_decode($request->img));
+            $user->img = $img;
+        }
+
+        $user->update();
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'img' => $img,
+        ]);
+
+    }
+
+
 
 }
