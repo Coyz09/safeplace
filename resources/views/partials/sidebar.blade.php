@@ -3,7 +3,7 @@
 
 <nav>
     <div class="sidebar-top">
-      <img src="./Images/Logo.png" class="logo" alt="">
+      <img  href="{{ asset('Images/Logo.png') }}" src="{{ asset('Images/Logo.png') }}" class="logo" alt="">
     </div>
 
     <div class="Safeplace">
@@ -14,7 +14,7 @@
       <ul>
 
 
-        <li class="tooltip-element">
+        <!-- <l class="tooltip-element">
           <a href="/dashboard">
             <div class="icon">
               <i class='bx bx-tachometer'></i>
@@ -22,7 +22,7 @@
             </div>
             <span>Dashboard</span>
           </a>
-        </li>
+        </li> -->
         
       @if(auth()->guard('web')->user()->role == 'user_admin')
         <li class="tooltip-element">
@@ -80,6 +80,17 @@
         @endif
 
       @if(auth()->guard('web')->user()->role == 'hospital_admin')
+      
+      <li class="tooltip-element">
+          <a href="/hospital_dashboard">
+            <div class="icon">
+              <i class='bx bx-tachometer'></i>
+              <i class='bx bxs-tachometer'></i>
+            </div>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
         <li class="tooltip-element">
           <a href="/hospital">
             <div class="icon">
@@ -98,7 +109,7 @@
               <i class='bx bxs-bank' ></i>
               <i class='bx bxs-bank' ></i>
             </div>
-            <span>Police Stations</span>
+            <span>Police Substations</span>
           </a>
         </li>
 
@@ -117,6 +128,16 @@
      @if(auth()->guard('web')->user()->role == 'superadmin')
 
      <li class="tooltip-element">
+          <a href="/admin_dashboard">
+            <div class="icon">
+              <i class='bx bx-tachometer'></i>
+              <i class='bx bxs-tachometer'></i>
+            </div>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+     <li class="tooltip-element">
           <a href="/verifieduser">
             <div class="icon">
               <i class='bx bxs-user-check'></i>
@@ -162,7 +183,7 @@
               <i class='bx bxs-bank' ></i>
               <i class='bx bxs-bank' ></i>
             </div>
-            <span>Police Stations</span>
+            <span>Police Substations</span>
           </a>
         </li>
 
@@ -177,6 +198,17 @@
         </li>
 
         @elseif(auth()->guard('web')->user()->role == 'admin')
+
+        <li class="tooltip-element">
+          <a href="/admin_dashboard">
+            <div class="icon">
+              <i class='bx bx-tachometer'></i>
+              <i class='bx bxs-tachometer'></i>
+            </div>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        
         <li class="tooltip-element">
           <a href="/verifieduser">
             <div class="icon">
@@ -223,7 +255,7 @@
               <i class='bx bxs-bank' ></i>
               <i class='bx bxs-bank' ></i>
             </div>
-            <span>Police Stations</span>
+            <span>Police Substations</span>
           </a>
         </li>
 
@@ -238,10 +270,10 @@
       </a>
       <div class="admin-user tooltip-element" data-tooltip="1">
         <div class="admin-profile hide">
-          <img src="./img/face-1.png" alt="">
+          <img src="{{asset(auth()->guard('web')->user()->img)}}" height= "50" width="100" alt="">
           <div class="admin-info">
-            <h3>John Doe</h3>
-            <h5>Admin</h5>
+            <h3>{{auth()->guard('web')->user()->name}}</h3>
+            <h5>{{auth()->guard('web')->user()->role}}</h5>
           </div>
         </div>
         <a href="{{ route('user.logout') }}" class="log-out">
@@ -249,7 +281,7 @@
         </a>
       </div>
       <div class="tooltip">
-        <span class="show">John Doe</span>
+        <span class="show">{{auth()->guard('web')->user()->name}}</span>
         <span>Logout</span>
         <a href="{{ route('user.logout') }}" class="log-out">
           <i class='text-light bx bx-log-out'></i>

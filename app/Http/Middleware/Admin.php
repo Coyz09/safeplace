@@ -22,11 +22,11 @@ class Admin
         $user = Auth::guard('web')->user();
             if(Auth::guard('web')->user()->isAdmin())
             {
-                dd($user->role); 
+                // dd($user->role); 
                 return $next($request);
             }
     //    }
     
-       return redirect()->route('user.signin')->with('error',"Please Login!");
+    //    return redirect()->route('user.signin')->with('error',"Please Login!");
     }
 }

@@ -15,5 +15,9 @@ hospitals.
 *Seperated different admin roles in the system. 
 *Making admin for users, admin for hospitals, admin for policestations, admin for barangays.
 
+*Integrate maps in the dashboard which can show the location of the hospital, police station, and barangays.
+*Edit the database for the reports 
+*Fixed the bug in the images of the admin in the sidebar/navbar.
+*Add relationship table for the reports of barangay and police stations. 
+*Change the different admin of the system. 
 
-*NOTE: ADMIN LOGIN SHOULD BE FIX

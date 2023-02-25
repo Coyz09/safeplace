@@ -61,10 +61,10 @@ class Kernel extends HttpKernel
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'admin' => \App\Http\Middleware\Admin::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,   
         'role' => \App\Http\Middleware\Role::class,
         'normaluser' => \App\Http\Middleware\Users::class,
+        'administrator' => \App\Http\Middleware\Admin::class,
         'jwtAuth' => \App\Http\Middleware\JWTMiddleware::class,
     ];
 }

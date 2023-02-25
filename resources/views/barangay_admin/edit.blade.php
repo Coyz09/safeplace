@@ -222,9 +222,16 @@
               <!-- <div class="input-box">
               <div class="form-group">
               {!!Form::label('Role:')!!}
-                    {!! Form::text('role',$barangaystaff->role,['class' => 'form-control']) !!} 
+                    {!! Form::text('role',$barangay->role,['class' => 'form-control']) !!} 
                 </div>
                 </div>  -->
+
+              <div class="input-box">
+              <div class="form-group">
+                    <label for="role">Role: </label>            
+                    {!! Form::select('role',array('barangay' => 'barangay','barangay_centralbicutan' => 'barangay_centralbicutan','barangay_centralsignalvillage' => 'barangay_centralsignalvillage', 'barangay_fortbonifacio' => 'barangay_fortbonifacio', 'barangay_katuparan' => 'barangay_katuparan', 'barangay_maharlikavillage' => 'barangay_maharlikavillage','barangay_northdaanghari' => 'barangay_northdaanghari', 'barangay_northsignalvillage' => 'barangay_northsignalvillage','barangay_pinagsama' => 'barangay_pinagsama','barangay_southdaanghari' => 'barangay_southdaanghari','barangay_southsignalvillage' => 'barangay_southsignalvillage','barangay_tanyag' => 'barangay_tanyag','barangay_upperbicutan' => 'barangay_upperbicutan','barangay_westernbicutan' => 'barangay_westernbicutan'), $barangay->role,['placeholder' => 'Choose the role:','class' => 'form-control']) !!}
+                </div>
+                </div> 
 
                 <div class="input-box">
                 <div class="form-group ">

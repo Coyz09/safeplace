@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 06:42 AM
--- Server version: 10.4.11-MariaDB
+-- Generation Time: Feb 05, 2023 at 11:59 AM
+-- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -51,6 +51,18 @@ INSERT INTO `barangays` (`id`, `barangay_name`, `barangay_captain`, `barangay_lo
 (4, 'Upper Bicutan Barangay Hall', 'Chairman', 'Upper Bicutan Barangay Hall, A. Bonifacio Street, Taguig, Metro Manila, Philippines', '14.4969381', '121.0503622', '24/7', '093842234213', 'storage/images/1670563257.jpg', '87', '2022-11-15 05:55:13', '2022-12-08 21:20:57'),
 (6, 'Pinagsama Barangay Hall', 'Sama', 'Pinagsama Brgy. Hall, Taguig, Metro Manila, Philippines', '14.5230383', '121.0555691', '24/7', '07687606856', 'storage/images/1670509451.jpg', '101', '2022-12-08 05:35:18', '2022-12-08 06:24:11'),
 (7, 'Fort Bonifacio Barangay Hall', 'Bonifacio', 'Fort Bonifacio Barangay Hall, Lawton Avenue, Taguig, Metro Manila, Philippines', '14.5256223', '121.0268444', '24/7', '07687606856', 'storage/images/1670508908.jpg', '102', '2022-12-08 06:01:03', '2022-12-08 06:15:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barangay_accounts`
+--
+
+CREATE TABLE `barangay_accounts` (
+  `barangay_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -139,7 +151,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2022_08_09_124045_create_verified_users_table', 5),
 (24, '2022_08_09_123702_create_police_stations_table', 6),
 (26, '2022_08_09_124426_create_hospitals_table', 6),
-(27, '2022_08_09_123845_create_barangays_table', 7);
+(27, '2022_08_09_123845_create_barangays_table', 7),
+(28, '2023_01_30_135342_create_barangay_accounts_table', 8),
+(29, '2023_01_30_135523_create_police_station_accounts_table', 8);
 
 -- --------------------------------------------------------
 
@@ -182,6 +196,18 @@ INSERT INTO `police_stations` (`id`, `policestation_name`, `policestation_comman
 (2, 'Tenement Police Station', 'PCol. Bosita', 'G24P+Q8 Taguig, Metro Manila, Philippines', '14.5069375', '121.0358125', '24/7', '0967868876', 'storage/images/1670587180.jpg', '22', '2022-10-31 05:54:18', '2022-12-09 03:59:40'),
 (4, 'Maharlika Station', 'Chief', 'G22X+JVQ Taguig, Metro Manila, Philippines', '14.5015875', '121.0497344', '24/7', '097287387', 'storage/images/1670587510.jpg', '75', '2022-11-08 22:26:33', '2022-12-09 04:05:10'),
 (5, 'BGC Police', 'Bonifacio', 'BGC Police Community Precinct, 28th Street Corner 7th Avenue, Taguig, Metro Manila, Philippines', '14.548775', '121.0486593', '24/7', '0984821412', 'storage/images/1670587400.jpg', '103', '2022-12-09 04:03:22', '2022-12-09 04:03:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `police_station_accounts`
+--
+
+CREATE TABLE `police_station_accounts` (
+  `policestation_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -332,6 +358,13 @@ ALTER TABLE `barangays`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `barangay_accounts`
+--
+ALTER TABLE `barangay_accounts`
+  ADD KEY `barangay_accounts_barangay_id_foreign` (`barangay_id`),
+  ADD KEY `barangay_accounts_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `barangay_reports`
 --
 ALTER TABLE `barangay_reports`
@@ -367,6 +400,13 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `police_stations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `police_station_accounts`
+--
+ALTER TABLE `police_station_accounts`
+  ADD KEY `police_station_accounts_policestation_id_foreign` (`policestation_id`),
+  ADD KEY `police_station_accounts_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `police_station_reports`
@@ -425,7 +465,7 @@ ALTER TABLE `hospitals`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `police_stations`
@@ -456,6 +496,24 @@ ALTER TABLE `users`
 --
 ALTER TABLE `verified_users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `barangay_accounts`
+--
+ALTER TABLE `barangay_accounts`
+  ADD CONSTRAINT `barangay_accounts_barangay_id_foreign` FOREIGN KEY (`barangay_id`) REFERENCES `barangays` (`id`),
+  ADD CONSTRAINT `barangay_accounts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `police_station_accounts`
+--
+ALTER TABLE `police_station_accounts`
+  ADD CONSTRAINT `police_station_accounts_policestation_id_foreign` FOREIGN KEY (`policestation_id`) REFERENCES `police_stations` (`id`),
+  ADD CONSTRAINT `police_station_accounts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -109,6 +109,18 @@ Route::group(['prefix' => 'user'], function(){
             'uses' => 'UserController@getProfile',
             'as' => 'user.profile',
         ]);
+
+        Route::get('editprofile/{user}', [
+            'uses' => 'UserController@EditProfile',
+            'as' => 'user.editprofile',
+        ]);
+
+        Route::put('updateprofile/{user}/update', [
+            'uses' => 'UserController@UpdateProfile',
+            'as' => 'user.updateprofile',
+        ]);
+
+
     });
 
 
@@ -169,31 +181,38 @@ Route::group(['middleware' => 'role:superadmin'], function() {
   });
 
 //Admin User
-Route::group(['middleware' => 'admin'], function() {
+Route::group(['middleware' => 'role:admin'], function() {
 
-  //BARANGAY CRUD
-  Route::resource('barangay', BarangayController::class);
-  Route::get('/get-barangay',[ 'uses'=>'BarangayController@getBarangay','as' => 'barangays.getBarangay']);
+    //BARANGAY CRUD
+    Route::resource('barangay', BarangayController::class);
+    Route::get('/get-barangay',[ 'uses'=>'BarangayController@getBarangay','as' => 'barangays.getBarangay']);
+  
+    //HOSPITALS CRUD
+    Route::resource('hospital', HospitalController::class);
+    Route::get('/get-hospital',[ 'uses'=>'HospitalController@getHospital','as' => 'hospitals.getHospital']);
+  
+    //POLICESTATION CRUD
+    Route::resource('policestation', PoliceStationController::class);
+    Route::get('/get-policestation',[ 'uses'=>'PoliceStationController@getPoliceStation','as' => 'policestations.getPoliceStation']);
+  
+    Route::resource('unverifieduser', UnverifiedUserController::class);
+    Route::get('/get-unverifieduser',[ 'uses'=>'UnverifiedUserController@getUnverifiedUser','as' => 'unverifiedusers.getUnverifiedUser']);
+    Route::put('/reject/{id}',[ 'uses'=>'UnverifiedUserController@reject','as' => 'unverifieduser.reject']);
+  
+    Route::resource('verifieduser', VerifiedUserController::class);
+    Route::get('/get-verifieduser',[ 'uses'=>'VerifiedUserController@getVerifiedUser','as' => 'verifiedusers.getVerifiedUser']);
+  
 
-  //HOSPITALS CRUD
-  Route::resource('hospital', HospitalController::class);
-  Route::get('/get-hospital',[ 'uses'=>'HospitalController@getHospital','as' => 'hospitals.getHospital']);
+    Route::get('/admin_dashboard', 'DashboardController@getCountandLocation')->name('admin_dashboard');
+    
+    Route::get('/hospitals/{hospitals}', 'DashboardController@showHospital')->name('hospital');
+    Route::get('/barangays/{barangays}', 'DashboardController@showBarangay')->name('barangay');
+    Route::get('/polices/{polices}', 'DashboardController@showPolice')->name('police');
 
-  //POLICESTATION CRUD
-  Route::resource('policestation', PoliceStationController::class);
-  Route::get('/get-policestation',[ 'uses'=>'PoliceStationController@getPoliceStation','as' => 'policestations.getPoliceStation']);
-
-  Route::resource('unverifieduser', UnverifiedUserController::class);
-  Route::get('/get-unverifieduser',[ 'uses'=>'UnverifiedUserController@getUnverifiedUser','as' => 'unverifiedusers.getUnverifiedUser']);
-  Route::put('/reject/{id}',[ 'uses'=>'UnverifiedUserController@reject','as' => 'unverifieduser.reject']);
-
-  Route::resource('verifieduser', VerifiedUserController::class);
-  Route::get('/get-verifieduser',[ 'uses'=>'VerifiedUserController@getVerifiedUser','as' => 'verifiedusers.getVerifiedUser']);
-
-//   Route::resource('user', UserController::class);
-//   Route::get('/get-user',[ 'uses'=>'UserController@getUser','as' => 'users.getUser']);
-
-});
+  //   Route::resource('user', UserController::class);
+  //   Route::get('/get-user',[ 'uses'=>'UserController@getUser','as' => 'users.getUser']);
+  
+  });
 
 Route::group(['middleware' => 'role:barangay_admin'], function() {
 
@@ -236,6 +255,8 @@ Route::group(['middleware' => 'role:hospital_admin'], function() {
      //HOSPITALS CRUD
     Route::resource('hospital', HospitalController::class);
     Route::get('/get-hospital',[ 'uses'=>'HospitalController@getHospital','as' => 'hospitals.getHospital']);
+
+    // Route::get('/hospital/{hospitals}',[ 'uses'=>'DashboardController@show','as' => 'hospitals.show']);
 
 });
 

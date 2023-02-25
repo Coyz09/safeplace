@@ -88,11 +88,19 @@ class HospitalController extends Controller
     }
 
 
+    // public function show($id)
+    // {
+    //     $hospital = Hospital::find($id);
+
+    //     return View::make('hospitals.show',compact('hospital'));
+    // }
+
     public function show($id)
     {
-        $hospital = Hospital::find($id);
-
-        return View::make('hospitals.show',compact('hospital'));
+        // $hospital->load([]);
+        $hospitals = Hospital::all()->first();
+        // dd($hospital);
+        return view('dashboard.hospital_info', compact('hospitals'));
     }
 
 

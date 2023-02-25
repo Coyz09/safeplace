@@ -252,7 +252,7 @@
               <div class="form-group">
                     <label for="role">Role: </label>
                   
-                    {!! Form::select('role',array('' => 'Choose the role:','users_admin' => 'users_admin','unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'hospital_admin' => 'hospital_admin', 'barangay_staff' => 'barangay_staff','barangay_admin' => 'barangay_admin', 'policestation_staff' => 'policestation_staff','policestation_admin' => 'policestation_admin','admin' => 'admin','superadmin' => 'superadmin'), $user->role,['class' => 'form-control']) !!}
+                    {!! Form::select('role',array('users_admin' => 'users_admin','unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'hospital_admin' => 'hospital_admin', 'barangay_staff' => 'barangay_staff','barangay_admin' => 'barangay_admin', 'policestation_staff' => 'policestation_staff','policestation_admin' => 'policestation_admin','admin' => 'admin','superadmin' => 'superadmin'), $user->role,['placeholder' => 'Choose the role:','class' => 'form-control']) !!}
                 </div>
                 </div> 
 

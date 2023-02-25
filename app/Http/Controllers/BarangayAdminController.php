@@ -11,6 +11,7 @@ use Validator;
 use App\Models\UnverifiedUser;
 use App\Models\VerifiedUser;
 use App\Models\User;
+use App\Models\Barangay;
 use Yajra\Datatables\Datatables;
 
 class BarangayAdminController extends Controller
@@ -39,12 +40,14 @@ class BarangayAdminController extends Controller
   
     public function create()
     {
-        return View::make('barangay_admin.create');
+        $barangays = Barangay::select('*')->get();
+        return View::make('barangay_admin.create',compact('barangays'));
     }
 
 
     public function store(Request $request)
     {
+        // dd($request->input('name'),$request->input('barangay_id') );
         $this->validate($request, [
             'name' => 'required|min:2|max:200',          
             'email'=> 'required|min:2|max:200',
@@ -52,7 +55,7 @@ class BarangayAdminController extends Controller
             'role'=> 'required|min:2|max:200',
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
         ]);
-  
+       
   
           if($request->hasFile('img')){
   
@@ -68,7 +71,15 @@ class BarangayAdminController extends Controller
               'role' => 'barangay',
               'img' => $input['img'] ]);      
            $user->save();
-         }
+        
+
+         DB::table('barangay_accounts')->insert(
+            ['barangay_id' => $request->input('barangay_id') , 
+             'user_id' => $user->id,
+             'role' => $request->input('role')
+             ]
+            );
+     }
   
           return Redirect::to('barangayadmin')->with('success','New Barangay added!');
     }
@@ -91,9 +102,9 @@ class BarangayAdminController extends Controller
         $this->validate($request, [
             'name' => 'required|min:2|max:200',          
             'email'=> 'required|min:2|max:200',
-            'password'=> 'required|min:2|max:200',
+            'password'=> 'required|min:2|max:200',   
             'role'=> 'required|min:2|max:200',
-            'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+            // 'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
         ]);
 
    
@@ -109,11 +120,22 @@ class BarangayAdminController extends Controller
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
-                'role' => 'barangay',
+                'role' => $request->input('role'),
                 'img' => $input['img'],
               ];
 
-   
+            $user->update($data);
+           }
+           else
+           {
+
+            $user = User::find($id);
+            $data = [
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+                'role' => $request->input('role'),
+              ];
 
             $user->update($data);
            }

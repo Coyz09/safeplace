@@ -93,6 +93,14 @@ class BarangayController extends Controller
           $barangay->user_id = $user->id;
 
           $barangay->save();
+
+          DB::table('barangay_accounts')->insert(
+            ['barangay_id' => $barangay->id, 
+             'user_id' => $user->id,
+             'role' => $request->input('role')
+             ]
+            );
+          
       }
 
         return Redirect::to('barangay')->with('success','New Barangay added!');

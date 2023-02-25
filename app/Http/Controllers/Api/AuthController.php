@@ -52,12 +52,12 @@ class AuthController extends Controller
                 ]);
             }
 
-            elseif (auth()->guard('api')->user()->role == 'police') {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Unauthorized',
-                ]);
-            }
+            // elseif (auth()->guard('api')->user()->role == 'police') {
+            //     return response()->json([
+            //         'status' => false,
+            //         'message' => 'Unauthorized',
+            //     ]);
+            // }
 
             else{
 
@@ -100,6 +100,25 @@ class AuthController extends Controller
             ]);
         }
 
+    }
+
+    public function qrcode(Request $request)
+    {
+        // $user = User::where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')->first();
+
+ 
+        $user= DB::table('users')
+        ->select('*')
+        ->where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')
+        ->get(); 
+
+        return response()->json([
+            'success' => true,
+
+            'user' => $user
+
+
+        ]);
     }
 
 

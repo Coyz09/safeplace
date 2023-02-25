@@ -192,13 +192,28 @@
       <div class="title">Add New Record</div>
 
       <div class="user-details">
-
-      <div class="input-box">
-                <div class="form-group">
-                  {!!Form::label('Barangay Name:')!!}
-                  {!! Form::text('name',old('name'),['class' => 'form-control'])!!}
+        
+              <div class="input-box">
+              <div class="form-group">
+              {!!Form::label('Barangay Name:')!!}     
+                <select class="form-control select2" style="width: 100%;" name="name" id="name">
+                <option selected="selected" value="" >Select Barangay Name:</option>
+                  @foreach ($barangays as $barangay)
+                  <option value="{{ $barangay->barangay_name }}" data-price="{{ $barangay->id }}">{{ $barangay->barangay_name }}</option>
+                  @endforeach
+              </select>
+              <script type="text/javascript">  
+                let sel = document.getElementById('name');
+                sel.addEventListener('click', function (e) {
+                    let price = e.srcElement.selectedOptions["0"].dataset.price;
+                    document.getElementById('barangay_id').value = price;
+                });
+              </script>
+              <input type="hidden" name="barangay_id" id="barangay_id" class="form-control">
                 </div>
-              </div>
+                </div>
+
+        
 
               <div class="input-box">
                 <div class="form-group">
@@ -214,13 +229,13 @@
                 </div>
               </div>
 
-              <!-- <div class="input-box">
+              <div class="input-box">
               <div class="form-group">
-                    {!!Form::label('Role:')!!}
-                    {!! Form::text('role',"barangay_staff",['class' => 'form-control']) !!}                     
-              </div>
-              </div> 
-               -->
+                    <label for="role">Role: </label>            
+                    {!! Form::select('role',array('barangay_centralbicutan' => 'barangay_centralbicutan','barangay_centralsignalvillage' => 'barangay_centralsignalvillage', 'barangay_fortbonifacio' => 'barangay_fortbonifacio', 'barangay_katuparan' => 'barangay_katuparan', 'barangay_maharlikavillage' => 'barangay_maharlikavillage','barangay_northdaanghari' => 'barangay_northdaanghari', 'barangay_northsignalvillage' => 'barangay_northsignalvillage','barangay_pinagsama' => 'barangay_pinagsama','barangay_southdaanghari' => 'barangay_southdaanghari','barangay_southsignalvillage' => 'barangay_southsignalvillage','barangay_tanyag' => 'barangay_tanyag','barangay_upperbicutan' => 'barangay_upperbicutan','barangay_westernbicutan' => 'barangay_westernbicutan'), old('role'),['placeholder' => 'Choose the role:','class' => 'form-control']) !!}
+                </div>
+                </div> 
+
                 <div class="input-box">
                 <div class="form-group ">
                     {!!Form::label('Select image to upload:')!!}
