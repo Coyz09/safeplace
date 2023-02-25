@@ -8,6 +8,8 @@ use Redirect;
 use DB;
 use Validator;
 use App\Models\BarangayReports;
+use App\Models\Barangay;
+use App\Models\User;
 use Yajra\Datatables\Datatables;
 
 
@@ -26,11 +28,137 @@ class UserBarangayController extends Controller
     public function getBarangayReports()
     {
 
-        $barangay_reports = BarangayReports::select('*');
+        // $barangays = DB::table('barangays')
+        //     ->join('barangay_accounts','barangays.id','=','barangay_accounts.barangay_id')
+        //     ->join('users','users.id','=','barangay_accounts.user_id')
+        //     ->select('*')
+        //     ->where('barangay_accounts.role',"barangay_westernbicutan")
+        //     ->get();
+
+        // $barangay_reports =  $users = DB::table('barangay_reports')
+        //     ->select('*')
+        //     ->where('manage_by',"barangay_westernbicutan")
+        //     ->get();
+        // $barangay_reports = BarangayReports::select('*')->where('manage_by','barangay_westernbicutan')->get();
+        // dd($barangay_reports);
+        // $barangay_reports = BarangayReports::select('*');
+        
+        $users = DB::table('users')
+            ->join('barangay_accounts','users.id','=','barangay_accounts.user_id')
+            ->select('barangay_accounts.role')
+            ->where('barangay_accounts.user_id',(auth()->guard('web')->user()->id))
+            ->first();
+
+        // dd($users);
+        if (($users->role == "barangay_centralbicutan"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_centralbicutan")
+            ->get();
+        }
+        elseif (($users->role == "barangay_centralsignalvillage"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_centralsignalvillage")
+            ->get();
+        
+        }
+
+        elseif (($users->role == "barangay_fortbonifacio"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_fortbonifacio")
+            ->get();
+          
+        }
+        elseif (($users->role == "barangay_katuparan"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_katuparan")
+            ->get();
+          
+        }
+        elseif (($users->role == "barangay_maharlikavillage"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_maharlikavillage")
+            ->get();
+           
+        }
+        elseif (($users->role == "barangay_northdaanghari"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_northdaanghari")
+            ->get();
+           
+        }
+        elseif (($users->role == "barangay_northsignalvillage"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_northsignalvillage")
+            ->get();
+          
+        }
+        elseif (($users->role == "barangay_pinagsama"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_pinagsama")
+            ->get();
+          
+        }
+        elseif (($users->role == "barangay_southdaanghari"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_southdaanghari")
+            ->get();
+         
+        }
+        elseif (($users->role == "barangay_southsignalvillage"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_southsignalvillage")
+            ->get();
+            
+        }
+        elseif (($users->role == "barangay_tanyag"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_tanyag")
+            ->get();
+            
+        }
+        elseif (($users->role == "barangay_upperbicutan"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_upperbicutan")
+            ->get();
+        }
+        elseif (($users->role == "barangay_westernbicutan"))
+        {
+            $barangay_reports =  $users = DB::table('barangay_reports')
+            ->select('*')
+            ->where('manage_by',"barangay_westernbicutan")
+            ->get();
+            // dd($barangay_reports);
+        }
+       
+       
         return  Datatables::of($barangay_reports)
         ->addColumn('action', 'barangay_users.action')
         ->make();
-
+    
     }
 
     /**

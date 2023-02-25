@@ -87,6 +87,7 @@
               { data: 'address', name: 'address' },
               { data: 'contact', name: 'contact' },
               { data: 'email', name: 'email' },
+              // { data: 'status', name: 'status' },
               { data: 'action', name: 'action', orderable: false},
              ]
         });

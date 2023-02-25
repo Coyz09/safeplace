@@ -185,7 +185,8 @@
       <div class="image-holder"></div>
 
       <!-- {!! Form::open(['route' => 'policestation.store']) !!} -->
-      <form method="POST" action="{{ route("policestation.store") }}" enctype="multipart/form-data">
+      <!-- <form method="POST" action="{{ route("policestation.store") }}" enctype="multipart/form-data"> -->
+      {!! Form::open(['route' => 'policestation.store', 'files' => true]) !!}
       @csrf
 
       <div class="title">Add New Record</div>
@@ -268,6 +269,17 @@
               </div>
 
               </div>
+
+
+              <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
            
     
       </div>

@@ -12,6 +12,7 @@ use App\Models\UnverifiedUser;
 use App\Models\VerifiedUser;
 use App\Models\User;
 use Yajra\Datatables\Datatables;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Session;
 use Hash;
 use Cookie;
@@ -53,7 +54,7 @@ class UserController extends Controller
         if($request->hasFile('img')){
 
           $img  = time().'.'.$request->file('img')->extension();  
-          $request->file('img')->move(public_path('images'), $img);   
+          $request->file('img')->move(public_path('storage/images'), $img);   
           
           $input['img'] = 'storage/images/'.$img;
 
@@ -91,7 +92,7 @@ class UserController extends Controller
        
                 if($request->hasFile('img')){
                   $img  = time().'.'.$request->file('img')->extension();  
-                  $request->file('img')->move(public_path('images'), $img);   
+                  $request->file('img')->move(public_path('storage/images'), $img);   
                   
                   $input['img'] = 'storage/images/'.$img;
         
@@ -117,9 +118,9 @@ class UserController extends Controller
         public function destroy($id)
          {
              $user = User::find($id);
-
+          // dd($user);
              if ($user->role == "unverified_user"){
-
+              
                 $delete_unverified_user = DB::table('unverified_users')
                 ->select('user_id')
                 ->where('user_id', '=', $id)
@@ -179,14 +180,10 @@ class UserController extends Controller
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
         ]);
 
-        // $input = $request->all();
         if($request->hasFile('img')){
-          //  $img = time().'.'.$request->file('img')->getClientOriginalName();
-           
-          //  $request->file('img')->move(public_path('/storage/images'.$img));
 
            $img  = time().'.'.$request->file('img')->extension();  
-           $request->file('img')->move(public_path('images'), $img);   
+           $request->file('img')->move(public_path('storage/images'), $img);   
            
            $input['img'] = 'storage/images/'.$img;
 
@@ -200,13 +197,7 @@ class UserController extends Controller
          $user->save();
         }
 
-        //  $login = new User([
-        //     'email' => $request->input('email'),
-        //     'password' => bcrypt($request->input('password')),
- 
-        //  ]);
          Auth::guard('web')->login($user);
-            // dd($input['img'] );  
 
          $unverified_user = new UnverifiedUser;
          $unverified_user->user_id = $user->id;
@@ -229,19 +220,96 @@ class UserController extends Controller
      }
 
 
-    //  public function getProfile() {
-    //     //$orders = Auth::user()->with('orders')->get();
-    //     $orders = Auth::user()->orders;
-    //     // dd($orders);
-    //     $orders->transform(function($order, $key){
-    //         $order->cart = unserialize($order->cart);
-    //         return $order;
-    //     });
+     public function getProfile() {
+      $user = User::find(auth()->guard('web')->user()->id);
 
-    //  $customer = Customer::where('user_id',Auth::id())->first();
-    //  $orders = Order::with('customer','items')->where('customer_id',$customer->customer_id)->get();
-    //     return view('user.profile',compact('orders'));
-    // }
+
+      if (($user->role == "unverified_user"))
+        {
+            $users = DB::table('unverified_users')
+            ->select('*')
+            ->where('user_id',$user->id)
+            ->first();
+          
+        }
+
+      elseif (($user->role == "verified_user"))
+          {
+            $users = DB::table('verified_users')
+            ->select('*')
+            ->where('user_id',$user->id)
+            ->first();  
+        }
+
+        $qrcode = QrCode::size(200)->generate($user->qr_code);
+        // dd($qrcode);
+
+        return view('user.profile',compact('users','user','qrcode' ));
+    }
+
+
+    public function EditProfile(User $user) {
+      $user = User::find(auth()->guard('web')->user()->id);
+
+      if (($user->role == "unverified_user"))
+        {
+            $users = DB::table('unverified_users')
+            ->select('*')
+            ->where('user_id',$user->id)
+            ->first();
+          
+        }
+
+      elseif (($user->role == "verified_user"))
+          {
+            $users = DB::table('verified_users')
+            ->select('*')
+            ->where('user_id',$user->id)
+            ->first();  
+        }
+ 
+        return View::make('user.updateprofile',compact('user','users'));
+ 
+    }
+
+    public function UpdateProfile(Request $request, $user) {
+
+               $this->validate($request, [
+                'name' => 'required|min:2|max:200',          
+                'email'=> 'required|min:2|max:200',
+                'password'=> 'required|min:2|max:200',
+                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+            ]);
+
+       
+                if($request->hasFile('img')){
+                  $img  = time().'.'.$request->file('img')->extension();  
+                  $request->file('img')->move(public_path('storage/images'), $img);   
+                  
+                  $input['img'] = 'storage/images/'.$img;
+
+                  $id = User::find(auth()->guard('web')->user()->id);
+                  // dd($id);
+                  $user = User::find($id->id);
+
+
+                  $data = [
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'password' => bcrypt($request->input('password')),
+                    'role' => $id->role,
+                    'img' => $input['img'],
+                  ];
+    
+       
+    
+                $user->update($data);
+               }
+     
+              return Redirect::to('profile')->with('success','User updated!');
+       
+         
+    }
 
 
     public function getLogout(Request $request){

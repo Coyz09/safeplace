@@ -59,6 +59,7 @@
                         <th scope="col">Barangay Location</th>
                         <th scope="col">Barangay Schedule</th>
                         <th scope="col">Barangay Contact</th>
+                        <th scope="col">Barangay Image</th>
                         <th style="width: 100px">Action</th>
                     </tr>
                 </thead>  
@@ -81,6 +82,10 @@
             { data: 'barangay_location', name: 'barangay_location' },
             { data: 'barangay_schedule', name: 'barangay_schedule' },
             { data: 'barangay_contact', name: 'barangay_contact' },
+            { data: 'img', name: 'img',
+              "render": function (data, type, full, meta) {
+                  return "<img src=\"" + data + "\" height=\"100\" width=\"100\"/>";
+              },orderable: false},
             {data: 'action', name: 'action', orderable: false},
            
             ]

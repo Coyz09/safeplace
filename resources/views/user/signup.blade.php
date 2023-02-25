@@ -12,8 +12,13 @@
             }
             </style>
 
+            
+          
+
+
             <div class="alert alert-danger hide" id="error-message"></div>
             <div class="alert alert-success hide" id="sent-message"></div>
+
               <!-- @include('layouts.flash-messages') -->
      @if ($errors->any())
         <div class="alert alert-danger">
@@ -55,6 +60,16 @@
 
                     {!! Form::select('gender',array('' => 'Choose your Gender:','Male' => 'Male', 'Female' => 'Female'), old('gender') ,['class' => 'form-control']) !!}
                 </div>
+
+
+                <!-- <div class="form-group">
+                    <label for="contact">Contact: </label>
+                    <input type="text" name="contact" id="contact" class="form-control">
+                </div> -->
+                
+                <div class="alert alert-danger hide" id="error-message"></div>
+            <div class="alert alert-success hide" id="sent-message"></div>
+
 
 
             <div class="form-group">

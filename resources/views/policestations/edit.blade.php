@@ -185,7 +185,7 @@
     
       <div class="image-holder"></div>
 
-      <form action="{{route('policestation.update',$policestation->id)}}" method="POST" >
+      <form action="{{route('policestation.update',$policestation->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -221,7 +221,7 @@
              <div class="form-group">
              {!!Form::label('PoliceStation Location:')!!}
              <!-- {!! Form::text('address', $policestation->policestation_location, ['class' => 'form-control map-input ']); !!} -->
-                <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="policestation_location" id="address" value="{{$policestation->policestation_location}}">
+                <input class="form-control map-input {{ $errors->has('address') ? 'is-invalid' : '' }}" type="text" name="address" id="address" value="{{$policestation->policestation_location}}">
                 <input type="hidden" name="latitude" id="address-latitude" value="{{ $policestation->latitude ?? '0' }}" />
                 <input type="hidden" name="longitude" id="address-longitude" value="{{  $policestation->longitude ?? '0' }}" />
                 @if($errors->has('address'))
@@ -279,6 +279,16 @@
                   {!! Form::hidden('user_id',$policestation->user_id,array('class' => 'form-control')) !!}
                 </div>
               </div>
+
+              <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
     
       </div>
     

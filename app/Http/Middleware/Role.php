@@ -41,19 +41,22 @@ class Role
 
     public function handle($request, Closure $next, ... $roles)
 {
-    if (!Auth::guard('web')->check()) // I included this check because you have it, but it really should be part of your 'auth' middleware, most likely added as part of a route group.
-    return redirect()->route('user.signin')->with('error',"Please Login!");
+    if (!Auth::guard('web')->check()) 
+    {
+        return redirect()->route('user.signin')->with('error',"You do not have access! Please Login to your authorized account.");
+    }
 
-    // $user = Auth::user();
     $user = Auth::guard('web')->user();
+    // $user = Auth::user();
+  
 
-    // if( $user->isAdmin()){
-    //     return $next($request);
-    // }
+    if( $user->isAdmin()){
+        return $next($request);
+    }
 
-    // elseif( $user->isSuperAdmin()){
-    //     return $next($request);
-    // }
+    elseif( $user->isSuperAdmin()){
+        return $next($request);
+    }
 
     // foreach($roles as $role) {
     //     // Check if user has the role This check will depend on how your roles are set up
@@ -67,12 +70,16 @@ class Role
     // }
     foreach($roles as $role) {
         // Check if user has the role This check will depend on how your roles are set up
-        if($user->role == $role || $user->isSuperAdmin()){
+        if($user->role == $role || $user->isSuperAdmin() || $user->isAdmin()){
+            // dd($user->role);
             return $next($request);
         }
-            elseif($user->role != $role)
+            else
+            // if($user->role != $role || $user->isSuperAdmin() == false || $user->isAdmin() == false )
             {
-                return redirect()->back()->with('error',"You do not have access!"); 
+                // dd($user->role);
+                Auth::guard('web')->logout();
+                return redirect()->back()->with('error',"You do not have access! Please Login to your authorized account."); 
             }
             
             //  elseif( $user->isAdmin( )!= true){
@@ -82,6 +89,8 @@ class Role
             //         return redirect()->back()->with('error',"You do not have access!"); 
             // }
     }
-    return redirect()->route('user.signin')->with('error',"Please Login!");
+    // dd($user->role);
+    Auth::guard('web')->logout();
+    return redirect()->route('user.signin')->with('error',"You do not have access! Please Login to your authorized account.");
     }
 }

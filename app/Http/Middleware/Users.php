@@ -19,12 +19,14 @@ class Users
     {
     //    if (!Auth::guard('web')->check())
     //    {
-    
+    // $user = Auth::guard('web')->user();
             if(Auth::guard('web')->user()->isUser())
             {
+                // dd($user->role); 
                 return $next($request);
             }
             else{
+                Auth::guard('web')->logout();
                 return redirect()->back()->with('error',"You do not have access!"); 
             }
     //    }

@@ -52,7 +52,7 @@
                       <th scope="col">UnverifiedUser Last Name</th>
                       <th scope="col">UnverifiedUser Email</th>
                       <th scope="col">UnverifiedUser Status</th>
-
+                      <th scope="col">Verification Attempt</th>
                       <th style="width: 100px">Action</th>
                   </tr>
               </thead>
@@ -81,6 +81,7 @@
               { data: 'lname', name: 'lname' },
               { data: 'email', name: 'email' },
               { data: 'status', name: 'status' },
+              { data: 'verification_attempt', name: 'verification_attempt' },
               { data: 'action', name: 'action', orderable: false},
              ]
         });

@@ -13,7 +13,7 @@
     <form class="" action="{{ route('user.signin') }}" method="post">
         {{ csrf_field() }}
         <div class="form-group">
-            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+            <input type="text" name="email" id="email" class="form-control" placeholder="Email" value= "{{ old('email')}}">
         </div>
 
         <div class="form-group">

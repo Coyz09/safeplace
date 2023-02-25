@@ -225,7 +225,7 @@
               <div class="form-group">
                     <label for="role">Role: </label>
                   
-                    {!! Form::select('role',array('' => 'Choose the role:','unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'barangay' => 'barangay', 'police_station' => 'police_station','admin' => 'admin','superadmin' => 'superadmin'), old('role') ,['class' => 'form-control']) !!}
+                    {!! Form::select('role',array('user_admin' => 'user_admin', 'unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'hospital_admin' => 'hospital_admin', 'barangay' => 'barangay', 'barangay_admin' => 'barangay_admin', 'police_station' => 'police_station','policestation_admin' => 'policestation_admin','admin' => 'admin','superadmin' => 'superadmin'), old('role') ,['placeholder' => 'Choose the role:','class' => 'form-control']) !!}
                 </div>
                 </div> 
               

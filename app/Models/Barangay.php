@@ -17,6 +17,7 @@ class Barangay extends Model
 
    public function users()
    {
-      return $this->belongsToMany('App\Models\User');
+      return $this->belongsToMany('App\Models\User','barangay_accounts', 'barangay_id', 'user_id', 'role');
    }
+
 }

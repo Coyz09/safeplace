@@ -183,7 +183,7 @@
 
      <div class="image-holder"></div>
 
-     {!! Form::open(['route' => 'barangay.store']) !!}
+     {!! Form::open(['route' => 'barangay.store', 'files' => true]) !!}
      @csrf
 
      <div class="title">Add New Record</div>
@@ -247,6 +247,7 @@
                  {!! Form::text('barangay_contact', old('barangay_contact'), ['class' => 'form-control']); !!}
                </div>
              </div>
+             
 
              <div class="input-box">
              <div class="form-group">
@@ -262,6 +263,23 @@
               </div>
 
               </div>
+
+              <div class="input-box">
+              <div class="form-group">
+                    <label for="role">Role: </label>            
+                    {!! Form::select('role',array('barangay_centralbicutan' => 'barangay_centralbicutan','barangay_centralsignalvillage' => 'barangay_centralsignalvillage', 'barangay_fortbonifacio' => 'barangay_fortbonifacio', 'barangay_katuparan' => 'barangay_katuparan', 'barangay_maharlikavillage' => 'barangay_maharlikavillage','barangay_northdaanghari' => 'barangay_northdaanghari', 'barangay_northsignalvillage' => 'barangay_northsignalvillage','barangay_pinagsama' => 'barangay_pinagsama','barangay_southdaanghari' => 'barangay_southdaanghari','barangay_southsignalvillage' => 'barangay_southsignalvillage','barangay_tanyag' => 'barangay_tanyag','barangay_upperbicutan' => 'barangay_upperbicutan','barangay_westernbicutan' => 'barangay_westernbicutan'), old('role'),['placeholder' => 'Choose the role:','class' => 'form-control']) !!}
+                </div>
+                </div> 
+              
+              <div class="input-box">
+                <div class="form-group ">
+                    {!!Form::label('Select image to upload:')!!}
+                    {!! Form::file('img',['class' => 'form-control']); !!}
+                    @if($errors->has('img'))
+                    <a>{{ $errors->first('img') }}</a>
+                    @endif
+                </div>
+                </div> 
 
 
 

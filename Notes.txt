@@ -22,3 +22,7 @@ Consultation 9/8/22:
 2. Included ba mga barangay tanod sa mobile app?
 3. Pwede ba palitan yung function na call to policemen gawing call to police station?
 
+
+*NOTE: ADMIN LOGIN SHOULD BE FIX
+
+https://bbbootstrap.com/snippets/bootstrap-5-profile-card-animation-74461039
