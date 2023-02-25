@@ -25,6 +25,8 @@ Route::get('logout', 'Api\AuthController@logout');
 Route::post('save_user_info', 'Api\AuthController@save_user_info')->middleware('jwtAuth');
 Route::get('get_user_info', 'Api\AuthController@get_user_info')->middleware('jwtAuth');
 Route::post('change_password', 'Api\AuthController@change_password')->middleware('jwtAuth');
+Route::post('update_profile_picture', 'Api\AuthController@update_profile_picture')->middleware('jwtAuth');
+
 
 Route::get('qrcode', 'Api\AuthController@qrcode');
 
