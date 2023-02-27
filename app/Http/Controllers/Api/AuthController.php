@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         $token = auth()->guard('api')->attempt($credentials);
-
+        // dd($token);
 
         if ($token) {
 
@@ -63,6 +63,7 @@ class AuthController extends Controller
 
 
                 $user = User::find(Auth::user()->id);
+             
 
                 if($user->role == "verified_user")
                 {
@@ -102,23 +103,109 @@ class AuthController extends Controller
 
     }
 
-    public function qrcode(Request $request)
-    {
-        // $user = User::where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')->first();
+    // public function qrcode(Request $request)
+    // {
+    //     // $user = User::where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')->first();
 
  
-        $user= DB::table('users')
+    //     $user= DB::table('users')
+    //     ->select('*')
+    //     ->where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')
+    //     ->get(); 
+
+    //     return response()->json([
+    //         'success' => true,
+
+    //         'user' => $user
+
+
+    //     ]);
+    // }
+    public function qrcode(Request $request)
+    {
+
+        $qr_code = $request->only('qr_code');
+
+         $user= DB::table('users')
         ->select('*')
-        ->where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')
-        ->get(); 
+        ->where('qr_code', '=',  $qr_code)
+        ->first();
 
-        return response()->json([
-            'success' => true,
+    //     $email = $user->email;
+    //     $password = $user->password;
 
-            'user' => $user
+    //     $credentials = "$email $password";
+    //    dd($credentials);
 
 
-        ]);
+    //     $array1 = array('email' => $email );
+    //     $array2 = array('password' => $password);
+    //     $result = array_merge($array1, $array2);
+
+    //     dd($result);
+    //     $token = auth()->guard('api')->attempt($result);
+        // dd($token );
+
+       
+
+        // dd($user);
+        // $email = $user->email;
+        // $password =$user->password;
+        $qr_code =$user->qr_code;
+        //  dd($password);
+
+        //  $hashedPassword = Auth::user()->getAuthPassword();
+        //  dd( $hashedPassword );
+        // dd(Hash::check("password", $user->password));
+        // if(Hash::check($password, $user->password)){
+        //     return response()->json([
+        //         'success' => true,
+        //         // 'token' => $token,
+        //         'user' => $user,
+        //         'expires_in' => auth()->factory()->getTTL()*60
+
+        //     ]);
+        // }
+            
+        // if (Auth::guard('api')->attempt(['email' => $email, 'password' => $password, 'qr_code' => $qr_code]))
+        // {
+        //     return response()->json([
+        //         'success' => true,
+        //         // 'token' => $token,
+        //         'user' => $user,
+        //         'expires_in' => auth()->factory()->getTTL()*60
+
+        //     ]);
+        // }
+    $useraccount = User::where('qr_code',$qr_code)->first();
+        if ($useraccount)
+        {
+           $token = Auth::guard('api')->login($useraccount);
+            // dd($token);
+            return response()->json([
+                'success' => true,
+                'token' => $token,
+                'user' => $user,
+                'expires_in' => auth()->factory()->getTTL()*60
+
+            ]);
+        }
+
+        // return response()->json([
+        //     'success' => true,
+        //     'token' => $token,
+        //     'user' => $user,
+        //     'expires_in' => auth()->factory()->getTTL()*60
+        // ]);
+
+        else{
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid Credentials',
+            ]);
+        }
+
+
     }
 
 

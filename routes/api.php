@@ -28,7 +28,7 @@ Route::post('change_password', 'Api\AuthController@change_password')->middleware
 Route::post('update_profile_picture', 'Api\AuthController@update_profile_picture')->middleware('jwtAuth');
 
 
-Route::get('qrcode', 'Api\AuthController@qrcode');
+Route::post('qrcode', 'Api\AuthController@qrcode');
 
 Route::post('forgot-password', 'Api\AuthController@forgot_password');
 
