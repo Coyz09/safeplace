@@ -20,6 +20,14 @@ body {
     transition: all 0.5s;
 }
 
+.card2 {
+    width: 550px;
+    background-color: #efefef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
 .image img {
     transition: all 0.5s
 }
@@ -110,7 +118,7 @@ hr .new1 {
 </style>
 
 
-<div class="container mt-5 mb-4 p-3 d-flex justify-content-center"> 
+<div class="container mt-5 mb-4 p-5 d-flex justify-content-center"> 
     <div class="card p-4"> 
         <div class=" image d-flex flex-column justify-content-center align-items-center"> 
             <button class="btn btn-secondary"> <img src="{{asset($user->img)}}" height="100" width="100" /></button> <span class="name mt-3">{{$user->name}}</span> 
@@ -139,22 +147,23 @@ hr .new1 {
         <a href="{{ route('user.logout') }}" class="log-out">
           <i class='text-light bx bx-log-out'></i>
         </a>
-    </div> 
-   
-     
-           
-              
-         
-  
-    
+    </div>   
     </div>
       
 </div>
 
-<div class="container mt-5 mb-4 p-2 justify-content-center"> 
-            <div class="row mt-5 text-center">
+<div class="container mt-5 mb-4 p-5 justify-content-center"> 
+<div class="card2 p-4"> 
+            <h2 class="row mt-2 text-center justify-content-center align-items-center"> <strong> SAFEPLACE </strong> </h2>
+            <div class="row mt-2 text-center justify-content-center align-items-center">
+                
                 {!! $qrcode !!}
             </div>
+
+            <h3 class="row mt-3 mb-4 p-2 text-center justify-content-center align-items-center"><strong>Scan to login</strong></h3>
+            <h4 class="row mt-1 text-center justify-content-center align-items-center">Scan the QR Code to log in</h4>
+            <h4 class="row mt-1 text-center justify-content-center align-items-center">instantly in your mobile device.</h4>
+        </div>
         </div>
 
 @endsection
