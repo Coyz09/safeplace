@@ -123,13 +123,54 @@ class AuthController extends Controller
     // }
     public function qrcode(Request $request)
     {
-
         $qr_code = $request->only('qr_code');
 
-         $user= DB::table('users')
-        ->select('*')
-        ->where('qr_code', '=',  $qr_code)
-        ->first();
+        $userinfo= DB::table('users')
+           ->select('*')
+           ->where('qr_code', '=',  $qr_code)
+           ->first();
+
+        if ($userinfo){
+
+            $useraccount = User::where('qr_code',$userinfo->qr_code)->first();
+
+            // if ($useraccount)
+            // {
+                $token = Auth::guard('api')->login($useraccount);
+                // dd($token);
+                if($userinfo->role == "verified_user")
+                    {
+                        $user = DB::table('verified_users')
+                        ->join('users', 'verified_users.user_id',  '=', 'users.id')
+                        ->select('verified_users.*','users.img')
+                        ->where('verified_users.user_id', '=',  $userinfo->id )->get();
+                    }
+                elseif($userinfo->role == "unverified_user")
+                    {
+                        $user = DB::table('unverified_users')
+                        ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+                        ->select('unverified_users.*','users.img')
+                        ->where('unverified_users.user_id', '=',  $userinfo->id )->get();
+                    }
+
+                return response()->json([
+                    'success' => true,
+                    'token' => $token,
+                    'user' => $user,
+                    'userinfo' => $userinfo,
+                    'expires_in' => auth()->factory()->getTTL()*60
+
+                ]);
+       // }
+       }
+    
+       else{
+           return response()->json([
+               'status' => false,
+               'message' => 'Invalid Credentials',
+           ]);
+       }
+    }
 
     //     $email = $user->email;
     //     $password = $user->password;
@@ -151,7 +192,7 @@ class AuthController extends Controller
         // dd($user);
         // $email = $user->email;
         // $password =$user->password;
-        $qr_code =$user->qr_code;
+        
         //  dd($password);
 
         //  $hashedPassword = Auth::user()->getAuthPassword();
@@ -176,37 +217,13 @@ class AuthController extends Controller
         //         'expires_in' => auth()->factory()->getTTL()*60
 
         //     ]);
-        // }
-    $useraccount = User::where('qr_code',$qr_code)->first();
-        if ($useraccount)
-        {
-           $token = Auth::guard('api')->login($useraccount);
-            // dd($token);
-            return response()->json([
-                'success' => true,
-                'token' => $token,
-                'user' => $user,
-                'expires_in' => auth()->factory()->getTTL()*60
-
-            ]);
-        }
-
-        // return response()->json([
+        // } 
+           // return response()->json([
         //     'success' => true,
         //     'token' => $token,
         //     'user' => $user,
         //     'expires_in' => auth()->factory()->getTTL()*60
         // ]);
-
-        else{
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid Credentials',
-            ]);
-        }
-
-
-    }
 
 
     public function register(Request $request) {
