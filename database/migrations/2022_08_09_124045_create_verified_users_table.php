@@ -28,7 +28,7 @@ class CreateVerifiedUsersTable extends Migration
             $table->string('id_type')->nullable();
             $table->string('id_number')->nullable();
             $table->string('face_img')->nullable();
-            $table->string('status');
+            // $table->string('status');
             $table->string('user_id');
             $table->timestamps();
         });

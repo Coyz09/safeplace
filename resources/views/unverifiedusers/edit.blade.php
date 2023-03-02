@@ -280,6 +280,7 @@
 
       <div class="button">
         {{ Form::submit('Verify',['class'=>'btn btn-primary']) }}
+        <!-- <button type="submit" class="btn btn-primary">Verify</button> -->
       </div>
      {!! Form::close() !!}
     
@@ -287,17 +288,112 @@
      <form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
         @csrf
         @method('PUT')
-        <div class="buttonreject">
-        {{ Form::submit('Reject',['class'=>'btn btn-primary']) }}
-       </div>
+        <!-- <div class="buttonreject"> -->
+        <!-- {{ Form::submit('Reject',['class'=>'btn btn-primary']) }} -->
+        <!-- <button type="submit" class="btn btn-primary">Reject</button>
+       </div> -->
+
+       <div class="container">
+  <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" id="open">Rejected</button>
+	<form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
+        @csrf
+        @method('PUT')
+
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    	<div class="alert alert-danger" style="display:none"></div>
+      <div class="modal-header">
+      	
+        <h5 class="modal-title">Choose the reason:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="input-box">
+                <div class="form-group">
+                  {!!Form::label(' ')!!}
+                  {!! Form::select('message',array('Your ID mismatch with your information' => 'Your ID mismatch with your information', 'You already had existing account in the system.' => 'You already had existing account in the system.' , 'The photo of the ID you provided is blurry.' => 'The photo of the ID you provided is blurry.', 'The photo your selfies are blurry.' => 'The photo your selfies are blurry.' ),'',['class' => 'form-control'])!!}
+                </div>
+        </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger" >Confirm</button>
+                <!-- {{ Form::submit('Rejected Again',['class'=>'btn btn-primary']) }} -->
+              </div>
+          </div>
+        </div>
+      </div>
+        </form>
+      </div>
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                    crossorigin="anonymous">
+            </script>
+            <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            
+
       </form> 
       @elseif ($unverifieduser->status == "Rejected")
       <form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
         @csrf
         @method('PUT')
-        <div class="buttonreject">
+        <!-- <div class="buttonreject">
         {{ Form::submit('Rejected Again',['class'=>'btn btn-primary']) }}
-       </div>
+        <button type="submit" class="btn btn-primary">Rejected Again</button>
+        <button type="submit" id="rejected-button" class="btn btn-primary" onclick="otpRejected();">Rejected Again</button>
+ 
+        
+       </div> -->
+
+  <div class="container">
+  <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" id="open">Rejected Again</button>
+	<form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
+        @csrf
+        @method('PUT')
+
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    	<div class="alert alert-danger" style="display:none"></div>
+      <div class="modal-header">
+      	
+        <h5 class="modal-title">Choose the reason:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="input-box">
+                <div class="form-group">
+                  {!!Form::label(' ')!!}
+                  {!! Form::select('message',array('Your ID mismatch with your information' => 'Your ID mismatch with your information', 'You already had existing account in the system.' => 'You already had existing account in the system.')," ",['class' => 'form-control'])!!}
+                </div>
+        </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger" >Confirm</button>
+                <!-- {{ Form::submit('Rejected Again',['class'=>'btn btn-primary']) }} -->
+              </div>
+          </div>
+        </div>
+      </div>
+        </form>
+      </div>
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                    crossorigin="anonymous">
+            </script>
+            <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            
+
       </form> 
       @endif
 
