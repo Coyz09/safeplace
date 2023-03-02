@@ -158,7 +158,8 @@ hr .new1 {
             <div class="row mt-2 text-center justify-content-center align-items-center">
                 
                 {!! $qrcode !!}
-            </div>
+               
+            </div>  
 
             <h3 class="row mt-3 mb-4 p-2 text-center justify-content-center align-items-center"><strong>Scan to login</strong></h3>
             <h4 class="row mt-1 text-center justify-content-center align-items-center">Scan the QR Code to log in</h4>

@@ -241,7 +241,8 @@ class UserController extends Controller
             ->first();  
         }
 
-        $qrcode = QrCode::size(200)->generate($user->qr_code);
+        $qrcode = QrCode::size(200)->merge(('\public\Images\Logo.png'))->generate($user->qr_code);
+        // $qrcode = QrCode::size(200)->generate($user->qr_code);
         // dd($qrcode);
 
         return view('user.profile',compact('users','user','qrcode' ));

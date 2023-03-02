@@ -11,7 +11,7 @@ use App\Models\UnverifiedUser;
 use App\Models\VerifiedUser;
 use App\Models\User;
 use Yajra\Datatables\Datatables;
-
+use App\Models\Notification;
 class UnverifiedUserController extends Controller
 {
    
@@ -85,6 +85,23 @@ class UnverifiedUserController extends Controller
          
          VerifiedUser::create($request->all());
 
+         
+         $username = DB::table('users')
+         ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
+         ->select('users.name', 'unverified_users.user_id')
+         ->where('unverified_users.id', '=', $id)
+         ->first();
+
+         $notification_message = $username->name.", Your account is now verified!";
+        //  dd( $username);
+ 
+ 
+         $notification = Notification::create([
+             'message' =>  $notification_message,
+             'user_id' =>$username->user_id,
+          ]);
+          $notification->save();
+
 
          $user = DB::table('users')
             ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
@@ -93,8 +110,15 @@ class UnverifiedUserController extends Controller
             ->update(['role'=>'verified_user']);   
             // dd($user);
 
+
+            // $username = DB::table('users')
+            // ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
+            // ->select('*')
+            // ->where('unverified_users.id', '=', $id)
+            // ->first();
+
          $unverifieduser = UnverifiedUser::find($id);
-         $unverifieduser->delete();
+         $unverifieduser->delete();  
 
          return Redirect::to('unverifieduser')->with('success','Unverified User updated!');
         
@@ -102,6 +126,25 @@ class UnverifiedUserController extends Controller
 
     public function reject(Request $request, $id)
     {
+        // dd($request->input('message'));
+
+        $username = DB::table('users')
+         ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
+         ->select('users.name', 'unverified_users.user_id')
+         ->where('unverified_users.id', '=', $id)
+         ->first();
+
+         $notification_message = $username->name.", Your account is rejected!";
+        //  dd( $username);
+        
+ 
+         $notification = Notification::create([
+             'message' =>  $request->input('message'),
+             'user_id' =>$username->user_id,
+          ]);
+
+             
+          $notification->save();
        
          $unverifieduser = UnverifiedUser::find($id);
          $unverifieduser->update(['status'=>'Rejected']);
