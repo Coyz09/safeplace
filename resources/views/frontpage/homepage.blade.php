@@ -41,7 +41,7 @@
             <img src="../../Images/frontpage/feat1.png">
             </div>
             <p class="features"><strong>Emergency Calls & Filing Reports</strong></p>
-            <p class="caption">These are the powerful functions in this application. Users can easily call for emergency and file a report without any subscription but with a help of internet or mobile data. Emergency calls, whether it is a crime or medical emergency, can be used by the residents of District 2 - Taguig City as long as they are a registered user. Filing reports in barangays or police sub-stations can be used by the verified users only to avoid unwanted or fake reports. </p>
+            <p class="caption">These are the powerful functions in this application. Users can easily call whether it is a crime or medical emergency and file a report without any subscription but with a help of internet or mobile data. </p>
         </div>
 
         <div class="img-with-text">

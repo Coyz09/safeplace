@@ -1,7 +1,26 @@
 @extends('layouts.base')
 @section('content')
+       <style>
+.modal-backdrop.fade {
+opacity: 0;
+filter: alpha(opacity=0);
+}
+.modal-backdrop.in {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
 
+...to this (added ".fade" between the two classes in the second definition):
 
+.modal-backdrop.fade {
+opacity: 0;
+filter: alpha(opacity=0);
+}
+.modal-backdrop.fade.in {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
+</style>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1>Sign Up</h1>
@@ -11,12 +30,6 @@
                 display: none;
             }
             </style>
-
-            
-          
-
-
-   
 
               <!-- @include('layouts.flash-messages') -->
      @if ($errors->any())
@@ -60,150 +73,210 @@
                     {!! Form::select('gender',array('' => 'Choose your Gender:','Male' => 'Male', 'Female' => 'Female'), old('gender') ,['class' => 'form-control']) !!}
                 </div>
 
-
-                <!-- <div class="form-group">
-                    <label for="contact">Contact: </label>
-                    <input type="text" name="contact" id="contact" class="form-control">
-                </div> -->
-                
-                <!-- <div class="alert alert-danger hide" id="error-message"></div>
-            <div class="alert alert-success hide" id="sent-message"></div> -->
-
-            <div class="alert alert-danger hide" id="error-message"></div>
-            <div class="alert alert-success hide" id="sent-message"></div>
-
-            <div class="form-group">
-                  <div class="card mt-3">
-                     <div class="card-body">
-                    <h4>Please Verify Phone number to proceed.</h4>
-                            <div class="mb-3">
-                                <label for="contact" class="form-label">Phone Number:</label>
-                                <input type="text" id="contact" name="contact" value= "{{ old('contact')}}"  class="form-control" placeholder="+639XXXXXXXXXX">
-                            </div>
-                            <div id="recaptcha-container"></div>
-                            <button type="button" id="otp-button" class="btn btn-info" onclick="otpSend();">Verify Phone Number</button>
-
-                    </div>
-                </div>
-                <div id="otp-codes" class="card mt-3 hide">
-                    <div class="card-body">
-
-                            <div class="mb-3">
-                                <label for="otp-code" class="form-label">OTP code:</label>
-                                <input type="text" id="otp-code" class="form-control" placeholder="Enter OTP Code">
-                            </div>
-                            <button type="button" class="btn btn-info" onclick="otpVerify();">Verify OTP</button>
-
-                    </div>
-                </div>
-                        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
-                        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
-                        <script type="text/javascript">
-                            const config = {
-
-                                apiKey: "AIzaSyD1FsINq1NWB1Mu3E3t00p7PJFaIWFdj20",
-                                authDomain: "safeplace-4fa43.firebaseapp.com",
-                                projectId: "safeplace-4fa43",
-                                storageBucket: "safeplace-4fa43.appspot.com",
-                                messagingSenderId: "1053701644301",
-                                appId: "1:1053701644301:web:7c501710f80653d78c3544",
-                                measurementId: "G-LX40NYFV43"
-
-                            };
-
-                            firebase.initializeApp(config);
-                        </script>
-
-                        <script type="text/javascript">
-                            // reCAPTCHA widget
-                            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                                'size': 'invisible',
-                                'callback': (response) => {
-                                    // reCAPTCHA solved, allow signInWithPhoneNumber.
-                                    onSignInSubmit();
-                                }
-                            });
-
-                            function otpSend() {
-                                var phoneNumber = document.getElementById('contact').value;
-                                const appVerifier = window.recaptchaVerifier;
-                                firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-                                    .then((confirmationResult) => {
-                                        // SMS sent. Prompt user to type the code from the message, then sign the
-                                        // user in with confirmationResult.confirm(code).
-                                        window.confirmationResult = confirmationResult;
-
-                                        document.getElementById("sent-message").innerHTML = "Message sent succesfully.";
-                                        document.getElementById("sent-message").classList.add("d-block");
-                                        document.getElementById("error-message").classList.remove("d-block");
-                                        // document.getElementById("signup").disabled = false;
-                                        // document.getElementById("signup").setAttribute("type", "submit");
-                                         document.getElementById("otp-codes").classList.add("d-block");
-                                    }).catch((error) => {
-                                        document.getElementById("error-message").innerHTML = error.message;
-                                        document.getElementById("error-message").classList.add("d-block");
-                                        document.getElementById("sent-message").classList.remove("d-block");
-                                        document.getElementById("signup").disabled = true;
-                                        document.getElementById("signup").setAttribute("type", "hidden");
-                                        document.getElementById("otp-codes").classList.remove("d-block");
-                                    });
-                            }
-
-                            function otpVerify() {
-                                var code = document.getElementById('otp-code').value;
-                                confirmationResult.confirm(code).then(function (result) {
-                                    // User signed in successfully.
-                                    var user = result.user;
-
-                                    document.getElementById("sent-message").innerHTML = "Phone number succesfully verified.";
-                                    document.getElementById("sent-message").classList.add("d-block");
-                                    document.getElementById("error-message").classList.remove("d-block");
-                                    document.getElementById("signup").disabled = false;
-                                    document.getElementById("signup").setAttribute("type", "submit");
-                                    document.getElementById("otp-codes").classList.remove("d-block");
-                                    document.getElementById("otp-button").style.visibility = 'hidden';
-                                    document.getElementById("otp-button").disabled = true;
-
-                                }).catch(function (error) {
-                                    document.getElementById("error-message").innerHTML = error.message;
-                                    document.getElementById("error-message").classList.add("d-block");
-                                    document.getElementById("sent-message").classList.remove("d-block");
-                                    document.getElementById("signup").disabled = true;
-                                    document.getElementById("signup").setAttribute("type", "hidden");
-
-                                });
-                            }
-                        </script>
-                </div>
-
                 <div class="form-group">
                     <label for="address">Address: </label>
                     <input type="text" name="address" id="address" value= "{{ old('address')}}" class="form-control">
                 </div>
 
+        <div class="form-group">
+         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" >Proceed</button>
+	
 
-                <div class="form-group">
-                    <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" value="{{ old('email')}}" class="form-control">
+            <!-- Modal -->
+            <div class="modal" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="alert alert-danger" style="display:none"></div>
+                <div class="modal-header">
+                    
+                    <h5 class="modal-title">Please Verify Phone number to proceed.</h5>
+                    <!-- <h4>Please Verify Phone number to proceed.</h4> -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <div class="alert alert-danger hide" id="error-message"></div>
+                        <div class="alert alert-success hide" id="sent-message"></div>
+
+                        <div class="form-group">
+                            <div class="card mt-3">
+                                <div class="card-body">
+                            
+                                        <div class="mb-3">
+                                            <label for="contact" class="form-label">Phone Number:</label>
+                                            <input type="text" id="contact" name="contact" value= "{{ old('contact')}}"  class="form-control" placeholder="+639XXXXXXXXXX">
+                                        </div>
+                                        <div id="recaptcha-container"></div>
+                                        <button type="button" id="otp-button" class="btn btn-info" onclick="otpSend();">Verify Phone Number</button>
+
+                                </div>
+                            </div>
+                            <div id="otp-codes" class="card mt-3 hide">
+                                <div class="card-body">
+
+                                        <div class="mb-3">
+                                            <label for="otp-code" class="form-label">OTP code:</label>
+                                            <input type="text" id="otp-code" class="form-control" placeholder="Enter OTP Code">
+                                        </div>
+                                        <button type="button" class="btn btn-info" onclick="otpVerify();">Verify OTP</button>
+
+                                </div>
+                            </div>
+                                    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+                                    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+                                    <script type="text/javascript">
+                                        const config = {
+
+                                            apiKey: "AIzaSyD1FsINq1NWB1Mu3E3t00p7PJFaIWFdj20",
+                                            authDomain: "safeplace-4fa43.firebaseapp.com",
+                                            projectId: "safeplace-4fa43",
+                                            storageBucket: "safeplace-4fa43.appspot.com",
+                                            messagingSenderId: "1053701644301",
+                                            appId: "1:1053701644301:web:7c501710f80653d78c3544",
+                                            measurementId: "G-LX40NYFV43"
+
+                                        };
+
+                                        firebase.initializeApp(config);
+                                    </script>
+
+                                    <script type="text/javascript">
+                                        // reCAPTCHA widget
+                                        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                                            'size': 'invisible',
+                                            'callback': (response) => {
+                                                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                                                onSignInSubmit();
+                                            }
+                                        });
+
+                                        function otpSend() {
+                                            var phoneNumber = document.getElementById('contact').value;
+                                            const appVerifier = window.recaptchaVerifier;
+                                            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                                                .then((confirmationResult) => {
+                                                    // SMS sent. Prompt user to type the code from the message, then sign the
+                                                    // user in with confirmationResult.confirm(code).
+                                                    window.confirmationResult = confirmationResult;
+
+                                                    document.getElementById("sent-message").innerHTML = "Message sent succesfully.";
+                                                    document.getElementById("sent-message").classList.add("d-block");
+                                                    document.getElementById("error-message").classList.remove("d-block");
+                                                    // document.getElementById("signup").disabled = false;
+                                                    // document.getElementById("signup").setAttribute("type", "submit");
+                                                    document.getElementById("otp-codes").classList.add("d-block");
+                                                }).catch((error) => {
+                                                    document.getElementById("error-message").innerHTML = error.message;
+                                                    document.getElementById("error-message").classList.add("d-block");
+                                                    document.getElementById("sent-message").classList.remove("d-block");
+                                                    document.getElementById("open").disabled = true;
+                                                    document.getElementById("open").setAttribute("hidden", "hidden");
+                                                    document.getElementById("otp-codes").classList.remove("d-block");
+                                                });
+                                        }
+
+                                        function otpVerify() {
+                                            var code = document.getElementById('otp-code').value;
+                                            confirmationResult.confirm(code).then(function (result) {
+                                                // User signed in successfully.
+                                                var user = result.user;
+
+                                                document.getElementById("sent-message").innerHTML = "Phone number succesfully verified.";
+                                                document.getElementById("sent-message").classList.add("d-block");
+                                                document.getElementById("error-message").classList.remove("d-block");
+
+                                                document.getElementById("proceed").removeAttribute("hidden");
+                                                document.getElementById("proceed").disabled = false;
+                                               
+                                                document.getElementById("otp-codes").classList.remove("d-block");
+                                                document.getElementById("otp-button").style.visibility = 'hidden';
+                                                document.getElementById("otp-button").disabled = true;
+
+                                            }).catch(function (error) {
+                                                document.getElementById("error-message").innerHTML = error.message;
+                                                document.getElementById("error-message").classList.add("d-block");
+                                                document.getElementById("sent-message").classList.remove("d-block");
+                                                document.getElementById("proceed").disabled = true;
+                                                document.getElementById("proceed").setAttribute("hidden", "hidden");
+
+                                            });
+                                        }
+                                    </script>
+                            </div>
+
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="submit" class="btn btn-danger" >Confirm</button> -->
+                        <button type="button" hidden disabled ="true" id="proceed" name="proceed" class="btn btn-success" data-toggle="modal" data-target="#credentials"  data-dismiss="modal">Proceed</button>
+                            <!-- {{ Form::submit('Rejected Again',['class'=>'btn btn-primary']) }} -->
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    
+                </div>
+
+             <div class="form-group">
+            <!-- Modal -->
+            <div class="modal" tabindex="-1" role="dialog" id="credentials">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="alert alert-danger" style="display:none"></div>
+                <div class="modal-header">
+                    
+                    <h5 class="modal-title">Enter Login Credentials:</h5>
+                    <!-- <h4>Please Verify Phone number to proceed.</h4> -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
                 <div class="form-group">
+                <div class="card">
+                 <div class="card-body">
+                    <label for="email">Email: </label>
+                    <input type="text" name="email" id="email" value="{{ old('email')}}" class="form-control">
+                     </div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                <div class="card">
+                 <div class="card-body">
                     <label for="password">Password: </label>
                     <input type="password" name="password" id="password" class="form-control">
+                </div>
+                </div>
                 </div>
 
 
                 <div class="form-group ">
-                    <!-- <label for="password">Password: </label>
-                    <input type="file" name="img" id="img" class="form-control"> -->
+                <div class="card">
+                 <div class="card-body">
                     {!!Form::label('Select image to upload:')!!}
                     {!! Form::file('img',['class' => 'form-control']); !!}
                     @if($errors->has('img'))
                     <a>{{ $errors->first('img') }}</a>
                     @endif
                 </div>
+                </div>
+                </div>
 
                     <input type="hidden" disabled ="true" id="signup" name="signup" value="Sign Up" class="btn btn-primary">
+
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" data-dismiss="modal">Back</button>
+	
+                        <button type="submit" class="btn btn-success" >Confirm</button>
+                            <!-- {{ Form::submit('Rejected Again',['class'=>'btn btn-primary']) }} -->
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    </form>
+                </div>
+             
              </form>
 
     </div>
