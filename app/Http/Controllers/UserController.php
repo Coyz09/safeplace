@@ -187,9 +187,9 @@ class UserController extends Controller
         if($request->hasFile('img')){
 
           //  $randomString = Str::random(20);
-           $img  = time().'.'.$request->file('img')->extension();  
-           $request->file('img')->move(public_path('storage/images'), $img);   
-           
+           $img  = time().'.'.$request->file('img')->extension();
+           $request->file('img')->move(public_path('storage/images'), $img);
+
 
            $input['img'] = 'storage/images/'.$img;
 
@@ -213,7 +213,7 @@ class UserController extends Controller
          $users= DB::table('users')
          ->select('qr_code')
          ->where('users.id', '=', $id)
-         ->update(['qr_code'=>$randomString]); 
+         ->update(['qr_code'=>$randomString]);
 
         //Create Unverified User
          $unverified_user = new UnverifiedUser;
@@ -231,8 +231,11 @@ class UserController extends Controller
 
         //Create Notification
          $notification_message = "Welcome to Safeplace App! Please verify your account first to use the all system's function.";
+         $notification_status = "unread";
+
          $notification = Notification::create([
              'message' =>  $notification_message,
+             'status' =>  $notification_status,
              'user_id' =>$id,
           ]);
           $notification->save();
