@@ -63,7 +63,6 @@ class AuthController extends Controller
 
 
                 $user = User::find(Auth::user()->id);
-             
 
                 if($user->role == "verified_user")
                 {
@@ -103,24 +102,6 @@ class AuthController extends Controller
 
     }
 
-    // public function qrcode(Request $request)
-    // {
-    //     // $user = User::where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')->first();
-
- 
-    //     $user= DB::table('users')
-    //     ->select('*')
-    //     ->where('qr_code', '=', 'hdLEaLMB8VgN4ywRptll')
-    //     ->get(); 
-
-    //     return response()->json([
-    //         'success' => true,
-
-    //         'user' => $user
-
-
-    //     ]);
-    // }
     public function qrcode(Request $request)
     {
         $qr_code = $request->only('qr_code');
@@ -163,7 +144,7 @@ class AuthController extends Controller
                 ]);
        // }
        }
-    
+
        else{
            return response()->json([
                'status' => false,
@@ -171,60 +152,6 @@ class AuthController extends Controller
            ]);
        }
     }
-
-    //     $email = $user->email;
-    //     $password = $user->password;
-
-    //     $credentials = "$email $password";
-    //    dd($credentials);
-
-
-    //     $array1 = array('email' => $email );
-    //     $array2 = array('password' => $password);
-    //     $result = array_merge($array1, $array2);
-
-    //     dd($result);
-    //     $token = auth()->guard('api')->attempt($result);
-        // dd($token );
-
-       
-
-        // dd($user);
-        // $email = $user->email;
-        // $password =$user->password;
-        
-        //  dd($password);
-
-        //  $hashedPassword = Auth::user()->getAuthPassword();
-        //  dd( $hashedPassword );
-        // dd(Hash::check("password", $user->password));
-        // if(Hash::check($password, $user->password)){
-        //     return response()->json([
-        //         'success' => true,
-        //         // 'token' => $token,
-        //         'user' => $user,
-        //         'expires_in' => auth()->factory()->getTTL()*60
-
-        //     ]);
-        // }
-            
-        // if (Auth::guard('api')->attempt(['email' => $email, 'password' => $password, 'qr_code' => $qr_code]))
-        // {
-        //     return response()->json([
-        //         'success' => true,
-        //         // 'token' => $token,
-        //         'user' => $user,
-        //         'expires_in' => auth()->factory()->getTTL()*60
-
-        //     ]);
-        // } 
-           // return response()->json([
-        //     'success' => true,
-        //     'token' => $token,
-        //     'user' => $user,
-        //     'expires_in' => auth()->factory()->getTTL()*60
-        // ]);
-
 
     public function register(Request $request) {
 
@@ -268,7 +195,6 @@ class AuthController extends Controller
 
 
     }
-
 
     public function logout(Request $request){
         try{
@@ -478,7 +404,6 @@ class AuthController extends Controller
 
 
     }
-
 
 
     public function resetPasswordLoad(Request $request){
