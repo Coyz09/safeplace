@@ -30,7 +30,75 @@ class NotificationController extends Controller
         ]);
 
 
+    }
+
+
+    public function notification_read(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+
+        $notification = DB::table('notifications')
+        ->join('users', 'notifications.user_id',  '=', 'users.id')
+        ->select('notifications.*')
+        ->where('notifications.user_id', '=',  $user->id )
+        ->update([
+            'status'=>'read',
+        ]);
+
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'notification' => $notification,
+        ]);
+
+
 
 
     }
+
+
+    public function check_unread(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+
+        $notification = DB::table('notifications')
+        ->join('users', 'notifications.user_id',  '=', 'users.id')
+        ->select('notifications.*')
+        ->where('notifications.user_id', '=',  $user->id )
+        ->where('notifications.status', '=',  'unread' )
+        ->get();
+
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'notification' => $notification,
+        ]);
+
+
+        // if ($notification->isEmpty())
+        // {
+        //     return response()->json([
+        //         'success' => true,
+        //         'notifications' => false
+        //     ]);
+
+        // }
+        // else
+        // {
+        //     return response()->json([
+        //         'success' => true,
+        //         'notifications' => true
+        //     ]);
+
+        // }
+
+    }
+
+
+
+
 }

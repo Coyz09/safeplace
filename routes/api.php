@@ -53,3 +53,9 @@ Route::post('verification_idDetails', 'Api\VerificationController@verification_i
 
 Route::get('notification', 'Api\NotificationController@user_notification')->middleware('jwtAuth');
 
+Route::post('notification_read', 'Api\NotificationController@notification_read')->middleware('jwtAuth');
+
+
+Route::get('check_unread', 'Api\NotificationController@check_unread')->middleware('jwtAuth');
+
+

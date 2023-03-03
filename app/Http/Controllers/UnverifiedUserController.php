@@ -14,12 +14,12 @@ use Yajra\Datatables\Datatables;
 use App\Models\Notification;
 class UnverifiedUserController extends Controller
 {
-   
+
     public function index()
     {
         return View::make('unverifiedusers.index');
     }
-    
+
     public function getUnverifiedUser()
     {
 
@@ -30,32 +30,32 @@ class UnverifiedUserController extends Controller
 
     }
 
-   
+
     public function create()
     {
         //
     }
 
-  
+
     public function store(Request $request)
     {
         //
     }
 
-  
+
     public function show($id)
     {
         //
     }
 
-  
+
     public function edit($id)
     {
         $unverifieduser = UnverifiedUser::find($id);
         return View::make('unverifiedusers.edit',compact('unverifieduser'));
     }
 
-  
+
     public function update(Request $request, $id)
     {
         $rules =[
@@ -65,7 +65,7 @@ class UnverifiedUserController extends Controller
                 'gender'=> 'required|min:2|max:20',
                 'birthdate'=> 'required',
                 'address' => 'required',
-                'contact' => 'numeric',             
+                'contact' => 'numeric',
                 'email'=> 'required|min:2|max:20',
                 'user_id'=> 'required|min:2|max:20',
                   ];
@@ -81,11 +81,11 @@ class UnverifiedUserController extends Controller
           ];
 
          //  dd($request->all());
-         
-         
+
+
          VerifiedUser::create($request->all());
 
-         
+
          $username = DB::table('users')
          ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
          ->select('users.name', 'unverified_users.user_id')
@@ -93,11 +93,16 @@ class UnverifiedUserController extends Controller
          ->first();
 
          $notification_message = $username->name.", Your account is now verified!";
+
+         $notification_status = "unread";
+
+
         //  dd( $username);
- 
- 
+
+
          $notification = Notification::create([
              'message' =>  $notification_message,
+             'status' =>  $notification_status,
              'user_id' =>$username->user_id,
           ]);
           $notification->save();
@@ -107,7 +112,7 @@ class UnverifiedUserController extends Controller
             ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
             ->select('unverified_users.user_id')
             ->where('unverified_users.id', '=', $id)
-            ->update(['role'=>'verified_user']);   
+            ->update(['role'=>'verified_user']);
             // dd($user);
 
 
@@ -118,10 +123,10 @@ class UnverifiedUserController extends Controller
             // ->first();
 
          $unverifieduser = UnverifiedUser::find($id);
-         $unverifieduser->delete();  
+         $unverifieduser->delete();
 
          return Redirect::to('unverifieduser')->with('success','Unverified User updated!');
-        
+
     }
 
     public function reject(Request $request, $id)
@@ -135,22 +140,25 @@ class UnverifiedUserController extends Controller
          ->first();
 
          $notification_message = $username->name.", Your account is rejected!";
+         $notification_status = "unread";
+
         //  dd( $username);
-        
- 
+
+
          $notification = Notification::create([
              'message' =>  $request->input('message'),
+             $notification_status = "unread",
              'user_id' =>$username->user_id,
           ]);
 
-             
+
           $notification->save();
-       
+
          $unverifieduser = UnverifiedUser::find($id);
          $unverifieduser->update(['status'=>'Rejected']);
 
          return Redirect::to('unverifieduser')->with('success','Unverified User updated!');
-        
+
     }
 
     public function destroy($id)
@@ -160,13 +168,13 @@ class UnverifiedUserController extends Controller
             ->join('unverified_users', 'users.id', '=', 'unverified_users.user_id')
             ->select('unverified_users.user_id')
             ->where('unverified_users.id', '=', $id)
-            ->delete();    
-            
+            ->delete();
+
 
             // dd($deleteuser);
         $unverifieduser = UnverifiedUser::find($id);
         $unverifieduser->delete();
-        
+
          return Redirect::to('unverifieduser')->with('success','Unverified User deleted!');
     }
 
