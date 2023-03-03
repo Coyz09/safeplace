@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use View;
 use Redirect;
 use DB;
@@ -10,12 +11,14 @@ use Auth;
 use Validator;
 use App\Models\UnverifiedUser;
 use App\Models\VerifiedUser;
+use App\Models\Notification;
 use App\Models\User;
 use Yajra\Datatables\Datatables;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Session;
 use Hash;
 use Cookie;
+
 class UserController extends Controller
 {
 
@@ -180,10 +183,13 @@ class UserController extends Controller
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
         ]);
 
+        //Create User Account
         if($request->hasFile('img')){
 
-           $img  = time().'.'.$request->file('img')->extension();
-           $request->file('img')->move(public_path('storage/images'), $img);
+          //  $randomString = Str::random(20);
+           $img  = time().'.'.$request->file('img')->extension();  
+           $request->file('img')->move(public_path('storage/images'), $img);   
+           
 
            $input['img'] = 'storage/images/'.$img;
 
@@ -193,12 +199,23 @@ class UserController extends Controller
             'password' => bcrypt($request->input('password')),
             'role' => 'unverified_user',
             'img' => $input['img'] ,
+            // 'qr_code'=>$randomString,
          ]);
          $user->save();
         }
 
+        //Login User
          Auth::guard('web')->login($user);
 
+         //Create QR Code
+         $randomString = Str::random(20);
+         $id = auth()->guard('web')->user()->id;
+         $users= DB::table('users')
+         ->select('qr_code')
+         ->where('users.id', '=', $id)
+         ->update(['qr_code'=>$randomString]); 
+
+        //Create Unverified User
          $unverified_user = new UnverifiedUser;
          $unverified_user->user_id = $user->id;
          $unverified_user->fname = $request->input('fname');
@@ -211,6 +228,14 @@ class UserController extends Controller
          $unverified_user->contact = $request->contact;
          $unverified_user->status = 'Unverified';
          $unverified_user->save();
+
+        //Create Notification
+         $notification_message = "Welcome to Safeplace App! Please verify your account first to use the all system's function.";
+         $notification = Notification::create([
+             'message' =>  $notification_message,
+             'user_id' =>$id,
+          ]);
+          $notification->save();
 
          return redirect()->route('user.profile')->with('success',"Successfully Signup!");
     }

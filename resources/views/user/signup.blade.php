@@ -16,8 +16,7 @@
           
 
 
-            <div class="alert alert-danger hide" id="error-message"></div>
-            <div class="alert alert-success hide" id="sent-message"></div>
+   
 
               <!-- @include('layouts.flash-messages') -->
      @if ($errors->any())
@@ -67,10 +66,11 @@
                     <input type="text" name="contact" id="contact" class="form-control">
                 </div> -->
                 
-                <div class="alert alert-danger hide" id="error-message"></div>
+                <!-- <div class="alert alert-danger hide" id="error-message"></div>
+            <div class="alert alert-success hide" id="sent-message"></div> -->
+
+            <div class="alert alert-danger hide" id="error-message"></div>
             <div class="alert alert-success hide" id="sent-message"></div>
-
-
 
             <div class="form-group">
                   <div class="card mt-3">
