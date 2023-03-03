@@ -119,6 +119,7 @@ hr .new1 {
 .name {
     text-align: center;
 }
+
 </style>
 
 
@@ -127,16 +128,17 @@ hr .new1 {
         <div class=" image d-flex flex-column justify-content-center align-items-center"> 
             <button class="btn btn-secondary"> <img src="{{asset($user->img)}}" height="100" width="100" /></button> <span class="name">{{$user->name}}</span> 
             <span class="idd">{{$users->email}}</span> 
+
             <div class="d-flex flex-row justify-content-center align-items-center gap-2">
              <span><i class="fa fa-phone"></i></span> <span class="idd1">{{$users->contact}}</span>
-         </div> 
-         <!-- <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span class="follow">Followers</span></span> 
-        </div> 
+         </div>
+         <!-- <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span class="follow">Followers</span></span>
+        </div>
        -->
-      <!-- <div class="text mt-2"> <span>Full Name: {{$user->name}}</span> 
-      <div class="text mt-1"> <span>Gender: {{$users->gender}}</span> 
+      <!-- <div class="text mt-2"> <span>Full Name: {{$user->name}}</span>
+      <div class="text mt-1"> <span>Gender: {{$users->gender}}</span>
       <div class="text mt-1"> <span>Address: {{$users->address}}</span>  -->
-        </div> 
+        </div>
         <div class="row">
         <div class=" d-flex mt-3 col-md-6"> <button class="btn1 buttonradius btn-dark"> <span><i class="fa fa-download"></i></span>Download Mobile app</button>
         </div>
@@ -145,25 +147,25 @@ hr .new1 {
         </div>
         </div>
         <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> </div>
-        <div class=" join "> <span class="join">Download and Install the mobile version to experience all the features of SAFEPLACE.</span> </div> 
+        <div class=" join "> <span class="join">Download and Install the mobile version to experience all the features of SAFEPLACE.</span> </div>
 
-        
+
         <a href="{{ route('user.logout') }}" class="log-out">
           <i class='text-light bx bx-log-out'></i>
         </a>
-    </div>   
     </div>
-      
+    </div>
+
 </div>
 
-<div class="container mt-5 mb-4 p-5 justify-content-center"> 
-<div class="card2 p-4"> 
+<div class="container mt-5 mb-4 p-5 justify-content-center">
+<div class="card2 p-4">
             <h2 class="row mt-2 text-center justify-content-center align-items-center"> <strong> SAFEPLACE </strong> </h2>
             <div class="row mt-2 text-center justify-content-center align-items-center">
-                
+
                 {!! $qrcode !!}
-               
-            </div>  
+
+            </div>
 
             <h3 class="row mt-3 mb-4 p-2 text-center justify-content-center align-items-center"><strong>Scan to login</strong></h3>
             <h4 class="row mt-1 text-center justify-content-center align-items-center">Scan the QR Code to log in</h4>

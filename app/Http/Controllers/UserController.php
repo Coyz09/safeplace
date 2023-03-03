@@ -46,19 +46,19 @@ class UserController extends Controller
     {
 
         $this->validate($request, [
-          'name' => 'required|min:2|max:200',          
+          'name' => 'required|min:2|max:200',
           'email'=> 'required|min:2|max:200',
           'password'=> 'required|min:2|max:200',
           'role'=> 'required|min:2|max:200',
-          'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+          'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
       ]);
 
 
         if($request->hasFile('img')){
 
-          $img  = time().'.'.$request->file('img')->extension();  
-          $request->file('img')->move(public_path('storage/images'), $img);   
-          
+          $img  = time().'.'.$request->file('img')->extension();
+          $request->file('img')->move(public_path('storage/images'), $img);
+
           $input['img'] = 'storage/images/'.$img;
 
           $user = new User([
@@ -66,7 +66,7 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'role' => $request->input('role'),
-            'img' => $input['img'] ]);      
+            'img' => $input['img'] ]);
          $user->save();
        }
 
@@ -85,20 +85,20 @@ class UserController extends Controller
          {
 
                $this->validate($request, [
-                'name' => 'required|min:2|max:200',          
+                'name' => 'required|min:2|max:200',
                 'email'=> 'required|min:2|max:200',
                 'password'=> 'required|min:2|max:200',
                 'role'=> 'required|min:2|max:200',
-                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
             ]);
 
-       
+
                 if($request->hasFile('img')){
-                  $img  = time().'.'.$request->file('img')->extension();  
-                  $request->file('img')->move(public_path('storage/images'), $img);   
-                  
+                  $img  = time().'.'.$request->file('img')->extension();
+                  $request->file('img')->move(public_path('storage/images'), $img);
+
                   $input['img'] = 'storage/images/'.$img;
-        
+
                   $user = User::find($id);
 
                   $data = [
@@ -108,35 +108,35 @@ class UserController extends Controller
                     'role' => $request->input('role'),
                     'img' => $input['img'],
                   ];
-    
-       
-    
+
+
+
                 $user->update($data);
                }
-     
+
               return Redirect::to('user')->with('success','User updated!');
-       
+
          }
-     
+
         public function destroy($id)
          {
              $user = User::find($id);
           // dd($user);
              if ($user->role == "unverified_user"){
-              
+
                 $delete_unverified_user = DB::table('unverified_users')
                 ->select('user_id')
                 ->where('user_id', '=', $id)
-                 ->delete();    
+                 ->delete();
              }
 
              elseif ($user->role == "verified_user"){
                 $delete_verified_user = DB::table('verified_users')
                 ->select('user_id')
                 ->where('user_id', '=', $id)
-                  ->delete();  
+                  ->delete();
                 // ->get();
-               
+
                 //  dd ($delete_verified_user);
             }
 
@@ -144,9 +144,9 @@ class UserController extends Controller
                 $delete_barangay = DB::table('barangays')
                 ->select('user_id')
                 ->where('user_id', '=', $id)
-                  ->delete();  
+                  ->delete();
                 // ->get();
-               
+
                 //  dd ($delete_barangay );
              }
 
@@ -154,14 +154,14 @@ class UserController extends Controller
                 $delete_police_station = DB::table('police_stations')
                 ->select('user_id')
                 ->where('user_id', '=', $id)
-                  ->delete();  
+                  ->delete();
                 // ->get();
-               
+
                 //  dd ($delete_police_station );
             }
 
              $user->delete();
-             
+
               return Redirect::to('user')->with('success','User deleted!');
          }
 
@@ -179,16 +179,18 @@ class UserController extends Controller
             'gender'=> 'required|min:2|max:20',
             'birthdate'=> 'required',
             'address' => 'required',
-            'contact' => 'required|numeric',             
-            'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+            'contact' => 'required|numeric',
+            'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
         ]);
 
         //Create User Account
         if($request->hasFile('img')){
+
           //  $randomString = Str::random(20);
            $img  = time().'.'.$request->file('img')->extension();  
            $request->file('img')->move(public_path('storage/images'), $img);   
            
+
            $input['img'] = 'storage/images/'.$img;
 
            $user = User::create([
@@ -253,7 +255,7 @@ class UserController extends Controller
             ->select('*')
             ->where('user_id',$user->id)
             ->first();
-          
+
         }
 
       elseif (($user->role == "verified_user"))
@@ -261,11 +263,11 @@ class UserController extends Controller
             $users = DB::table('verified_users')
             ->select('*')
             ->where('user_id',$user->id)
-            ->first();  
+            ->first();
         }
 
-        $qrcode = QrCode::size(200)->merge(('\public\Images\Logo.png'))->generate($user->qr_code);
-        // $qrcode = QrCode::size(200)->generate($user->qr_code);
+        // $qrcode = QrCode::size(200)->merge(('\public\Images\Logo.png'))->generate($user->qr_code);
+        $qrcode = QrCode::size(200)->generate($user->qr_code);
         // dd($qrcode);
 
         return view('user.profile',compact('users','user','qrcode' ));
@@ -281,7 +283,7 @@ class UserController extends Controller
             ->select('*')
             ->where('user_id',$user->id)
             ->first();
-          
+
         }
 
       elseif (($user->role == "verified_user"))
@@ -289,27 +291,27 @@ class UserController extends Controller
             $users = DB::table('verified_users')
             ->select('*')
             ->where('user_id',$user->id)
-            ->first();  
+            ->first();
         }
- 
+
         return View::make('user.updateprofile',compact('user','users'));
- 
+
     }
 
     public function UpdateProfile(Request $request, $user) {
 
                $this->validate($request, [
-                'name' => 'required|min:2|max:200',          
+                'name' => 'required|min:2|max:200',
                 'email'=> 'required|min:2|max:200',
                 'password'=> 'required|min:2|max:200',
-                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',     
+                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
             ]);
 
-       
+
                 if($request->hasFile('img')){
-                  $img  = time().'.'.$request->file('img')->extension();  
-                  $request->file('img')->move(public_path('storage/images'), $img);   
-                  
+                  $img  = time().'.'.$request->file('img')->extension();
+                  $request->file('img')->move(public_path('storage/images'), $img);
+
                   $input['img'] = 'storage/images/'.$img;
 
                   $id = User::find(auth()->guard('web')->user()->id);
@@ -324,15 +326,15 @@ class UserController extends Controller
                     'role' => $id->role,
                     'img' => $input['img'],
                   ];
-    
-       
-    
+
+
+
                 $user->update($data);
                }
-     
+
               return Redirect::to('profile')->with('success','User updated!');
-       
-         
+
+
     }
 
 
