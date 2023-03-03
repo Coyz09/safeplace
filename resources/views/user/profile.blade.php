@@ -115,13 +115,17 @@ hr .new1 {
 .date {
     background-color: #ccc
 }
+
+.name {
+    text-align: center;
+}
 </style>
 
 
 <div class="container mt-5 mb-4 p-5 d-flex justify-content-center"> 
     <div class="card p-4"> 
         <div class=" image d-flex flex-column justify-content-center align-items-center"> 
-            <button class="btn btn-secondary"> <img src="{{asset($user->img)}}" height="100" width="100" /></button> <span class="name mt-3">{{$user->name}}</span> 
+            <button class="btn btn-secondary"> <img src="{{asset($user->img)}}" height="100" width="100" /></button> <span class="name">{{$user->name}}</span> 
             <span class="idd">{{$users->email}}</span> 
             <div class="d-flex flex-row justify-content-center align-items-center gap-2">
              <span><i class="fa fa-phone"></i></span> <span class="idd1">{{$users->contact}}</span>
