@@ -47,3 +47,9 @@ Route::post('verification_frontId', 'Api\VerificationController@verification_fro
 Route::post('verification_backId', 'Api\VerificationController@verification_backId')->middleware('jwtAuth');
 Route::post('verification_faceImage', 'Api\VerificationController@verification_faceImage')->middleware('jwtAuth');
 Route::post('verification_idDetails', 'Api\VerificationController@verification_idDetails')->middleware('jwtAuth');
+
+
+
+
+Route::get('notification', 'Api\NotificationController@user_notification')->middleware('jwtAuth');
+
