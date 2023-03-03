@@ -1,9 +1,26 @@
 @extends('layouts.base')
 @section('body')
 
-
-
 <style>
+  .modal-backdrop.fade {
+opacity: 0;
+filter: alpha(opacity=0);
+}
+.modal-backdrop.in {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
+
+...to this (added ".fade" between the two classes in the second definition):
+
+.modal-backdrop.fade {
+opacity: 0;
+filter: alpha(opacity=0);
+}
+.modal-backdrop.fade.in {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
 
   .default{
     margin-left: 200px;
