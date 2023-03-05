@@ -20,9 +20,7 @@
                 <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
                 <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"> -->
                 <!-- <link rel='stylesheet' href='{{ asset('assets/css/style.css') }}' type='text/css' /> -->
-                
-                
-
+              
 
                 @yield('styles')
         </head>
@@ -38,6 +36,7 @@
         <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+                 
 
         @yield('body')
 

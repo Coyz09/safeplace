@@ -147,7 +147,7 @@ class UnverifiedUserController extends Controller
 
          $notification = Notification::create([
              'message' =>  $request->input('message'),
-             $notification_status = "unread",
+             'status' =>  $notification_status,
              'user_id' =>$username->user_id,
           ]);
 
