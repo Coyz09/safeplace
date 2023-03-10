@@ -151,4 +151,52 @@ class VerificationController extends Controller
 
     }
 
+
+    public function update_information(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+
+
+        $unverified_user = DB::table('unverified_users')
+        ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+        ->select('unverified_users.user_id')
+        ->where('unverified_users.user_id', '=',  $user->id )
+        ->update([
+
+            'fname'=>$request->fname,
+            'mname'=>$request->mname,
+            'lname'=>$request->lname,
+
+            'gender'=>$request->gender,
+
+            'birthdate'=>$request->birthdate,
+
+            'address'=>$request->address,
+
+            'contact'=>$request->contact
+        ]);
+
+        $name = $request->fname.' '.$request->mname.' '.$request->lname;
+        $user->name = $name;
+        $user->update();
+
+
+        $user = DB::table('unverified_users')
+        ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+        ->select('unverified_users.*')
+        ->where('unverified_users.user_id', '=',  $user->id )->get();
+
+
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'unverified_user' => $unverified_user,
+        ]);
+
+
+
+    }
+
 }
