@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\UnverifiedUser;
 use App\Models\User;
 use App\Models\PasswordReset;
+use App\Models\Notification;
+
 
 
 use DB;
@@ -180,6 +182,18 @@ class AuthController extends Controller
 
             $unverified_user->status = 'Unverified';
             $unverified_user->save();
+
+
+            $notification_message = "Welcome to Safeplace App! Please verify your account first to use the all system's function.";
+            $notification_status = "unread";
+
+
+            $notification = Notification::create([
+                'message' =>  $notification_message,
+                'status' =>  $notification_status,
+                'user_id' =>$user->id,
+             ]);
+             $notification->save();
 
 
             return $this->login($request);
