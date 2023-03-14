@@ -15,9 +15,30 @@ class CreatePoliceStationReportsTable extends Migration
     {
         Schema::create('police_station_reports', function (Blueprint $table) {
             $table->id();
-            $table->string('report_title');
-            $table->string('report_details');
-            $table->string('report_status');
+            $table->string('barangay');
+            $table->string('street')->nullable();
+            $table->string('police_substation');
+
+            $table->string('complainant_id')->nullable();
+            $table->string('complainant_name')->nullable();
+            $table->string('complainant_address')->nullable();
+            $table->string('complainant_gender')->nullable();
+            $table->string('complainant_age')->nullable();
+            $table->string('complainant_contact')->nullable();
+            $table->string('complainant_email')->nullable();
+            $table->string('complainant_identity')->nullable(); //anonymous or not
+
+            $table->string('report_details')->nullable();
+            $table->string('report_images')->nullable();
+            $table->string('report_status')->nullable();
+            
+            $table->date('date_reported');
+            $table->time('time_reported');
+            $table->date('date_commited');
+            $table->time('time_commited');
+            $table->string('incident_type');
+           
+
             $table->timestamps();
         });
     }

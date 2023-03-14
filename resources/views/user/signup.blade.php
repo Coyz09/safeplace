@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @section('body')
-       <style>
+
+<style>
 .modal-backdrop.fade {
 opacity: 0;
 filter: alpha(opacity=0);
@@ -21,6 +22,7 @@ opacity: 0.5;
 filter: alpha(opacity=50);
 }
 </style>
+
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1>Sign Up</h1>

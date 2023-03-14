@@ -42,6 +42,29 @@
                   </div>
               </div>
           </div>
+
+          {!! Form::open(['route' => 'import', 'files' => true]) !!}
+          {{ csrf_field() }}
+
+
+      <div class="title">Import</div>
+
+      <div class="user-details">
+
+      <div class="input-box">
+                <div class="form-group">
+                  {!!Form::label('Excel:')!!}
+                  {!! Form::file('excel_file',old('excel_file'),['class' => 'form-control'])!!}
+                </div>
+              </div>
+      </div>
+    
+      <div class="button">
+        {{ Form::submit('Submit',['class'=>'btn btn-primary']) }}
+      </div>
+      {!! Form::close() !!}
+   
+
           <table id="policestation_reports-table" class="table table-striped table-hover">
               <thead>
                   <tr>

@@ -2,25 +2,26 @@
 @section('body')
 
 <style>
+
   .modal-backdrop.fade {
-opacity: 0;
-filter: alpha(opacity=0);
-}
-.modal-backdrop.in {
-opacity: 0.5;
-filter: alpha(opacity=50);
-}
+  opacity: 0;
+  filter: alpha(opacity=0);
+  }
+  .modal-backdrop.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  }
 
-...to this (added ".fade" between the two classes in the second definition):
+  ...to this (added ".fade" between the two classes in the second definition):
 
-.modal-backdrop.fade {
-opacity: 0;
-filter: alpha(opacity=0);
-}
-.modal-backdrop.fade.in {
-opacity: 0.5;
-filter: alpha(opacity=50);
-}
+  .modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  }
+  .modal-backdrop.fade.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  }
 
   .default{
     margin-left: 200px;
@@ -31,10 +32,17 @@ filter: alpha(opacity=50);
   }
 
   .container .title{
+        font-size: 50px;
+        font-weight: 500;
+      
+        margin-bottom: 25px;
+    }
+
+  .container .title2{
         font-size: 25px;
         font-weight: 500;
         position: relative;
-        margin-bottom: 60px;
+        margin-bottom: 10px;
     }
 
   .input-form {
@@ -45,14 +53,16 @@ filter: alpha(opacity=50);
     display: table-cell;
     width: auto;
     height: 500px;
-    background-image: url('../../Images/3d2.png');
+    /* background-image: url('../../Images/3d2.png'); */
     background-size: cover;
+    background-color: #e0ffed;
+    padding: 100px 60px;
   }
 
   .input-form .form-container {
     display: table;
     height: 600px;
-    max-width: 900px;
+    max-width: 5000px;
     width: 100%;
     margin: 0 auto;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
@@ -96,7 +106,7 @@ filter: alpha(opacity=50);
   }
 
   .input-form form .btn-primary {
-    background: #6c6565;
+    background: #037e37;
     border: none;
     border-radius: 4px;
     padding: 11px;
@@ -107,7 +117,7 @@ filter: alpha(opacity=50);
   }
 
   .input-form form .btn-primary:hover, .input-form form .btn-primary:active {
-    background: #037e37;
+    background: #02b84e;
   }
 
   .input-form form .btn-primary:active {
@@ -163,6 +173,7 @@ filter: alpha(opacity=50);
         height: 5px;
         margin: 5px;
         border-color: red;
+        
     }
 
     form .buttonreject input{     
@@ -210,21 +221,63 @@ filter: alpha(opacity=50);
 
 
 
-
+   
 <div class="input-form">
 
   <div class="form-container">
     
-      <div class="image-holder"></div>
+      <div class="image-holder">
+         
+      <div style ="text-align: center;" class="title">Verification</div>
+      <!-- <h2 style ="text-align: center;">Verification</h2> -->
+   
+    
+      <div class="user-details">
+          
+          <div class="input-box" style ="text-align: center;">
+            <div class="form-group" style ="text-align: center;">
+              <!-- {!!Form::label('ID type:')!!} -->
+              <h4 style ="text-align: center;">ID type:</h4>
+              {!! Form::text('id_type',$unverifieduser->id_type,['class' => 'form-control', 'readonly' => 'true'])!!}
+            </div>
+
+            <div class="form-group">
+              <!-- {!!Form::label('ID Number:')!!} -->
+              <h4 style ="text-align: center;">ID Number:</h4>
+              {!! Form::text('id_number',$unverifieduser->id_number,['class' => 'form-control', 'readonly' => 'true'])!!}
+            </div>
+          </div>
+          </div>
+
+          <!-- {!!Form::label('ID Picture Front:')!!} -->
+          <div class="form-group">
+              <h5>ID Picture Front:</h5>
+              <button class="btn btn-secondary"> <img src="{{asset($unverifieduser->id_picture_front)}}" height="100%" width="100%" /></button> 
+          </div>
+        
+          <!-- {!!Form::label('ID Picture Back:')!!} -->
+          <div class="form-group">
+              <h5>ID Picture Back:</h5>
+              <button class="btn btn-secondary"> <img src="{{asset($unverifieduser->id_picture_back)}}" height="100%" width="100%" /></button> 
+          </div>
+
+          <!-- {!!Form::label('Selfie Image:')!!} -->
+          <div class="form-group">
+              <h5>Selfie Image:</h5>
+              <button class="btn btn-secondary"> <img src="{{asset($unverifieduser->face_img)}}" height="100%" width="100%" /></button> 
+          </div>
+
+          <h3 style ="text-align: center;">Status: {{$unverifieduser->status}}</h3>
+      </div>
       
       <form action="{{route('unverifieduser.update',$unverifieduser->id)}}" method="POST" >
         @csrf
         @method('PUT')
 
-      <div class="title">Update Record</div>
+    @include('layouts.flash-messages')
+      <div class="title2">User Details:</div>
+      
 
-
-      <h2>Status: {{$unverifieduser->status}}</h2>
 
       <div class="user-details">
           
@@ -251,10 +304,15 @@ filter: alpha(opacity=50);
 
 
               <div class="input-box">
+                <!-- <div class="form-group"> -->
+                  <!-- {!!Form::label('Gender:')!!} -->
+                  <!-- {!! Form::text('gender',$unverifieduser->gender,array('class' => 'form-control')) !!} -->
+                  <!-- {!! Form::select('gender',array('Male' => 'Male', 'Female' => 'Female'), $unverifieduser->gender,['class' => 'form-control', 'disabled' => true])!!} -->
+                <!-- </div> -->
+
                 <div class="form-group">
                   {!!Form::label('Gender:')!!}
-                  <!-- {!! Form::text('gender',$unverifieduser->gender,array('class' => 'form-control')) !!} -->
-                  {!! Form::select('gender',array('Male' => 'Male', 'Female' => 'Female'), $unverifieduser->gender,['class' => 'form-control'])!!}
+                  {!! Form::text('gender',$unverifieduser->gender,['class' => 'form-control', 'readonly' => 'true'])!!}
                 </div>
               </div>
 
@@ -310,9 +368,9 @@ filter: alpha(opacity=50);
         <!-- <button type="submit" class="btn btn-primary">Reject</button>
        </div> -->
 
-       <div class="container">
-  <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" id="open">Reject</button>
-	<form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
+  <div class="container">
+    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" id="open">Reject</button>
+	  <form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
         @csrf
         @method('PUT')
 
@@ -332,7 +390,7 @@ filter: alpha(opacity=50);
       <div class="input-box">
                 <div class="form-group">
                   {!!Form::label(' ')!!}
-                  {!! Form::select('message',array('Your ID mismatch with your information.' => 'Your ID mismatch with your information.', 'You already had existing account in the system.' => 'You already had existing account in the system.' , 'The photo of the ID you provided is blurry.' => 'The photo of the ID you provided is blurry.', 'The photo your selfies are blurry.' => 'The photo your selfies are blurry.' ),'',['class' => 'form-control'])!!}
+                  {!! Form::select('message',array('Your ID mismatch with your information.' => 'Your ID mismatch with your information.', 'You already had existing account in the system.' => 'You already had existing account in the system.' , 'The photo of the ID you provided is blurry.' => 'The photo of the ID you provided is blurry.', 'The photo your selfies are blurry.' => 'The photo your selfies are blurry.', 'You exceeded the verification attempt, limit is 5.' => 'You exceeded the verification attempt, limit is 5.' ),'',['class' => 'form-control'])!!}
                 </div>
         </div>
 
@@ -387,7 +445,7 @@ filter: alpha(opacity=50);
             <div class="input-box">
                       <div class="form-group">
                       {!!Form::label(' ')!!}
-                        {!! Form::select('message',array('Your ID mismatch with your information' => 'Your ID mismatch with your information.', 'You already had existing account in the system.' => 'You already had existing account in the system.' , 'The photo of the ID you provided is blurry.' => 'The photo of the ID you provided is blurry.', 'The photo your selfies are blurry.' => 'The photo your selfies are blurry.' ),'',['class' => 'form-control'])!!}
+                        {!! Form::select('message',array('Your ID mismatch with your information' => 'Your ID mismatch with your information.', 'You already had existing account in the system.' => 'You already had existing account in the system.' , 'The photo of the ID you provided is blurry.' => 'The photo of the ID you provided is blurry.', 'The photo your selfies are blurry.' => 'The photo your selfies are blurry.', 'You exceeded the verification attempt, limit is 5.' => 'You exceeded the verification attempt, limit is 5.'),'',['class' => 'form-control'])!!}
                       </div>
               </div>
 
