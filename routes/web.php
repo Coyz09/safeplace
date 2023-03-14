@@ -123,7 +123,7 @@ Route::group(['prefix' => 'user'], function(){
 
     });
 
-
+    Route::post('/import',[ 'uses'=>'UserPoliceStationController@import','as' => 'import']);
 
 //SuperAdmin User
 Route::group(['middleware' => 'role:superadmin'], function() {

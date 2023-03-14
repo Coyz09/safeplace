@@ -10,14 +10,24 @@ use Validator;
 use App\Models\PoliceStationReports;
 use Yajra\Datatables\Datatables;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\Police_Substation_ReportsImport;
+
 
 class UserPoliceStationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+     public function import(Request $request){
+        $request->validate([
+            'excel_file'=> 'required|mimes:xlsx'
+        ]);
+        
+        Excel::import(new Police_Substation_ReportsImport, $request->file('excel_file'));
+        return View::make('policestation_users.index');
+
+     }
+
     public function index()
     {
         return View::make('policestation_users.index');

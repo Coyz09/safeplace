@@ -31,8 +31,13 @@ Route::post('qrcode', 'Api\AuthController@qrcode');
 
 Route::post('forgot-password', 'Api\AuthController@forgot_password');
 
+<<<<<<< HEAD
+Route::resource('policesubstation_reports', 'Api\PoliceSubstation_ReportAPIController');
+
+=======
 
 //Barangay, Police Station, and Hospital
+>>>>>>> a4391e8cc1769f2295eda96f35ce5a30c5ae80c2
 Route::resource('hospitals', 'Api\HospitalAPIController');
 Route::resource('police_stations', 'Api\PoliceStationAPIController');
 Route::resource('barangays', 'Api\BarangayAPIController');
