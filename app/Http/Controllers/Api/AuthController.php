@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\UnverifiedUser;
 use App\Models\User;
 use App\Models\PasswordReset;
+use App\Models\Notification;
+
 
 
 use DB;
@@ -22,8 +24,7 @@ use Illuminate\Support\Carbon;
 class AuthController extends Controller
 {
 
-    public function login(Request $request)
-    {
+    public function login(Request $request){
 
         $credentials = $request->only('email', 'password');
         $token = auth()->guard('api')->attempt($credentials);
@@ -102,8 +103,7 @@ class AuthController extends Controller
 
     }
 
-    public function qrcode(Request $request)
-    {
+    public function qrcode(Request $request){
         $qr_code = $request->only('qr_code');
 
         $userinfo= DB::table('users')
@@ -180,6 +180,18 @@ class AuthController extends Controller
 
             $unverified_user->status = 'Unverified';
             $unverified_user->save();
+
+
+            $notification_message = "Welcome to Safeplace App! Please verify your account first to use the all system's function.";
+            $notification_status = "unread";
+
+
+            $notification = Notification::create([
+                'message' =>  $notification_message,
+                'status' =>  $notification_status,
+                'user_id' =>$user->id,
+             ]);
+             $notification->save();
 
 
             return $this->login($request);

@@ -79,23 +79,6 @@ class NotificationController extends Controller
         ]);
 
 
-        // if ($notification->isEmpty())
-        // {
-        //     return response()->json([
-        //         'success' => true,
-        //         'notifications' => false
-        //     ]);
-
-        // }
-        // else
-        // {
-        //     return response()->json([
-        //         'success' => true,
-        //         'notifications' => true
-        //     ]);
-
-        // }
-
     }
 
 

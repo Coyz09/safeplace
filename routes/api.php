@@ -63,3 +63,9 @@ Route::post('notification_read', 'Api\NotificationController@notification_read')
 Route::get('check_unread', 'Api\NotificationController@check_unread')->middleware('jwtAuth');
 
 
+//Call Log
+Route::post('call_log', 'Api\CallLogController@create_call_log')->middleware('jwtAuth');
+Route::get('view_call_log', 'Api\CallLogController@user_call_log')->middleware('jwtAuth');
+
+
+
