@@ -24,8 +24,7 @@ use Illuminate\Support\Carbon;
 class AuthController extends Controller
 {
 
-    public function login(Request $request)
-    {
+    public function login(Request $request){
 
         $credentials = $request->only('email', 'password');
         $token = auth()->guard('api')->attempt($credentials);
@@ -104,8 +103,7 @@ class AuthController extends Controller
 
     }
 
-    public function qrcode(Request $request)
-    {
+    public function qrcode(Request $request){
         $qr_code = $request->only('qr_code');
 
         $userinfo= DB::table('users')
