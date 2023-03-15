@@ -17,6 +17,7 @@ class CreateCallLogsTable extends Migration
             $table->id();
             $table->string('user_name');
             $table->string('name_contacted');
+            $table->string('type_contacted');
             $table->string('date_contacted');
             $table->string('time_contacted');
             $table->string('user_id');
