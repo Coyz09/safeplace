@@ -66,7 +66,9 @@ Route::get('check_unread', 'Api\NotificationController@check_unread')->middlewar
 
 
 //Call Log
-Route::post('call_log', 'Api\CallLogController@create_call_log')->middleware('jwtAuth');
+Route::post('barangay_call_log', 'Api\CallLogController@barangay_call_log')->middleware('jwtAuth');
+Route::post('police_call_log', 'Api\CallLogController@police_call_log')->middleware('jwtAuth');
+
 Route::get('view_call_log', 'Api\CallLogController@user_call_log')->middleware('jwtAuth');
 
 

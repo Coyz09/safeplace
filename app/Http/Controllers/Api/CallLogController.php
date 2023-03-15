@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 class CallLogController extends Controller
 {
-    public function create_call_log(Request $request){
+    public function barangay_call_log(Request $request){
 
         $user = User::find(Auth::user()->id);
 
@@ -26,10 +26,14 @@ class CallLogController extends Controller
 
         $time = Carbon::now()->format('g:i A');
 
+        $type = "barangay";
+
+
 
         $call_log = CallLog::create([
             'user_name' => $user->name,
             'name_contacted' => $request->name_contacted,
+            'type_contacted' => $type,
             'date_contacted' => $date,
             'time_contacted' => $time,
             'user_id' => $user->id,
@@ -40,7 +44,41 @@ class CallLogController extends Controller
         $user->save();
 
 
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+        ]);
 
+
+
+    }
+
+    public function police_call_log(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+        $date = Carbon::today()->format('F j, Y');
+
+
+
+        $time = Carbon::now()->format('g:i A');
+
+        $type = "police_station";
+
+
+
+        $call_log = CallLog::create([
+            'user_name' => $user->name,
+            'name_contacted' => $request->name_contacted,
+            'type_contacted' => $type,
+            'date_contacted' => $date,
+            'time_contacted' => $time,
+            'user_id' => $user->id,
+
+
+        ]);
+
+        $user->save();
 
 
         return response()->json([
