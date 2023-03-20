@@ -55,53 +55,64 @@ class Barangay_ReportAPIController extends Controller
             
         if($request->hasFile('report_images')){
             // $images = $request->report_images;
+            // dd($request->file('report_images'));
 
                 foreach($request->file('report_images') as $images ){
-                    // $img = $images->getClientOriginalName();
-                    $imageName ='storage/images/'.time().'.jpg';
-                    // $img = 'storage/images/'.time().'.jpg';
-
+                    $img = $images->getClientOriginalName();
+                    // $imageName =$img.'storage/images/'.time().'.jpg';
+                    $imageName =time().$img;
                     // $input['img'] = 'storage/images/'.$img;
                     $images->move(public_path('storage/images'), $imageName);
 
                     $data[] = $imageName ;
-                       
                 }
             }
+            // $img = '';
+            // if($request->report_images!=''){
+            //     foreach($request->file('report_images') as $images ){
+           
+            //     $img = $images->getClientOriginalName();
+            //     dd($img);
+            //     $path = 'storage/images/'.time().'.jpg';
+            //     // $imageName =time().$img;
+            //     file_put_contents($path,base64_decode($img));
+
+            //  }
+            // }
         
-        //Report Details
-        $barangayreport = new BarangayReports; 
-        $barangayreport ->barangay= $request->barangay;
-        $barangayreport ->street= $request->street;
-        $barangayreport ->report_details= $request->report_details;
-        $barangayreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
-        $barangayreport ->report_status= "Pending";
-        $barangayreport ->incident_type= $request->incident_type;
+        // //Report Details
+        // $barangayreport = new BarangayReports; 
+        // $barangayreport ->barangay= $request->barangay;
+        // $barangayreport ->street= $request->street;
+        // $barangayreport ->report_details= $request->report_details;
+        // $barangayreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
+        // $barangayreport ->report_status= "Pending";
+        // $barangayreport ->incident_type= $request->incident_type;
 
-        // //Reported Date and time
-        $barangayreport  ->date_reported= $todayDate;
-        $barangayreport  ->time_reported= $todayTime;
-        $barangayreport  ->year_reported= "2023";
-        $barangayreport  ->date_commited= $request->date_commited;
-        $barangayreport  ->time_commited= $request->time_commited;
+        // // //Reported Date and time
+        // $barangayreport  ->date_reported= $todayDate;
+        // $barangayreport  ->time_reported= $todayTime;
+        // $barangayreport  ->year_reported= "2023";
+        // $barangayreport  ->date_commited= $request->date_commited;
+        // $barangayreport  ->time_commited= $request->time_commited;
 
-        // //Complainant Details
-        $barangayreport  ->complainant_id= $userdetails->id;
-        $barangayreport  ->complainant_name= $user->name;
-        $barangayreport  ->complainant_address= $userdetails->address;
-        $barangayreport  ->complainant_gender= $userdetails->gender;
-        $barangayreport  ->complainant_age= $age;
-        $barangayreport  ->complainant_contact= $userdetails->contact;
-        $barangayreport  ->complainant_email= $userdetails->email;
-        $barangayreport  ->complainant_identity= $request->complainant_identity;
-        $barangayreport ->save();
+        // // //Complainant Details
+        // $barangayreport  ->complainant_id= $userdetails->id;
+        // $barangayreport  ->complainant_name= $user->name;
+        // $barangayreport  ->complainant_address= $userdetails->address;
+        // $barangayreport  ->complainant_gender= $userdetails->gender;
+        // $barangayreport  ->complainant_age= $age;
+        // $barangayreport  ->complainant_contact= $userdetails->contact;
+        // $barangayreport  ->complainant_email= $userdetails->email;
+        // $barangayreport  ->complainant_identity= $request->complainant_identity;
+        // $barangayreport ->save();
 
 
         return response()->json([
             'success' => true, 
-            'report' => $barangayreport,
-            'user' => $user,  
-            'userdetails'=>  $userdetails,
+            // 'report' => $barangayreport,
+            // 'user' => $user,  
+            // 'userdetails'=>  $userdetails,
             // 'report_images'=> $imageName,
            
         ]);
