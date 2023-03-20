@@ -18,7 +18,7 @@ class CreateBarangayAccountsTable extends Migration
             $table->foreign('barangay_id')->references('id')->on('barangays');
             $table->BigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-              $table->string('role');
+            $table->string('role');
         });
     }
 

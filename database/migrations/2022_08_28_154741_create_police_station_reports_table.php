@@ -28,15 +28,17 @@ class CreatePoliceStationReportsTable extends Migration
             $table->string('complainant_email')->nullable();
             $table->string('complainant_identity')->nullable(); //anonymous or not
 
-            $table->string('report_details')->nullable();
+            $table->string('report_details', 5000)->nullable();
             $table->string('report_images')->nullable();
             $table->string('report_status')->nullable();
             
             $table->date('date_reported');
             $table->time('time_reported');
+            $table->string('year_reported')->nullable();
             $table->date('date_commited');
             $table->time('time_commited');
             $table->string('incident_type');
+            
            
 
             $table->timestamps();
