@@ -32,7 +32,7 @@ Route::post('qrcode', 'Api\AuthController@qrcode');
 Route::post('forgot-password', 'Api\AuthController@forgot_password');
 
 Route::resource('policesubstation_reports', 'Api\PoliceSubstation_ReportAPIController');
-
+Route::resource('barangay_reports', 'Api\Barangay_ReportAPIController');
 
 //Barangay, Police Station, and Hospital
 Route::resource('hospitals', 'Api\HospitalAPIController');

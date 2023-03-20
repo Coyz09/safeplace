@@ -288,10 +288,40 @@ Route::group(['middleware' => 'role:police_station'], function() {
   //Police Report
   Route::resource('policestation_user', UserPoliceStationController::class);
 
-  //show all reports
+
+  //show all reports 2023
   Route::get('/get-police_reports',[
     'uses'=>'UserPoliceStationController@getPoliceStationReports',
     'as' => 'policestation_user.getPoliceStationReports']);
+
+ //show all reports2022
+ Route::get('/get-police_report2022',[
+        'uses'=>'UserPoliceStationController@getPoliceStationReports2022',
+        'as' => 'policestation_user.getPoliceStationReports2022']);
+        
+ Route::get('/reports2022',[
+    'uses'=>'UserPoliceStationController@reports2022',
+    'as' => 'policestation_user.reports2022']);      
+    
+     //show all reports2021
+ Route::get('/get-police_report2021',[
+    'uses'=>'UserPoliceStationController@getPoliceStationReports2021',
+    'as' => 'policestation_user.getPoliceStationReports2021']);
+
+ Route::get('/reports2021',[
+    'uses'=>'UserPoliceStationController@reports2021',
+    'as' => 'policestation_user.reports2021']);     
+
+
+    //show all reports2020
+ Route::get('/get-police_report2020',[
+    'uses'=>'UserPoliceStationController@getPoliceStationReports2020',
+    'as' => 'policestation_user.getPoliceStationReports2020']);
+
+ Route::get('/reports2020',[
+    'uses'=>'UserPoliceStationController@reports2020',
+    'as' => 'policestation_user.reports2020']);     
+
 
   //show specific report
   Route::get('/get-police_reports{id}',[

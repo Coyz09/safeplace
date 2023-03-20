@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PoliceStationReports;
+use App\Models\BarangayReports;
 use App\Models\User;
 
 use DB;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\URL;
 use Mail;
 use Illuminate\Support\Carbon;
 
-class PoliceSubstation_ReportAPIController extends Controller
+class Barangay_ReportAPIController extends Controller
 {
   
     public function index()
@@ -25,18 +25,17 @@ class PoliceSubstation_ReportAPIController extends Controller
         //
     }
 
-   
+  
     public function create()
     {
         //
     }
 
-  
+
     public function store(Request $request)
     {
         // $request->validate([
         //     'barangay' =>'required',
-        //     'police_substation' =>'required',
         //     'report_details' =>'required',
         //     'report_images' =>'required',
         // ]);
@@ -46,7 +45,7 @@ class PoliceSubstation_ReportAPIController extends Controller
         ->join('users', 'verified_users.user_id',  '=', 'users.id')
         ->select('verified_users.*','users.img')
         ->where('verified_users.user_id', '=',  $user->id)->first();
-        // dd($userdetails[0]->birthdate);
+
 
 
         $age = Carbon::parse($userdetails->birthdate)->age;
@@ -80,65 +79,61 @@ class PoliceSubstation_ReportAPIController extends Controller
         // }
 
         //Report Details
-        $policesubstationreport = new PoliceStationReports; 
-        $policesubstationreport ->barangay= $request->barangay;
-        $policesubstationreport ->street= $request->street;
-        $policesubstationreport ->police_substation= $request->police_substation;
-        $policesubstationreport ->report_details= $request->report_details;
-        $policesubstationreport ->report_images= $request->report_images;
-        $policesubstationreport ->report_status= "Pending";
-        $policesubstationreport ->incident_type= $request->incident_type;
+        $barangayreport = new BarangayReports; 
+        $barangayreport ->barangay= $request->barangay;
+        $barangayreport ->street= $request->street;
+        $barangayreport ->report_details= $request->report_details;
+        $barangayreport ->report_images= $request->report_images;
+        $barangayreport ->report_status= "Pending";
+        $barangayreport ->incident_type= $request->incident_type;
 
         // //Reported Date and time
-        $policesubstationreport ->date_reported= $todayDate;
-        $policesubstationreport ->time_reported= $todayTime;
-        $policesubstationreport ->year_reported= "2023";
-        $policesubstationreport ->date_commited= $request->date_commited;
-        $policesubstationreport ->time_commited= $request->time_commited;
+        $barangayreport  ->date_reported= $todayDate;
+        $barangayreport  ->time_reported= $todayTime;
+        $barangayreport  ->year_reported= "2023";
+        $barangayreport  ->date_commited= $request->date_commited;
+        $barangayreport  ->time_commited= $request->time_commited;
 
         // //Complainant Details
-        $policesubstationreport ->complainant_id= $userdetails->id;
-        $policesubstationreport ->complainant_name= $user->name;
-        $policesubstationreport ->complainant_address= $userdetails->address;
-        $policesubstationreport ->complainant_gender= $userdetails->gender;
-        $policesubstationreport ->complainant_age= $age;
-        $policesubstationreport ->complainant_contact= $userdetails->contact;
-        $policesubstationreport ->complainant_email= $userdetails->email;
-        $policesubstationreport ->complainant_identity= $request->complainant_identity;
-        $policesubstationreport ->save();
+        $barangayreport  ->complainant_id= $userdetails->id;
+        $barangayreport  ->complainant_name= $user->name;
+        $barangayreport  ->complainant_address= $userdetails->address;
+        $barangayreport  ->complainant_gender= $userdetails->gender;
+        $barangayreport  ->complainant_age= $age;
+        $barangayreport  ->complainant_contact= $userdetails->contact;
+        $barangayreport  ->complainant_email= $userdetails->email;
+        $barangayreport  ->complainant_identity= $request->complainant_identity;
+        $barangayreport ->save();
 
-       
-        // dd($years);
 
         return response()->json([
             'success' => true, 
-            // 'report' => $policesubstationreport,
-            // 'user' => $user,  
-            // 'userdetails'=>  $userdetails,
+            'report' => $barangayreport,
+            'user' => $user,  
+            'userdetails'=>  $userdetails,
             // 'report_images'=> $imageName,
            
         ]);
     }
 
- 
+
     public function show($id)
     {
         //
     }
 
-   
+
     public function edit($id)
     {
         //
     }
 
- 
     public function update(Request $request, $id)
     {
         //
     }
 
-    
+  
     public function destroy($id)
     {
         //

@@ -18,11 +18,13 @@ class Police_Substation_ReportsImport implements ToModel, WithHeadingRow
         return new PoliceStationReports([
             'barangay' => $row['barangay'],
             'street' => $row['street'],
+            'police_substation' => $row['police_substation'],
             'date_reported' => $row['date_reported'],
             'time_reported' => $row['time_reported'],
             'date_commited' => $row['date_commited'],
             'time_commited' => $row['time_commited'],
             'incident_type' => $row['incident_type'],
+            'year_reported' => $row['year_reported'],
         ]);
     }
 }

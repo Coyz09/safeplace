@@ -60,40 +60,18 @@
           <a href="{{ route('policestation_user.reports2021')}}"  class="edit"><i class='bx bx-detail' ></i>2021</a>
           <a href="{{ route('policestation_user.reports2020')}}"  class="edit"><i class='bx bx-detail' ></i>2020</a>
           
-          {!! Form::open(['route' => 'import', 'files' => true]) !!}
-          {{ csrf_field() }}
-
-
-      <div class="title">Import</div>
-
-      <div class="user-details">
-
-      <div class="input-box">
-                <div class="form-group">
-                  {!!Form::label('Excel:')!!}
-                  {!! Form::file('excel_file',old('excel_file'),['class' => 'form-control'])!!}
-                </div>
-              </div>
-      </div>
-    
-      <div class="button">
-        {{ Form::submit('Submit',['class'=>'btn btn-primary']) }}
-      </div>
-      {!! Form::close() !!}
-   
-
           <table id="policestation_reports-table" class="table table-striped table-hover">
               <thead>
                   <tr>
 
                       <th scope="col">Report ID</th> 
-                      <th scope="col">Complainant Name</th>
-                      <th scope="col">Complainant Contact</th>
                       <th scope="col">Incident Type</th>
                       <th scope="col">Barangay</th>
                       <th scope="col">Street</th>                     
                       <th scope="col">Date Reported</th>
                       <th scope="col">Time Reported</th>
+                      <th scope="col">Date Committed</th>
+                      <th scope="col">Time Committed</th>
 
                       <th style="width: 100px">View Report</th>
                   </tr>
@@ -120,16 +98,16 @@
             processing: true,
             serverSide: true,
             ordering: false,
-            ajax: '{!! route('policestation_user.getPoliceStationReports') !!}',
+            ajax: '{!! route('policestation_user.getPoliceStationReports2022') !!}',
             columns: [
               { data: 'id', name: 'id' },
-              { data: 'complainant_name', name: 'complainant_name' },
-              { data: 'complainant_contact', name: 'complainant_contact' },
               { data: 'incident_type', name: 'incident_type' },
               { data: 'barangay', name: 'barangay' },
               { data: 'street', name: 'street' },
               { data: 'date_reported', name: 'date_reported' },
               { data: 'time_reported', name: 'time_reported' },
+              { data: 'date_commited', name: 'date_commited' },
+              { data: 'time_commited', name: 'time_commited' },
               { data: 'action', name: 'action', orderable: false},
              ]
         });
