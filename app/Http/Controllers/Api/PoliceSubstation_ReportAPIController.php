@@ -79,13 +79,30 @@ class PoliceSubstation_ReportAPIController extends Controller
         //     }
         // }
 
+             
+        if($request->hasFile('report_images')){
+            // $images = $request->report_images;
+
+                foreach($request->file('report_images') as $images ){
+                    // $img = $images->getClientOriginalName();
+                    $imageName ='storage/images/'.time().'.jpg';
+                    // $img = 'storage/images/'.time().'.jpg';
+
+                    // $input['img'] = 'storage/images/'.$img;
+                    $images->move(public_path('storage/images'), $imageName);
+
+                    $data[] = $imageName ;
+                       
+                }
+            }
+
         //Report Details
         $policesubstationreport = new PoliceStationReports; 
         $policesubstationreport ->barangay= $request->barangay;
         $policesubstationreport ->street= $request->street;
         $policesubstationreport ->police_substation= $request->police_substation;
         $policesubstationreport ->report_details= $request->report_details;
-        $policesubstationreport ->report_images= $request->report_images;
+        $policesubstationreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
         $policesubstationreport ->report_status= "Pending";
         $policesubstationreport ->incident_type= $request->incident_type;
 
@@ -112,9 +129,9 @@ class PoliceSubstation_ReportAPIController extends Controller
 
         return response()->json([
             'success' => true, 
-            // 'report' => $policesubstationreport,
-            // 'user' => $user,  
-            // 'userdetails'=>  $userdetails,
+            'report' => $policesubstationreport,
+            'user' => $user,  
+            'userdetails'=>  $userdetails,
             // 'report_images'=> $imageName,
            
         ]);
