@@ -53,28 +53,50 @@ class Barangay_ReportAPIController extends Controller
         $todayTime = Carbon::now()->format('H:i:m');
         $todayDate = Carbon::now()->format('Y-m-d');
             
-        if($request->hasFile('report_images')){
-            // $images = $request->report_images;
+       if($request->hasFile('report_images')){
 
                 foreach($request->file('report_images') as $images ){
-                    // $img = $images->getClientOriginalName();
-                    $imageName ='storage/images/'.time().'.jpg';
-                    // $img = 'storage/images/'.time().'.jpg';
+                    $img = strtolower($images->getClientOriginalExtension());
+                   
+                    $random = Str::random(10);
+                    
+                    $imageName= 'storage/images/'.$random.'.'.$img; 
+                    // $imageName ='storage/images/'.time().'.jpg';
 
-                    // $input['img'] = 'storage/images/'.$img;
+
+                    // $url = $upload_path.$imageName;
+
                     $images->move(public_path('storage/images'), $imageName);
 
-                    $data[] = $imageName ;
-                       
+                    $data[] = $imageName;
                 }
-            }
-        
+            } 
+//             $img = '';
+//             if($request->report_images!=''){
+//                 foreach($request->file('report_images',[]) as $images ){
+           
+//                 $img = $images->getClientOriginalName();
+                
+//                 $path = $img .time().'.jpg';
+//                 $imageName =time().$img;
+                
+//                 // file_put_contents($path,base64_decode($imageName));
+//                 $file = base64_decode($images);
+// dd($request->file('report_images'));
+//                 file_put_contents(public_path().'/storage/images/'.$path,  $file);
+
+//              }
+//             }
+
+
+
         //Report Details
         $barangayreport = new BarangayReports; 
         $barangayreport ->barangay= $request->barangay;
         $barangayreport ->street= $request->street;
         $barangayreport ->report_details= $request->report_details;
-        $barangayreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
+        // $barangayreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
+        $barangayreport ->report_images= implode('|',$data);
         $barangayreport ->report_status= "Pending";
         $barangayreport ->incident_type= $request->incident_type;
 

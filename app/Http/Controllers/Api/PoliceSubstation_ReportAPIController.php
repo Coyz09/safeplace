@@ -80,21 +80,39 @@ class PoliceSubstation_ReportAPIController extends Controller
         // }
 
              
+        // if($request->hasFile('report_images')){
+        //     // $images = $request->report_images;
+
+        //         foreach($request->file('report_images') as $images ){
+        //             // $img = $images->getClientOriginalName();
+        //             $imageName ='storage/images/'.time().'.jpg';
+        //             // $img = 'storage/images/'.time().'.jpg';
+
+        //             // $input['img'] = 'storage/images/'.$img;
+        //             $images->move(public_path('storage/images'), $imageName);
+
+        //             $data[] = $imageName ;
+                       
+        //         }
+        //     }
+
         if($request->hasFile('report_images')){
             // $images = $request->report_images;
+            // dd($request->file('report_images'));
 
                 foreach($request->file('report_images') as $images ){
-                    // $img = $images->getClientOriginalName();
-                    $imageName ='storage/images/'.time().'.jpg';
-                    // $img = 'storage/images/'.time().'.jpg';
+                    $img = strtolower($images->getClientOriginalExtension());
+                   
+                    $random = Str::random(10);
+                    
+                    $imageName= 'storage/images/'.$random.'.'.$img; 
+                    // $imageName ='storage/images/'.time().'.jpg';
 
-                    // $input['img'] = 'storage/images/'.$img;
                     $images->move(public_path('storage/images'), $imageName);
 
-                    $data[] = $imageName ;
-                       
+                    $data[] = $imageName;
                 }
-            }
+            } 
 
         //Report Details
         $policesubstationreport = new PoliceStationReports; 
@@ -102,7 +120,8 @@ class PoliceSubstation_ReportAPIController extends Controller
         $policesubstationreport ->street= $request->street;
         $policesubstationreport ->police_substation= $request->police_substation;
         $policesubstationreport ->report_details= $request->report_details;
-        $policesubstationreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
+        // $policesubstationreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
+        $policesubstationreport  ->report_images= implode('|',$data);
         $policesubstationreport ->report_status= "Pending";
         $policesubstationreport ->incident_type= $request->incident_type;
 
