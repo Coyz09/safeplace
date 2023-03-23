@@ -19,13 +19,13 @@ use Illuminate\Support\Carbon;
 
 class Barangay_ReportAPIController extends Controller
 {
-  
+
     public function index()
     {
         //
     }
 
-  
+
     public function create()
     {
         //
@@ -52,51 +52,30 @@ class Barangay_ReportAPIController extends Controller
 
         $todayTime = Carbon::now()->format('H:i:m');
         $todayDate = Carbon::now()->format('Y-m-d');
-            
-       if($request->hasFile('report_images')){
 
-                foreach($request->file('report_images') as $images ){
-                    $img = strtolower($images->getClientOriginalExtension());
-                   
-                    $random = Str::random(10);
-                    
-                    $imageName= 'storage/images/'.$random.'.'.$img; 
-                    // $imageName ='storage/images/'.time().'.jpg';
+        if($request->hasFile('report_images')){
+            // $images = $request->report_images;
 
+            foreach($request->file('report_images') as $images ){
+                $img = $images->getClientOriginalName();
+                // $imageName =$img.'storage/images/'.time().'.jpg';
+                $imageName =time().$img;
+                // $input['img'] = 'storage/images/'.$img;
+                $images->move(public_path('storage/images'), $imageName);
 
-                    // $url = $upload_path.$imageName;
-
-                    $images->move(public_path('storage/images'), $imageName);
-
-                    $data[] = $imageName;
-                }
-            } 
-//             $img = '';
-//             if($request->report_images!=''){
-//                 foreach($request->file('report_images',[]) as $images ){
-           
-//                 $img = $images->getClientOriginalName();
-                
-//                 $path = $img .time().'.jpg';
-//                 $imageName =time().$img;
-                
-//                 // file_put_contents($path,base64_decode($imageName));
-//                 $file = base64_decode($images);
-// dd($request->file('report_images'));
-//                 file_put_contents(public_path().'/storage/images/'.$path,  $file);
-
-//              }
-//             }
+                $data[] = $imageName ;
+            }
 
 
+
+        }
 
         //Report Details
-        $barangayreport = new BarangayReports; 
+        $barangayreport = new BarangayReports;
         $barangayreport ->barangay= $request->barangay;
         $barangayreport ->street= $request->street;
         $barangayreport ->report_details= $request->report_details;
-        // $barangayreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
-        $barangayreport ->report_images= implode('|',$data);
+        $barangayreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
         $barangayreport ->report_status= "Pending";
         $barangayreport ->incident_type= $request->incident_type;
 
@@ -120,14 +99,14 @@ class Barangay_ReportAPIController extends Controller
 
 
         return response()->json([
-            'success' => true, 
+            'success' => true,
             'report' => $barangayreport,
-            'user' => $user,  
+            'user' => $user,
             'userdetails'=>  $userdetails,
             // 'report_images'=> $imageName,
-           
+
         ]);
-   
+
 
 }
 
@@ -149,7 +128,7 @@ class Barangay_ReportAPIController extends Controller
         //
     }
 
-  
+
     public function destroy($id)
     {
         //
