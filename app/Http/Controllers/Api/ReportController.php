@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\BarangayReports;
 use App\Models\PoliceStationReports;
 use App\Models\User;
+use App\Models\VerifiedUser;
+
 
 use DB;
 use Auth;
@@ -215,5 +217,45 @@ class ReportController extends Controller
 
 
     }
+
+
+    public function view_reports(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+        $verified = DB::table('verified_users')
+        ->join('users', 'verified_users.user_id',  '=', 'users.id')
+        ->select('verified_users.id')
+        ->where('verified_users.user_id', '=',  $user->id)
+        ->first();
+
+
+        $barangay = DB::table('barangay_reports')
+        ->join('verified_users', 'barangay_reports.complainant_id',  '=', 'verified_users.id')
+        ->select('barangay_reports.*')
+        ->where('barangay_reports.complainant_id', '=',  $verified->id )
+        ->get();
+
+
+        $police_station = DB::table('police_station_reports')
+        ->join('verified_users', 'police_station_reports.complainant_id',  '=', 'verified_users.id')
+        ->select('police_station_reports.*')
+        ->where('police_station_reports.complainant_id', '=',  $verified->id )
+        ->get();
+
+
+
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'reports' => $barangay->merge($police_station),
+        ]);
+
+    }
+
+
+
+
 
 }
