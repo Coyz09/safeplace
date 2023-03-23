@@ -31,8 +31,10 @@ Route::post('qrcode', 'Api\AuthController@qrcode');
 
 Route::post('forgot-password', 'Api\AuthController@forgot_password');
 
-Route::resource('policesubstation_reports', 'Api\PoliceSubstation_ReportAPIController');
-Route::resource('barangay_reports', 'Api\Barangay_ReportAPIController');
+// Route::resource('policesubstation_reports', 'Api\PoliceSubstation_ReportAPIController');
+// Route::resource('barangay_reports', 'Api\Barangay_ReportAPIController');
+
+
 
 //Barangay, Police Station, and Hospital
 Route::resource('hospitals', 'Api\HospitalAPIController');
@@ -51,25 +53,24 @@ Route::post('verification_frontId', 'Api\VerificationController@verification_fro
 Route::post('verification_backId', 'Api\VerificationController@verification_backId')->middleware('jwtAuth');
 Route::post('verification_faceImage', 'Api\VerificationController@verification_faceImage')->middleware('jwtAuth');
 Route::post('verification_idDetails', 'Api\VerificationController@verification_idDetails')->middleware('jwtAuth');
-
 Route::post('update_information', 'Api\VerificationController@update_information')->middleware('jwtAuth');
+
 
 
 
 
 //Notifications
 Route::get('notification', 'Api\NotificationController@user_notification')->middleware('jwtAuth');
-
 Route::post('notification_read', 'Api\NotificationController@notification_read')->middleware('jwtAuth');
-
 Route::get('check_unread', 'Api\NotificationController@check_unread')->middleware('jwtAuth');
 
 
 //Call Log
 Route::post('barangay_call_log', 'Api\CallLogController@barangay_call_log')->middleware('jwtAuth');
 Route::post('police_call_log', 'Api\CallLogController@police_call_log')->middleware('jwtAuth');
-
 Route::get('view_call_log', 'Api\CallLogController@user_call_log')->middleware('jwtAuth');
 
 
-
+//Report
+Route::post('barangay_report', 'Api\ReportController@barangay_report')->middleware('jwtAuth');
+Route::post('police_report', 'Api\ReportController@police_report')->middleware('jwtAuth');
