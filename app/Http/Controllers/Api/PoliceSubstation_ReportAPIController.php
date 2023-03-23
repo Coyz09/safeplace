@@ -19,19 +19,19 @@ use Illuminate\Support\Carbon;
 
 class PoliceSubstation_ReportAPIController extends Controller
 {
-  
+
     public function index()
     {
         //
     }
 
-   
+
     public function create()
     {
         //
     }
 
-  
+
     public function store(Request $request)
     {
         // $request->validate([
@@ -53,75 +53,31 @@ class PoliceSubstation_ReportAPIController extends Controller
 
         $todayTime = Carbon::now()->format('H:i:m');
         $todayDate = Carbon::now()->format('Y-m-d');
-            
-        // if($request->hasFile('report_images')){
-        //     $imagess[] = $request->file('report_images');
-            
-        //     foreach($imagess as $images){
-        //         $imageName ='storage/images/'.time().'.jpg';
-        //         // $imageName = 'storage/images/'.time().rand(1,1000).'.'.$image->extension();
-        //         // $image->move(public_path('product_images'),$imageName);
-        //         $images->move(public_path('storage/images'), $imageName);
 
-        //         // dd($images);
-        //         // Image::create([
-        //         //     'product_id'=>$new_product->id,
-        //         //     'image'=>$imageName
-        //         // ]);
-        //         return response()->json([
-        //             'success' => true, 
-        //             // 'report' => $policesubstationreport,
-        //             // 'user' => $user,  
-        //             // 'userdetails'=>  $userdetails,
-        //             'report_images'=> $imageName,
-                   
-        //         ]);
-        //     }
-        // }
 
-             
-        // if($request->hasFile('report_images')){
-        //     // $images = $request->report_images;
-
-        //         foreach($request->file('report_images') as $images ){
-        //             // $img = $images->getClientOriginalName();
-        //             $imageName ='storage/images/'.time().'.jpg';
-        //             // $img = 'storage/images/'.time().'.jpg';
-
-        //             // $input['img'] = 'storage/images/'.$img;
-        //             $images->move(public_path('storage/images'), $imageName);
-
-        //             $data[] = $imageName ;
-                       
-        //         }
-        //     }
 
         if($request->hasFile('report_images')){
             // $images = $request->report_images;
-            // dd($request->file('report_images'));
 
-                foreach($request->file('report_images') as $images ){
-                    $img = strtolower($images->getClientOriginalExtension());
-                   
-                    $random = Str::random(10);
-                    
-                    $imageName= 'storage/images/'.$random.'.'.$img; 
-                    // $imageName ='storage/images/'.time().'.jpg';
+            foreach($request->file('report_images') as $images ){
+                $img = $images->getClientOriginalName();
 
-                    $images->move(public_path('storage/images'), $imageName);
+                $imageName =time().$img;
 
-                    $data[] = $imageName;
-                }
-            } 
+                $images->move(public_path('storage/images'), $imageName);
+
+                $data[] = $imageName ;
+            }
+
+        }
 
         //Report Details
-        $policesubstationreport = new PoliceStationReports; 
+        $policesubstationreport = new PoliceStationReports;
         $policesubstationreport ->barangay= $request->barangay;
         $policesubstationreport ->street= $request->street;
         $policesubstationreport ->police_substation= $request->police_substation;
         $policesubstationreport ->report_details= $request->report_details;
-        // $policesubstationreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
-        $policesubstationreport  ->report_images= implode('|',$data);
+        $policesubstationreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
         $policesubstationreport ->report_status= "Pending";
         $policesubstationreport ->incident_type= $request->incident_type;
 
@@ -143,38 +99,76 @@ class PoliceSubstation_ReportAPIController extends Controller
         $policesubstationreport ->complainant_identity= $request->complainant_identity;
         $policesubstationreport ->save();
 
-       
+
         // dd($years);
 
         return response()->json([
-            'success' => true, 
+            'success' => true,
             'report' => $policesubstationreport,
-            'user' => $user,  
+            'user' => $user,
             'userdetails'=>  $userdetails,
             // 'report_images'=> $imageName,
-           
+
         ]);
     }
 
- 
+
+    // public function uploadImage(Request $request){
+    //     $user = User::find(Auth::user()->id);
+    //     $userdetails = DB::table('verified_users')
+    //     ->join('users', 'verified_users.user_id',  '=', 'users.id')
+    //     ->select('verified_users.*','users.img')
+    //     ->where('verified_users.user_id', '=',  $user->id)->first();
+
+    //     if($request->hasFile('report_images')){
+    //         // $images = $request->report_images;
+
+    //         foreach($request->file('report_images') as $images ){
+    //             $img = $images->getClientOriginalName();
+
+    //             $imageName =time().$img;
+
+    //             $images->move(public_path('storage/images'), $imageName);
+
+    //             $data[] = $imageName ;
+    //         }
+
+    //     }
+
+
+    //     $policesubstationreport = new PoliceStationReports;
+    //     $policesubstationreport ->report_images= json_encode($data,JSON_UNESCAPED_SLASHES);
+    //     $policesubstationreport ->save();
+
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'report' => $policesubstationreport,
+    //         // 'report_images'=> $imageName,
+
+    //     ]);
+
+    // }
+
+
     public function show($id)
     {
         //
     }
 
-   
+
     public function edit($id)
     {
         //
     }
 
- 
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    
+
     public function destroy($id)
     {
         //
