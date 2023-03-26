@@ -20,7 +20,9 @@ class NotificationController extends Controller
         $notification = DB::table('notifications')
         ->join('users', 'notifications.user_id',  '=', 'users.id')
         ->select('notifications.*')
-        ->where('notifications.user_id', '=',  $user->id )->get();
+        ->where('notifications.user_id', '=',  $user->id )
+        ->orderBy('id', 'DESC')
+        ->get();
 
 
         return response()->json([
