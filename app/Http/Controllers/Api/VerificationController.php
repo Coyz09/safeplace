@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UnverifiedUser;
 use App\Models\User;
-
+use App\Models\Notification;
 
 use DB;
 use Auth;
@@ -113,6 +113,18 @@ class VerificationController extends Controller
             ]);
 
         }
+
+        $userID = User::find(Auth::user()->id);
+
+        $notification_message = "Your Request for verification is already in process. Please wait for it to be processed.";
+        $notification_status = "unread";
+
+        $notification = Notification::create([
+            'message' =>  $notification_message,
+            'status' =>  $notification_status,
+            'user_id' =>$userID->id,
+         ]);
+         $notification->save();
 
         return response()->json([
             'success' => true,

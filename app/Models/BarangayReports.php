@@ -11,6 +11,7 @@ class BarangayReports extends Model
     public $table = 'barangay_reports';
     protected $fillable = [
         'barangay',
+        'police_substation',
         'street',
         'complainant_id',
         'complainant_name',
