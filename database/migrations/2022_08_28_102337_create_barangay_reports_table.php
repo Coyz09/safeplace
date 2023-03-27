@@ -17,6 +17,8 @@ class CreateBarangayReportsTable extends Migration
             $table->id();
             $table->string('barangay');
             $table->string('street')->nullable();
+            $table->string('police_substation')->nullable();
+
 
             $table->string('complainant_id')->nullable();
             $table->string('complainant_name')->nullable();
