@@ -275,11 +275,15 @@ class AuthController extends Controller
         elseif($user->role == "unverified_user"){
         $user = DB::table('unverified_users')
             ->join('users', 'unverified_users.user_id',  '=', 'users.id')
-            ->select('unverified_users.*','users.img','users.role'
+            ->select('unverified_users.*'
 
             ,'unverified_users.user_id', DB::raw('YEAR(birthdate) AS birth_year')
             ,'unverified_users.user_id', DB::raw('MONTH(birthdate) AS birth_month')
             ,'unverified_users.user_id', DB::raw('DAY(birthdate) AS birth_day')
+
+            ,'users.img','users.role'
+
+
 
             )
             ->where('unverified_users.user_id', '=',  $user->id )->get();

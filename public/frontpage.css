@@ -1,138 +1,113 @@
 body{
-    font-family: 'Montserrat', sans-serif;
-    background-color: #ECEDF3;
-    position: absolute;
+font-family: 'Montserrat', sans-serif;
+background-color: #ECEDF3;
+}
 
-  }
-
-  .staysafe_container{
-    width: auto;
-    position: absolute;
-  }
-
-  .container-1{
-    height: 850px;
-    display: flex;
-    margin-left: 50px;
-
-  }
-
-
-
-  .column {
-    float: left;
-    width: 50%;
-  }
-
-
-
+.row {
+display: flex;
+flex-wrap: wrap;
+padding-left: 1%;
+}
+.column {
+display: flex;
+flex-direction: column;
+justify-content: center;
+flex-basis: 100%;
+max-width: 100%;
+}
+/* Styling for the intro class */
+.intro {
+padding: 20px;
+font-size: 2.3rem;
+}
+/* Styling for the message class */
+.message {
+padding: 20px;
+}
 
 
-  .intro{
-    color: #212224;
-    font-size: 2.5rem;
-    padding: 120px 50px 0px 0px;
+.dowload_here{
+font-weight: bold;
+border: none;
+font-family: Montserrat;
+color: white;
+background-color: #008037;
+border-radius: 100px;
+padding: 1rem 2rem;
+width: 500px;
+max-width: 300px;
+cursor: pointer;
+padding: 20px 20px 20px 20px;
+font-size: 1.2rem;
 
-  }
+}
 
-  /* padding: top right bottom left */
-  .message{
-    color: #3B3C42;
-    font-size: 0.89rem;
-    padding: 0px 200px 10px 10px;
-  }
-
-  .btndowload{
-    padding: 0px 10px 10px 10px;
-  }
-
-  .dowload_here {
-    font-weight: bold;
-    border: none;
-    font-family: Montserrat;
-    font-size: 1.19rem;
-    color: white;
-    background-color: #008037;
-    border-radius: 100px;
-    padding: 20px 20px 20px 20px;
-    transform-origin: center;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  .container-2{
-    margin-left: 50px;
-
-    height: 1000px;
-  }
-
-
-  .title_containter2 {
-    color: #212224;
-    font-size: 2rem;
+.image-container img {
+max-width: 100%;
+}
+.image-container{
+    justify-content: center;
     text-align: center;
+}
 
-  }
+.container-2{
+    column-gap: 40px;
+    margin: 1%;
+}
+.safetitle h1{
+    font-size: 5rem;
+    text-align: center;
+}
 
-
-  .flex-container {
-
-    flex-direction:row;
-    display: -webkit-flex;
-    height: 750px;
-    align-content: center;
-
-  }
-
-  .flex-item {
-    height: 490px;
-  }
-
-
-  .img-with-text{
-    background-color: #f3f4f793;
-    align-content: center;
-    width: 80%;
-    height: 500px;
-    margin: 10px;
-    order: 1;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-
-  .img-with-text {
+.features{
+    font-size: 2.8rem;
+    justify-content: center;
+    text-align: center;
+}
+.caption{
+    font-size: 1.8rem;
+    max-width: 100%;
+    margin: 50px;
+    justify-content: center;
     text-align: justify;
-    width: 30%;
-  }
+}
 
-  .features{
-    color: #212224;
-    font-size: 2rem;
+.flex-item{
+    justify-content: center;
     text-align: center;
-  }
+}
 
-  .caption{
-    color: #3B3C42;
-    font-size: 1.5rem;
-  }
+.col-1{
+    float: left;
+    width: 33.33%;
+    max-width: 100%;
+
+}
+
+.col-2{
+    float: right;
+    width: 33.33%;
+    max-width: 100%;
+}
+
+.col-3{
+    display: inline-block;
+    width: 33.33%;
+    max-width: 100%;
+}
 
 
 
-  .container-3{
-    margin-left: 50px;
-    height: 900px;
-  }
 
 
-  .round-header{
-    border-radius: 25px;
-    width: 1800px;
-    height: 310px;
-    margin: auto;
+.round-header{
+    border-radius: 30px;
+    max-width: 100%;
+    height: auto;
     background-image: url("../../Images/frontpage/banner.png");
     padding: 10px;
+    margin: 10px;
+    background-repeat: inherit;
   }
 
 
@@ -140,6 +115,7 @@ body{
     color: #212224;
     margin-left: 30px;
     font-size: 3rem;
+    background-color: transparent;
   }
 
 
@@ -147,25 +123,20 @@ body{
     color: #212224;
     margin-left: 30px;
     font-size: 2rem;
+    background-color: transparent;
+
   }
 
-  /* .app-button{
-    background-color: #01AAAD;
-    width: 150px;
-    margin: 30px 30px;
-    display:inline-block;
-    line-height: 60px;
-  }
-
-   */
-
-
-   .button-wrapper{
+  .button-wrapper{
     display:inline-block;
     margin-left: 30px;
+    background-color: transparent;
+
   }
 
   .btn-download{
+    background-color: transparent;
+
     font-weight: bold;
     border: none;
     font-family: Montserrat;
@@ -196,87 +167,286 @@ body{
     cursor: pointer;
   }
 
-
-
-  .column-phone {
-    float: left;
-    margin-left: 100px;
-    width: 35%;
+  .container-4{
+    margin: 100px;
   }
 
-  .column-steps {
-    float: left;
-    width: 55%;
+.title-how{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.column-phone {
+    text-align: center;
+  }
+
+  .column-phone img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 80%;
+
+  }
+
+  .instruction{
+    text-align: justify;
+
   }
 
 
-  .title-how{
-    color: #212224;
-    font-size: 3.2rem;
-    padding: 30px 50px 0px 0px;
 
-  }
+
+
+
+/* Media query for responsiveness */
+@media screen and (min-width: 768px) {
+    .column {
+    flex-basis: 48%;
+    max-width: 48%;
+    }
+
+}
+
+
+@media screen and (max-width: 960px) {
+    .col-1{ float: none; width: 100%; }
+    .col-2{ float: none; width: 100%; }
+    .col-3{ display: block; width: 100%; }
+
+
+    .round-header{
+        max-width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+
+
+    .protect-title{
+        font-size: 2rem;
+        font-style: bold;
+    }
+
+    .protect-caption{
+        font-size: 1.5rem;
+
+    }
+
+    .dowload_here{
+        background-color: transparent;
+        font-weight: bold;
+        border: none;
+        font-family: Montserrat;
+        font-size: 1rem;
+        color: white;
+        background-color: #008037;
+        border-radius: 10px;
+        padding: 20px 20px 20px 20px;
+        transform-origin: center;
+        width: 150px;
+        cursor: pointer;
+
+      }
+
+      .btn-adminofficial{
+        font-weight: bold;
+        border: none;
+        font-family: Montserrat;
+        font-size: 1rem;
+        color: white;
+        background-color: #1A2E84;
+        border-radius: 10px;
+        padding: 20px 20px 20px 20px;
+        transform-origin: center;
+        width: 150px;
+
+        cursor: pointer;
+      }
+
+      .container-4{
+        margin: 80px;
+      }
+
+      .title-how{
+        font-size: 1rem;
+    }
+
+    .column-phone img {
+        height: 40%;
+
+      }
+
+      .instruction{
+        font-size: 0.5rem;
+
+      }
+
+
+
+}
+
+
+@media screen and (max-width: 480px) {
+    .column {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .intro{
+        padding: 20px;
+        font-size: 1rem;
+        margin: 10px;
+        text-align: center;
+
+    }
+
+    .intro-title{
+        text-align: center;
+    }
+
+
+
+    .dowload_here{
+        font-weight: bold;
+        border: none;
+        font-family: Montserrat;
+        color: white;
+        background-color: #008037;
+        border-radius: 100px;
+        padding: 0.5rem 2rem;
+        width: 200px;
+        cursor: pointer;
+        padding: 10px 10px 10px 10px;
+        font-size: 0.8rem;
+        text-align: center;
+        justify-content: center;
+        display: block;
+        margin: 0 auto;
+
+    }
+
+    .imgfront{
+        width: 80%;
+    }
+
+
+    .safetitle h1{
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .feat-img{
+        width: 80%;
+
+    }
+
+    .features{
+        font-size: 2rem;
+
+    }
+
+    .caption{
+        font-size: 1rem;
+
+    }
+
+    .round-header{
+        text-align: center;
+        padding: 10px;
+    }
+
+
+
+
+    .protect-title{
+        font-size: 1.5rem;
+        margin-left: 0px;
+
+    }
+
+    .protect-caption{
+        font-size: 1rem;
+        margin-left: 0px;
+
+    }
+
+    .button-wrapper{
+        margin-left: 0px;
+
+    }
+
+    .upper_text_button{
+        font-size: 0.8rem;
+    }
+
+
+    .btn-download{
+        font-size: 0.5rem;
+        padding: 10px 10px 10px 0px;
+        width: 100px;
+
+      }
+
+
+      .btn-adminofficial{
+        font-size: 0.5rem;
+        padding: 10px 10px 10px 0px;
+        width: 100px;
+        text-align: center;
+      }
+
+
+    .container-4{
+    margin: 20px;
+    }
+
+    .title-how{
+        font-size: 0.8rem;
+    }
+
+    .phone-container{
+        height: 10%;
+
+      }
+
+      .instruction{
+        font-size: 0.3rem;
+        text-align:justify;
+
+      }
+
+      .column-phone img {
+        height: 20%;
+
+
+      }
+
+
+
+
+}
 
 
 /*
+.container-4{
+    margin: 100px;
+  }
 
+.title-how{
+    text-align: center;
+    font-size: 3rem;
+}
 
+.column-phone {
+    text-align: center;
+  }
 
+  .column-phone img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 80%;
 
+  }
 
+  .instruction{
+    text-align: justify;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    nav{
-      float:right;
-      padding: 0px 0px 0px 50px;
-    }
-
-    .nav-logo img{
-      padding: 0px 0px 0px 90px;
-
-      float:left;
-    }
-
-    .navbar-ul{
-      display: inline-block;
-      padding: 0px 90px 0px 0px;
-      font-size:20px;
-      font-family:raleway;
-    }
-
-    .navbar-li{
-      display: inline-block;
-      padding: 0px 90px 0px 0px;
-      font-size:20px;
-      font-family:raleway;
-    }
-
-
-    .nav-login {
-      border: none;
-      font-family: Montserrat;
-      font-size: 1.7rem;
-      color: white;
-      background-color: #008037;
-      border-radius: 100px;
-      padding: 10px 30px 10px 30px;
-      transform-origin: center;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-     */
+  } */
