@@ -16,6 +16,7 @@ class Police_Substation_ReportsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new PoliceStationReports([
+            'report_status' => $row['report_status'],
             'barangay' => $row['barangay'],
             'street' => $row['street'],
             'police_substation' => $row['police_substation'],

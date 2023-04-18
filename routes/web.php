@@ -20,6 +20,10 @@ Route::get('/',[
     'as' => 'frontpage.index'
 ]);
 
+// Route::get('/downloadapk', function () {
+//     return Storage::download('safeplace.apk');
+// });
+Route::get('/downloadapk','FrontpageController@downloadapk');
 // Route::get('firebase', [FirebaseController::class, 'index']);
 
 Route::get('firebase',[
@@ -178,6 +182,7 @@ Route::group(['middleware' => 'role:superadmin'], function() {
         'as' => 'policestation_user.report_details']);
 
 
+
   });
 
 //Admin User
@@ -278,6 +283,23 @@ Route::group(['middleware' => 'role:barangay'], function() {
         'uses'=>'UserBarangayController@show',
         'as' => 'barangay_user.report_details']);
 
+
+     Route::get('/barangaydashboard',[
+            'uses'=>'BarangayDashboardController@index',
+            'as'=>'barangaydashboard',
+            ]);
+    
+    Route::get('/barangay_notifications',[
+            'uses'=>'UserBarangayController@notifications',
+            'as' => 'barangay_user.notifications']);    
+    
+    
+    Route::put('/police_transfer/{id}',[ 'uses'=>'UserBarangayController@transfer','as' => 'barangayreport.transfer']);
+    
+
+    
+    Route::post('/barangay_mark-as-read',[ 'uses'=>'UserBarangayController@markNotification','as' => 'barangayreport.markNotification']);
+
 });
 
 
@@ -323,10 +345,32 @@ Route::group(['middleware' => 'role:police_station'], function() {
     'as' => 'policestation_user.reports2020']);     
 
 
-  //show specific report
-  Route::get('/get-police_reports{id}',[
-    'uses'=>'UserPoliceStationController@show',
-    'as' => 'policestation_user.report_details']);
+//   //show specific report
+//   Route::get('/get-police_reports{id}',[
+//     'uses'=>'UserPoliceStationController@show',
+//     'as' => 'policestation_user.report_details']);
+
+    Route::get('/get-police_reports_yearly/{id}',[
+        'uses'=>'UserPoliceStationController@showyearly',
+        'as' => 'policestation_user.report_details_yearly']);
+    
+
+
+    Route::get('/policedashboard',[
+        'uses'=>'PoliceSubstationDashboardController@index',
+        'as'=>'policedashboard',
+        ]);
+
+     Route::get('/police_notifications',[
+        'uses'=>'UserPoliceStationController@notifications',
+        'as' => 'policestation_user.notifications']);    
+
+
+    Route::put('/barangay_transfer/{id}',[ 'uses'=>'UserPoliceStationController@transfer','as' => 'policereport.transfer']);
+
+    // Route::post('/mark-as-read', 'UserPoliceStationController@markNotification')->name('markNotification');
+
+    Route::post('/police_mark-as-read',[ 'uses'=>'UserPoliceStationController@markNotification','as' => 'policereport.markNotification']);
 
 });
 

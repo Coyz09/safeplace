@@ -15,7 +15,9 @@
         </div>
 
         <div class ="btndowload">
-          <button class="dowload_here">DOWNLOAD HERE</button>
+        <!-- <a href="/downloadapk"><button class="dowload_here">DOWNLOAD HERE</button></a> -->
+        <a href="{{asset('public/apk/safeplace.apk')}}"><button class="dowload_here">DOWNLOAD HERE</button></a>
+          <!-- <a href="/downloadapk" class="dowload_here">DOWNLOAD HERE</a> -->
         </div>
 
       </div>
@@ -49,7 +51,7 @@
                 <img src="../../Images/frontpage/feat2.png">
             </div>
             <p class="features"><strong>Community</strong></p>
-            <p class="caption">Lorem ipsum dolor sit amet. Sit veritatis tenetur rem veritatis aliquam in repellat adipisci aut repellendus officiis sed quod vitae eos molestiae perferendis. </p>
+            <p class="caption">Safe Place App is an application with different functional features that help people have a community to be informed about the crimes that occurred in District 2 - Taguig City where users of this application can assess, manage and monitor its risks.</p>
         </div>
 
         <div class="img-with-text">
@@ -99,8 +101,7 @@
             </div>
 
             <div class ="message">
-                <h1>Lorem ipsum dolor sit amet. Sit veritatis tenetur rem veritatis aliquam in repellat adipisci aut
-                repellendus officiis sed quod vitae eos molestiae perferendis. </h1>
+                <h1>The Safe place app is accessible via mobile and personal computing devices. This system will solely monitor the crime rate, police stations, barangay halls, and hospitals in District 2 of Taguig City. Using maps, the application can help to determine the closest hospitals, barangay halls, and police stations. Once users have successfully logged in, they can access nearby sites mentioned. Using "Emergency Swipe" functionalities, such as swipe left (barangay emergency call) and swipe right  (police emergency call), users can also conveniently make emergency calls. Users who have been verified have an option to report occurrences to their community whether anonymously or with their registered credentials. </h1>
             </div>
         </div>
 

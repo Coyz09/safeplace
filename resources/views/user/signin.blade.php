@@ -3,7 +3,7 @@
 
 
 <div class="logo">
-    <img src="../../Images/forms/Logo.png">
+<a href="/"><img src="../../Images/forms/Logo.png"></a>
     <!-- @include('layouts.flash-messages') -->
 </div>
 
@@ -14,6 +14,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <input type="text" name="email" id="email" class="form-control" placeholder="Email" value= "{{ old('email')}}">
+            <!-- {!! Form::text('email', old('email'), ['class' => 'form-control']); !!} -->
         </div>
 
         <div class="form-group">

@@ -2,7 +2,7 @@
 @include('partials.sidebar')
 
 @section('body')
-<div class="container">
+<div class="container-xl" style = "margin-left: 120px;">
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">

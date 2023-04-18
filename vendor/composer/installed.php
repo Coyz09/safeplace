@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c2e0209bcbce43f080d000a303eeac7807d61a71',
+    'reference' => '51f3973d6474b3ad4379cc26e32c2833bb5a408f',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -28,6 +28,15 @@
       array (
       ),
       'reference' => '8674e51bb65af933a5ffaf1c308a660387c35c22',
+    ),
+    'balping/json-raw-encoder' => 
+    array (
+      'pretty_version' => 'v1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e2b0ab888342b0716f1f0628e2fa13b345c5f276',
     ),
     'barryvdh/laravel-debugbar' => 
     array (
@@ -55,6 +64,15 @@
       array (
       ),
       'reference' => '3953f23262f2bff1919fc82183ad9acb13ff62c9',
+    ),
+    'consoletvs/charts' => 
+    array (
+      'pretty_version' => '6.6.0',
+      'version' => '6.6.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2bfd2c624fc68b9679b4b1c61c4de50fdae1b5f9',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -490,7 +508,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c2e0209bcbce43f080d000a303eeac7807d61a71',
+      'reference' => '51f3973d6474b3ad4379cc26e32c2833bb5a408f',
     ),
     'laravel/serializable-closure' => 
     array (
