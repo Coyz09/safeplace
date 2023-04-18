@@ -1,5 +1,16 @@
 @section('navbar')
 
+<style>
+       
+        .badge {
+            position: relative;
+            top: -20px;
+            left: 5px;
+            border: 1px solid black;
+            border-radius: 50%;
+        }
+
+</style>
 
 <nav style = "position: fixed; left: 20px;">
     <div class="sidebar-top">
@@ -17,11 +28,14 @@
       <li class="tooltip-element">
           <a href="/police_notifications">
             <div class="icon">
-            <i class='bx bxs-bell'></i>
-            <i class='bx bxs-bell'></i>
+        
+            <i class='bx bxs-bell'> </i>
+            <i class='bx bxs-bell'> </i>
+            
             </div>
             <!-- <button class="dowload_here"></button> -->
-            <span>Notifications</span>
+            <span>Notifications</span><span class="badge badge-pill badge-danger" style = "font-size:20px; margin-left: 8px;">{{auth()->guard('web')->user()->notifications()->where('status', '=','unread')->count()}}</span>
+            
           </a>
         </li>
       
@@ -57,9 +71,11 @@
             <div class="icon">
             <i class='bx bxs-bell'></i>
             <i class='bx bxs-bell'></i>
+
             </div>
-            <!-- <button class="dowload_here"></button> -->
-            <span>Notifications</span>
+               
+                <span>Notifications</span><span class="badge badge-pill badge-danger" style = "font-size:20px; ">{{auth()->guard('web')->user()->notifications()->where('status', '=','unread')->count()}}</span>
+      
           </a>
         </li>
       

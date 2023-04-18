@@ -78,6 +78,7 @@
                 // document.getElementById('mark').setAttribute("class", "alert alert-light");
 
                 $(this).css({"background": "white", "color": "white", "visibility": "hidden"});
+                location.reload();
                 // document.getElementById('read').setAttribute("hidden", "hidden");
 
             });
