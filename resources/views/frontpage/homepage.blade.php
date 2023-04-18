@@ -16,27 +16,8 @@
                     <img class="imgfront" src="../../Images/frontpage/Frontpages.png">
                 </div>
             </div>
-      <div class="column">
 
-        <div class ="intro">
-          <h1>STAY ALERT AND BE SAFE</h1>
-        </div>
-
-        <div class ="message">
-          <h1>Safe Place App is an application with different functional features that help people have a community to be informed about the crimes that occurred in District 2 - Taguig City where users of this application can assess, manage and monitor its risks. </h1>
-        </div>
-
-        <div class ="btndowload">
-        <!-- <a href="/downloadapk"><button class="dowload_here">DOWNLOAD HERE</button></a> -->
-        <a href="{{asset('public/apk/safeplace.apk')}}"><button class="dowload_here">DOWNLOAD HERE</button></a>
-          <!-- <a href="/downloadapk" class="dowload_here">DOWNLOAD HERE</a> -->
-        </div>
-
-      </div>
-
-        <div class="column">
-            <img src="../../Images/frontpage/Frontpages.png">
-        </div>
+     
     </div>
 
     <div class="container-2">
