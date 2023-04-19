@@ -158,21 +158,46 @@
         //     },
 
         chart: {
-            type: 'line'
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
+            type: 'spline'
         },
         
         title: {
-            text: 'Yearly Reports'
+            text: 'Yearly Reports',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
         },
          xAxis: {
             title: {
-             text: 'Month'
+             text: 'Month',
+             style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             },
 
-            categories: ['Month','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: ['Month','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
+            },
             // categories: months 
             // categories: users
             // type: 'category' 
@@ -181,7 +206,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -221,6 +251,7 @@
         {
             name: '2023',
             data: totalreports2023, 
+            color:'red'
         }, 
         {
             name: '2022',
@@ -267,22 +298,49 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'spline'
         },
         
         title: {
-            text: '2023 Reports'
+            text: '2023 Reports',
+        
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
+        
         },
         subtitle: {
             text: ''
         },
          xAxis: {
-            // title: {
-            //  text: 'Month'
-            // },
+         
+            title: {
+             text: 'Month',
+             style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
+            },
 
-            categories: ['Month','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
+            categories: ['Month','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
+            },
             // categories: months
             // // type: 'category' 
 
@@ -295,7 +353,14 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+              
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+               
+            },
             }
         },
         legend: {
@@ -327,23 +392,27 @@
             name: 'Total Number of Reports',
             data: reportsss2023, 
 
-        } ,
+
+        },
         {
             // type: 'column',
             name: 'Responded',
             data: responded, 
+            color: '#00FF00'
 
         },
         {
             // type: 'column',
             name: 'Pending',
             data: pending, 
+            color: 'tomato'
 
         },
         {
             // type: 'column',
             name: 'Transferred',
             data: transferred, 
+            color: '#EE82EE'
 
         }
         ],
@@ -379,11 +448,24 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'bar'
         },
         
         title: {
-            text: 'Top Most Occured Crimes/Incidents for the Current Month and Year'
+            text: 'Top Most Occured Crimes/Incidents for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
@@ -392,8 +474,20 @@
             // title: {
             //  text: 'Month'
             // },
-            title: {
-                text: 'Types of Crime Reported'
+            // title: {
+            //     text: 'Types of Crime Reported',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     },
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
             },
             categories: commoncrimeyearly2023
         },
@@ -401,7 +495,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -432,6 +531,7 @@
             // type: 'column',
             name: 'Current Month',
             data: commoncrimetotal2023, 
+            color: 'orange'
 
         } ,
 
@@ -439,7 +539,7 @@
             // type: 'column',
             name: 'Current Year',
             data: commoncrimetotalyearly2023, 
-
+            color: 'tomato'
         } ,
         ],
         
@@ -472,11 +572,24 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'bar'
         },
         
         title: {
-            text: 'Top Most Occured Crimes/Incidents for the Year 2022'
+            text: 'Top Most Occured Crimes/Incidents for the Year 2022',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
@@ -485,8 +598,20 @@
             // title: {
             //  text: 'Month'
             // },
-            title: {
-                text: 'Types of Crime Reported'
+            // title: {
+            //     text: 'Types of Crime Reported',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     },
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
             },
             categories: commoncrimeyearly2022
         },
@@ -494,7 +619,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -527,6 +657,7 @@
             // type: 'column',
             name: 'Number of Reports',
             data: commoncrimetotalyearly2022, 
+            color: '#FF0000'
 
         } ,
         ],
@@ -560,11 +691,24 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'bar'
         },
         
         title: {
-            text: 'Top Most Occured Crimes/Incidents for the Year 2021'
+            text: 'Top Most Occured Crimes/Incidents for the Year 2021',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
@@ -573,8 +717,20 @@
             // title: {
             //  text: 'Month'
             // },
-            title: {
-                text: 'Types of Crime Reported'
+            // title: {
+            //     text: 'Types of Crime Reported',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     },
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
             },
             categories: commoncrimeyearly2021
         },
@@ -582,7 +738,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -615,6 +776,7 @@
             // type: 'column',
             name: 'Number of Reports',
             data: commoncrimetotalyearly2021, 
+            color: 'orange'
 
         } ,
         ],
@@ -648,11 +810,24 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'bar'
         },
         
         title: {
-            text: 'Top Most Occured Crimes/Incidents for the Year 2020'
+            text: 'Top Most Occured Crimes/Incidents for the Year 2020',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
@@ -661,8 +836,20 @@
             // title: {
             //  text: 'Month'
             // },
-            title: {
-                text: 'Types of Crime Reported'
+            // title: {
+            //     text: 'Types of Crime Reported',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     },
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
             },
             categories: commoncrimeyearly2020
         },
@@ -670,7 +857,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -703,6 +895,7 @@
             // type: 'column',
             name: 'Number of Reports',
             data: commoncrimetotalyearly2020, 
+            color:'tomato'
 
         } ,
         ],

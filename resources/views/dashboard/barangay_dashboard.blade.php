@@ -138,22 +138,46 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'spline'
         },
         
         title: {
-            text: '2023 Reports'
+            text: '2023 Reports',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
         },
          xAxis: {
-            // title: {
-            //  text: 'Month'
-            // },
+            title: {
+             text: 'Month',
+             style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
+            },
 
-            categories: ['Month','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
+            categories: ['Month','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
+            },
             // categories: months
             // // type: 'category' 
 
@@ -166,7 +190,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -203,18 +232,21 @@
             // type: 'column',
             name: 'Responded',
             data: responded, 
+            color: '#00FF00'
 
         },
         {
             // type: 'column',
             name: 'Pending',
             data: pending, 
+            color:'tomato'
 
         },
         {
             // type: 'column',
             name: 'Transferred',
             data: transferred, 
+            color: '#EE82EE'
 
         }
         ],
@@ -251,11 +283,24 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'bar'
         },
         
         title: {
-            text: 'Top Most Occured Crimes/Incidents for the Current Month and Year'
+            text: 'Top Most Occured Crimes/Incidents for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                },
         },
         subtitle: {
             text: ''
@@ -264,8 +309,20 @@
             // title: {
             //  text: 'Month'
             // },
-            title: {
-                text: 'Types of Crime Reported'
+            // title: {
+            //     text: 'Types of Crime Reported',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     },
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                },
             },
             categories: commoncrimeyearly
         },
@@ -273,7 +330,12 @@
         yAxis: {
           
             title: {
-                text: 'Number of Reports'
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                },
             }
         },
         legend: {
@@ -304,6 +366,7 @@
             // type: 'column',
             name: 'Current Month',
             data: commoncrimetotal, 
+            color:'orange'
 
         } ,
 
@@ -311,7 +374,7 @@
             // type: 'column',
             name: 'Current Year',
             data: commoncrimetotalyearly, 
-
+            color:'tomato'
         } ,
         ],
         
@@ -342,6 +405,14 @@
         //     },
 
         chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
             type: 'bar'
         },
         
@@ -355,9 +426,9 @@
             // title: {
             //  text: 'Month'
             // },
-            title: {
-                text: 'Types of Crime Reported'
-            },
+            // title: {
+            //     text: 'Types of Crime Reported'
+            // },
             categories: commoncrimeyearly       
         },
        

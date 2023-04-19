@@ -99,7 +99,7 @@
                             </div>
                     <div class="row">
                         
-                          <div class="col-xl-5 col-md-6">
+                          <div class="col-xl-5 col-md-6" style="left:80px;">
                                 <div class="card bg-danger text-white mb-4">
 									<div class="card-body">
 										<div class="row">
@@ -125,7 +125,7 @@
 							</div>
 
                         
-                        <div class="col-xl-5 col-md-">
+                        <div class="col-xl-5 col-md-" style="left:80px;">
                                 <div class="card bg-primary text-white mb-4">
 									<div class="card-body">
 										<div class="row">
@@ -158,14 +158,999 @@
         <div id="map-canvas" style="height: 425px; width: 100%; position: relative; overflow: hidden;">
         </div>
     </div>
+    </div>  
+    <br /> 
+    <h2>Statistics: </h2> 
+    <br /> 
+    <div class="container" id="container6" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <br />
+    <div class="container" id="container1" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <br /> 
+    <div class="container" id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <br /> 
+    <div class="container" id="container7" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <br />
+    <div class="container" id="container5" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <br />
+    <div class="container" id="container3" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <br /> 
+    <div class="container" id="container4" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+   
+
+   
+
 </div>
-</div>
+
+<script>
+      
+    var barangaypending=  <?php echo json_encode($numberofbarangaypending) ?>;
+    var barangaypendingyearly =  <?php echo json_encode($numberofbarangaypendingyearly) ?>;
+    var barangaypendingmonthly =  <?php echo json_encode($numberofbarangaypendingmonthly) ?>;
+
+    var barangayresponded=  <?php echo json_encode($numberofbarangayresponded) ?>;
+    var barangayrespondedyearly =  <?php echo json_encode($numberofbarangayrespondedyearly) ?>;
+    var barangayrespondedmonthly =  <?php echo json_encode($numberofbarangayrespondedmonthly) ?>;
+
+    const chart =  Highcharts.chart('container2', {
+        // chart: {
+        //         renderTo: 'container',
+        //         zoomType: 'x',
+        //         spacingRight: 20
+        //     },
+
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Top Most Barangay with Pending Reports for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Barangays',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            
+            categories: barangaypending
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Barangay: ' + this.category + ', Number of Pending Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [
+        {
+            // type: 'column',
+            name: 'Number of Pending Reports(Current Month)',
+            data: barangaypendingmonthly, 
+            color: 'orange'
+
+        } ,
+        {
+            // type: 'column',
+            name: 'Number of Pending Reports(Current Year)',
+            data: barangaypendingyearly, 
+            color: 'tomato'
+
+        } ,
+
+        // {
+        //     // type: 'column',
+        //     name: 'Current Year',
+        //     data: commoncrimetotalyearly, 
+
+        // } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+    const charts =  Highcharts.chart('container1', {
+        // chart: {
+        //         renderTo: 'container',
+        //         zoomType: 'x',
+        //         spacingRight: 20
+        //     },
+
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Top Most Barangay with Responded Reports for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Barangays',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+                
+            // },
+            labels: {
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            categories: barangayresponded,
+            
+            
+            
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Barangay: ' + this.category + ', Number of Responded Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [
+        {
+            // type: 'column',
+            name: 'Number of Responded Reports(Current Month)',
+            data: barangayrespondedmonthly, 
+            color: 'lime'
+     
+
+        } ,
+        {
+            // type: 'column',
+            name: 'Number of Responded Reports(Current Year)',
+            data: barangayrespondedyearly, 
+            color: 'green'
+
+        } ,
+
+        // {
+        //     // type: 'column',
+        //     name: 'Current Year',
+        //     data: commoncrimetotalyearly, 
+
+        // } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+    var policepending=  <?php echo json_encode($numberofpolicepending) ?>;
+    var policependingyearly =  <?php echo json_encode($numberofpolicependingyearly) ?>;
+    var policependingmonthly =  <?php echo json_encode($numberofpolicependingmonthly) ?>;
+
+    var policeresponded=  <?php echo json_encode($numberofpoliceresponded) ?>;
+    var policerespondedyearly =  <?php echo json_encode($numberofpolicerespondedyearly) ?>;
+    var policerespondedmonthly =  <?php echo json_encode($numberofpolicerespondedmonthly) ?>;
+
+    const chart2 =  Highcharts.chart('container4', {
+        // chart: {
+        //         renderTo: 'container',
+        //         zoomType: 'x',
+        //         spacingRight: 20
+        //     },
+
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Top Most Police Substation with Pending Reports for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Police Substations',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            
+            categories: policepending
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Police Substation: ' + this.category + ', Number of Pending Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [
+        {
+            // type: 'column',
+            name: 'Number of Pending Reports(Current Month)',
+            data: policependingmonthly, 
+            color: 'orange'
+
+        } ,
+        {
+            // type: 'column',
+            name: 'Number of Pending Reports(Current Year)',
+            data: policependingyearly, 
+            color: 'tomato'
+
+        } ,
+
+        // {
+        //     // type: 'column',
+        //     name: 'Current Year',
+        //     data: commoncrimetotalyearly, 
+
+        // } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+    const charts2 =  Highcharts.chart('container3', {
+        // chart: {
+        //         renderTo: 'container',
+        //         zoomType: 'x',
+        //         spacingRight: 20
+        //     },
+
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Top Most Police Substation with Responded Reports for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Police Substations',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+                
+            // },
+            labels: {
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            categories: policeresponded,
+            
+            
+            
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Police Substation: ' + this.category + ', Number of Responded Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [
+        {
+            // type: 'column',
+            name: 'Number of Responded Reports(Current Month)',
+            data: policerespondedmonthly, 
+            color: 'lime'
+     
+
+        } ,
+        {
+            // type: 'column',
+            name: 'Number of Responded Reports(Current Year)',
+            data: policerespondedyearly, 
+            color: 'green'
+
+        } ,
+
+        // {
+        //     // type: 'column',
+        //     name: 'Current Year',
+        //     data: commoncrimetotalyearly, 
+
+        // } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+    var policereport2023=  <?php echo json_encode($policereport2023) ?>;
+    var policereportmonthly2023 =  <?php echo json_encode($totalofpolicereportmonthly2023) ?>;
+    var policereportyearly2023 =  <?php echo json_encode($totalofpolicereportyearly2023) ?>;
+
+    var barangayreport2023=  <?php echo json_encode($barangayreport2023) ?>;
+    var barangayreportmonthly2023 =  <?php echo json_encode($totalofbarangayreportmonthly2023) ?>;
+    var barangayreportyearly2023 =  <?php echo json_encode($totalofbarangayreportyearly2023) ?>;
+
+    const chart3 =  Highcharts.chart('container5', {
+        // chart: {
+        //         renderTo: 'container',
+        //         zoomType: 'x',
+        //         spacingRight: 20
+        //     },
+
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Total Number of Reports per Police Substation for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Police Substations',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            
+            categories: policereport2023
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Police Substation: ' + this.category + ', Total number of Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [  
+            {
+            // type: 'column',
+            name: 'Total Number of Reports per Police Substation(Current Month)',
+            data: policereportmonthly2023, 
+            color: 'cyan'
+
+        } ,
+        {
+            // type: 'column',
+            name: 'Total Number of Reports per Police Substation(Current Year)',
+            data: policereportyearly2023, 
+            color: 'blue'
+
+        } ,
+
+      
+       
+
+        // {
+        //     // type: 'column',
+        //     name: 'Current Year',
+        //     data: commoncrimetotalyearly, 
+
+        // } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+    const chart4 =  Highcharts.chart('container6', {
+        // chart: {
+        //         renderTo: 'container',
+        //         zoomType: 'x',
+        //         spacingRight: 20
+        //     },
+
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Total Number of Reports per Barangay for the Current Month and Year',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Barangays',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            
+            categories: barangayreport2023
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Barangay: ' + this.category + ', Total number of Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [ 
+        {
+            // type: 'column',
+            name: 'Total Number of Reports per Barangay(Current Month)',
+            data: barangayreportmonthly2023, 
+            color: 'cyan'
+
+        } ,
+        {
+            // type: 'column',
+            name: 'Total Number of Reports per Barangay(Current Year)',
+            data: barangayreportyearly2023, 
+            color: 'blue'
+
+        } ,
+
+       
+       
+
+        // {
+        //     // type: 'column',
+        //     name: 'Current Year',
+        //     data: commoncrimetotalyearly, 
+
+        // } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+    var totalpolicereports =  <?php echo json_encode($totalpolicereports) ?>;
+    var allpolicereports =  <?php echo json_encode($allpolicereports) ?>;
+    var policereportss2023 =  <?php echo json_encode($policereports2023) ?>;
+    var policereportss2022 =  <?php echo json_encode($policereports2022) ?>;
+    var policereportss2021 =  <?php echo json_encode($policereports2021) ?>;
+    var policereportss2020 =  <?php echo json_encode($policereports2020) ?>;
+
+    const chart5 =  Highcharts.chart('container7', {
+        chart: {
+            options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }, 
+        // inverted: true,
+            type: 'bar'
+        },
+        
+        title: {
+            text: 'Total Number of Reports per Police Substation(Yearly)',
+            style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '20px'
+                }
+        },
+        subtitle: {
+            text: ''
+        },
+         xAxis: {
+            // title: {
+            //  text: 'Month'
+            // },
+            // title: {
+            //     text: 'Police Substations',
+            //     style: {
+            //     color: 'black',
+            //     fontWeight: 'bold',
+            //     fontSize: '15px'
+            //     }
+            // },
+            labels:{
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '13px'
+                }
+            },
+            
+            categories: allpolicereports
+        },
+       
+        yAxis: {
+          
+            title: {
+                text: 'Number of Reports',
+                style: {
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: '15px'
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+                shared: true
+            },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            },
+            series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                click: function() {
+                    alert('Police Substation: ' + this.category + ', Total number of Reports: ' + this.y);
+                }
+                }
+            }
+            }
+        },
+
+        series: [  
+            {
+            // type: 'funnel',
+            name: 'Total Police Reports:',
+            data: totalpolicereports, 
+            
+
+        } ,
+            {
+            // type: 'column',
+            name: '2023',
+            data: policereportss2023, 
+            
+
+        } ,
+        {
+            // type: 'column',
+            name: '2022',
+            data: policereportss2022, 
+         
+
+        } ,
+        {
+            // type: 'column',
+            name: '2021',
+            data: policereportss2021, 
+           
+
+        } ,
+        {
+            // type: 'column',
+            name: '2020',
+            data: policereportss2020, 
+       
+
+        } ,
+        ],
+        
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+            
+            
+    });
+
+</script>
 @endsection
 
 @section('scripts')
-{{-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap"></script> --}}
-<script type='text/javascript' src='https://maps.google.com/maps/api/js?language=en&key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&region=GB'></script>
+
+<script type='text/javascript' src='https://maps.google.com/maps/api/js?language=en&key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&region=GB'>
+    
+</script>
 <script defer>
+
+    
 	function initialize() {
 		var mapOptions = {
 			zoom: 12.60,
@@ -401,5 +1386,6 @@
 
     }
 </script>
+
 
 @endsection

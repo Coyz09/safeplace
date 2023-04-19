@@ -73,7 +73,7 @@
             <i class='bx bxs-bell'></i>
 
             </div>
-               
+  
                 <span>Notifications</span><span class="badge badge-pill badge-danger" style = "font-size:20px; ">{{auth()->guard('web')->user()->notifications()->where('status', '=','unread')->count()}}</span>
       
           </a>

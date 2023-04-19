@@ -2364,6 +2364,18 @@ class BarangayDashboardController extends Controller
             ->orderBy('total', 'desc')
             ->limit(10)
             ->pluck('total');
+
+            // $numberofpending= DB::table('barangay_reports')
+            // ->selectRaw('barangay, report_status, COUNT(report_status) as total')
+            // ->whereYear('date_reported', Carbon::now()->year)    
+            // ->where('year_reported', '2023')
+            // ->where('report_status', 'Pending')
+            // ->groupBy('report_status', 'barangay')
+            // ->orderBy('total', 'desc')
+            // // ->get();
+            // ->pluck('total','barangay');
+            // dd($numberofpending);
+
             // dd( $commoncrimeyearly,$commoncrimetotalyearly );
 
 

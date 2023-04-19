@@ -346,8 +346,29 @@
                       </div>
                       @endif
 
+         @if($barangay_reports->report_status != "Transferred")
+          <div class="button">
+          <form action="{{route('barangayreport.transfer',$barangay_reports->id)}}" method="POST" >
+            @csrf
+            @method('PUT')
 
+            <div class="input-box">
+                            <div class="form-group">
+                                {!!Form::label('Transfer to:')!!}
+                                <!-- {!! Form::text('police_substation',$barangay_reports->police_substation,['class' => 'form-control', 'readonly' => 'true'])!!} -->
+
+                                {!! Form::select('police_substation',array('police_substation1' => 'police_substation1','police_substation2' => 'police_substation2', 'police_substation3' => 'police_substation3', 'police_substation6' => 'police_substation6', 'police_substation7' => 'police_substation7','police_substation8' => 'police_substation8'), $barangay_reports->police_substation,['placeholder' => 'Choose the Police Substation:','class' => 'form-control']) !!}
+                          </div>
+              </div>
+
+
+            {{ Form::submit('Transfer',['class'=>'btn btn-warning']) }}
+
+          </form>   
+          </div>
+        @endif
         </div>
+        
 
       
         <form action="{{route('barangay_user.update',$barangay_reports->id)}}" method="POST" >
@@ -418,31 +439,11 @@
       <div class="button">
         {{ Form::submit('Respond',['class'=>'btn btn-primary']) }}
       </div>
+      <a href="{{url()->previous()}}" class="btn btn-primary2" role="button"> Back</a>
       {!! Form::close() !!}
 
 
-@if($barangay_reports->report_status != "Transferred")
-<div class="button">
-<form action="{{route('barangayreport.transfer',$barangay_reports->id)}}" method="POST" >
-  @csrf
-  @method('PUT')
 
-  <div class="input-box">
-                  <div class="form-group">
-                      {!!Form::label('Transfer to:')!!}
-                      <!-- {!! Form::text('police_substation',$barangay_reports->police_substation,['class' => 'form-control', 'readonly' => 'true'])!!} -->
-
-                      {!! Form::select('police_substation',array('police_substation1' => 'police_substation1','police_substation2' => 'police_substation2', 'police_substation3' => 'police_substation3', 'police_substation6' => 'police_substation6', 'police_substation7' => 'police_substation7','police_substation8' => 'police_substation8'), $barangay_reports->police_substation,['placeholder' => 'Choose the Police Substation:','class' => 'form-control']) !!}
-                </div>
-     </div>
-
-  <a href="{{url()->previous()}}" class="btn btn-primary2" role="button"> Back</a>
-
-  {{ Form::submit('Transfer',['class'=>'btn btn-warning']) }}
-
-</form>   
-</div>
-@endif
 </div>
 </div>
 
