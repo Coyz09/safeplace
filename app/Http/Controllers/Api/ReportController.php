@@ -8,7 +8,7 @@ use App\Models\BarangayReports;
 use App\Models\PoliceStationReports;
 use App\Models\User;
 use App\Models\VerifiedUser;
-
+use App\Models\Notification;
 
 use DB;
 use Auth;
@@ -27,7 +27,6 @@ class ReportController extends Controller
 
 
         $user = User::find(Auth::user()->id);
-
         $userdetails = DB::table('verified_users')
         ->join('users', 'verified_users.user_id',  '=', 'users.id')
         ->select('verified_users.*','users.img')
@@ -103,6 +102,46 @@ class ReportController extends Controller
 
         $barangayreport ->save();
 
+        // $notification_message = "Your report is send! Please wait for the update. Thank you!";
+        $notification_message = "Your report has send, With the report ID of ".$barangayreport->id.". Please wait for the update. Thank you!";
+
+        $notification_status = "unread";
+
+        $notification = Notification::create([
+            'message' =>  $notification_message,
+            'status' =>  $notification_status,
+            'user_id' =>$user->id,
+         ]);
+         $notification->save();
+
+          
+
+            $barangay  = DB::table('barangay_accounts')
+            // ->join('users', 'verified_users.user_id',  '=', 'users.id')
+            ->select('user_id')
+            ->where('role', '=',  $request->barangay)
+            ->first();
+
+
+            if($request->complainant_identity == "not anonymous"){
+                $barangay_notification_message= $user->name." has sent a report, With the report ID of ".$barangayreport->id.". Please respond!";
+            }
+            elseif($request->complainant_identity == "anonymous")
+            {
+                $barangay_notification_message= "An anonymous person has sent a report, With the report ID of ".$barangayreport->id.". Please respond!";
+            }
+            
+
+            $barangay_notification_status = "unread";
+
+            $notification = Notification::create([
+                'message' =>  $barangay_notification_message,
+                'status' =>  $barangay_notification_status,
+                'user_id' =>$barangay->user_id,
+            ]);
+            $notification->save();
+   
+
 
 
         return response()->json([
@@ -113,7 +152,6 @@ class ReportController extends Controller
             // 'report_images'=> $imageName,
 
         ]);
-
 
     }
 
@@ -195,14 +233,54 @@ class ReportController extends Controller
         }
 
 
-
-
-
-
-
-
         $policesubstationreport ->save();
+     
+        // dd($policesubstationreport -> id); 
 
+        $notification_message = "Your report has sent, With the report ID of ".$policesubstationreport->id.". Please wait for the update. Thank you!";
+
+        $notification_status = "unread";
+
+        $notification = Notification::create([
+            'message' =>  $notification_message,
+            'status' =>  $notification_status,
+            'user_id' =>$user->id,
+         ]);
+         $notification->save();
+
+
+         
+        // if($request->police_substation == "police_substation1")
+        // {
+        
+
+            $police  = DB::table('police_station_accounts')
+            // ->join('users', 'verified_users.user_id',  '=', 'users.id')
+            ->select('user_id')
+            ->where('role', '=',  $request->police_substation)
+            ->first();
+
+
+            if($request->complainant_identity == "not anonymous"){
+                $police_notification_message= $user->name." has sent a report, With the report ID of ".$policesubstationreport->id.". Please respond!";
+            }
+            elseif($request->complainant_identity == "anonymous")
+            {
+                $police_notification_message= "An anonymous person has sent a report, With the report ID of ".$policesubstationreport->id.". Please respond!";
+            }
+            
+
+            $police_notification_status = "unread";
+
+            $notification = Notification::create([
+                'message' =>  $police_notification_message,
+                'status' =>  $police_notification_status,
+                'user_id' =>$police->user_id,
+            ]);
+            $notification->save();
+
+            // dd($police);
+        // }    
 
         // dd($years);
 
@@ -233,6 +311,8 @@ class ReportController extends Controller
         $barangay = DB::table('barangay_reports')
         ->join('verified_users', 'barangay_reports.complainant_id',  '=', 'verified_users.id')
         ->select('barangay_reports.*')
+        ->orderBy('barangay_reports.date_reported', 'DESC')
+        ->orderBy('barangay_reports.time_reported', 'DESC')
         ->where('barangay_reports.complainant_id', '=',  $verified->id )
         ->get();
 
@@ -240,6 +320,8 @@ class ReportController extends Controller
         $police_station = DB::table('police_station_reports')
         ->join('verified_users', 'police_station_reports.complainant_id',  '=', 'verified_users.id')
         ->select('police_station_reports.*')
+        ->orderBy('police_station_reports.date_reported', 'DESC')
+        ->orderBy('police_station_reports.time_reported', 'DESC')
         ->where('police_station_reports.complainant_id', '=',  $verified->id )
         ->get();
 

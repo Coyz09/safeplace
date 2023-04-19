@@ -16,7 +16,8 @@
                     <img class="imgfront" src="../../Images/frontpage/Frontpages.png">
                 </div>
             </div>
-        </div>
+
+     
     </div>
 
     <div class="container-2">

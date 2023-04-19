@@ -1,7 +1,8 @@
 @extends('layouts.base')
-
+@include('partials.sidebar2')
 
 @section('body')
+
 
 <style>
   .message    {
@@ -14,6 +15,7 @@
   background-color: transparent;
   border:transparent;
   color: red;
+  font-size: 30px
 
   }
 
@@ -21,27 +23,33 @@
   .edit {
   background-color: transparent;
   border:transparent;
-  color: rgb(255, 238, 0);
+
+  font-size: 30px
 
   }
 
-  .edit {
+  .edit2 {
   background-color: transparent;
   border:transparent;
   color: black;
+
 
   }
 
   .pagination{
       background-color: transparent;
   }
+
+  .table-striped {
+  font-size: 19px;
+}
 </style>
 
 
 
-  @include('layouts.flash-messages')
+@include('layouts.flash-messages2')
 
-<div class="container-xl">
+<div class="container-xl" style = "margin-left: 120px;">
   <div class="table-responsive">
       <div class="table-wrapper">
           <div class="table-title">
@@ -55,55 +63,35 @@
                   </div>
               </div>
           </div>
-          <a href="{{ route('policestation_user.index')}}"  class="edit"><i class='bx bx-detail' ></i>2023</a>
-          <a href="{{ route('policestation_user.reports2022')}}"  class="edit"><i class='bx bx-detail' ></i>2022</a>
-          <a href="{{ route('policestation_user.reports2021')}}"  class="edit"><i class='bx bx-detail' ></i>2021</a>
-          <a href="{{ route('policestation_user.reports2020')}}"  class="edit"><i class='bx bx-detail' ></i>2020</a>
+          <a href="{{ route('policestation_user.index')}}"  class="edit2"><i class='bx bx-detail' ></i>2023</a>
+          <a href="{{ route('policestation_user.reports2022')}}"  class="edit2"><i class='bx bx-detail' ></i>2022</a>
+          <a href="{{ route('policestation_user.reports2021')}}"  class="edit2"><i class='bx bx-detail' ></i>2021</a>
+          <a href="{{ route('policestation_user.reports2020')}}"  class="edit2"><i class='bx bx-detail' ></i>2020</a>
           
-          {!! Form::open(['route' => 'import', 'files' => true]) !!}
-          {{ csrf_field() }}
-
-
-      <div class="title">Import</div>
-
-      <div class="user-details">
-
-      <div class="input-box">
-                <div class="form-group">
-                  {!!Form::label('Excel:')!!}
-                  {!! Form::file('excel_file',old('excel_file'),['class' => 'form-control'])!!}
-                </div>
-              </div>
-      </div>
-    
-      <div class="button">
-        {{ Form::submit('Submit',['class'=>'btn btn-primary']) }}
-      </div>
-      {!! Form::close() !!}
    
 
-          <table id="policestation_reports-table" class="table table-striped table-hover">
+          <table id="policestation_reports-table" class="table-responsive table-striped table-hover">
               <thead>
                   <tr>
 
                       <th scope="col">Report ID</th> 
-                      <th scope="col">Complainant Name</th>
-                      <th scope="col">Complainant Contact</th>
+                      <!-- <th scope="col">Complainant Name</th>
+                      <th scope="col">Complainant Contact</th> -->
                       <th scope="col">Incident Type</th>
                       <th scope="col">Barangay</th>
                       <th scope="col">Street</th>                     
                       <th scope="col">Date Reported</th>
                       <th scope="col">Time Reported</th>
-
+                      <th scope="col">Report Status</th>
                       <th style="width: 100px">View Report</th>
                   </tr>
               </thead>
 
           </table>
 
-          <a href="{{ route('user.logout') }}" class="log-out">
+          <!-- <a href="{{ route('user.logout') }}" class="log-out">
             <i class='text-light bx bx-log-out'></i>
-          </a>
+          </a> -->
 
   </div>
 </div>
@@ -119,17 +107,18 @@
       $('#policestation_reports-table').DataTable({
             processing: true,
             serverSide: true,
-            ordering: false,
+            order: [[4, 'desc'],[5, 'desc']],
             ajax: '{!! route('policestation_user.getPoliceStationReports') !!}',
             columns: [
               { data: 'id', name: 'id' },
-              { data: 'complainant_name', name: 'complainant_name' },
-              { data: 'complainant_contact', name: 'complainant_contact' },
+              // { data: 'complainant_name', name: 'complainant_name' },
+              // { data: 'complainant_contact', name: 'complainant_contact' },
               { data: 'incident_type', name: 'incident_type' },
               { data: 'barangay', name: 'barangay' },
               { data: 'street', name: 'street' },
               { data: 'date_reported', name: 'date_reported' },
               { data: 'time_reported', name: 'time_reported' },
+              { data: 'report_status', name: 'report_status' },
               { data: 'action', name: 'action', orderable: false},
              ]
         });

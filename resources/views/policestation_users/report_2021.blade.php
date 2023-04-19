@@ -1,5 +1,5 @@
 @extends('layouts.base')
-
+@include('partials.sidebar2')
 
 @section('body')
 
@@ -21,11 +21,11 @@
   .edit {
   background-color: transparent;
   border:transparent;
-  color: rgb(255, 238, 0);
-
+ 
+  font-size: 25px
   }
 
-  .edit {
+  .edit2 {
   background-color: transparent;
   border:transparent;
   color: black;
@@ -41,7 +41,7 @@
 
   @include('layouts.flash-messages')
 
-<div class="container-xl">
+<div class="container-xl" style = "margin-left: 120px;">
   <div class="table-responsive">
       <div class="table-wrapper">
           <div class="table-title">
@@ -55,13 +55,13 @@
                   </div>
               </div>
           </div>
-          <a href="{{ route('policestation_user.index')}}"  class="edit"><i class='bx bx-detail' ></i>2023</a>
-          <a href="{{ route('policestation_user.reports2022')}}"  class="edit"><i class='bx bx-detail' ></i>2022</a>
-          <a href="{{ route('policestation_user.reports2021')}}"  class="edit"><i class='bx bx-detail' ></i>2021</a>
-          <a href="{{ route('policestation_user.reports2020')}}"  class="edit"><i class='bx bx-detail' ></i>2020</a>
+          <a href="{{ route('policestation_user.index')}}"  class="edit2"><i class='bx bx-detail' ></i>2023</a>
+          <a href="{{ route('policestation_user.reports2022')}}"  class="edit2"><i class='bx bx-detail' ></i>2022</a>
+          <a href="{{ route('policestation_user.reports2021')}}"  class="edit2"><i class='bx bx-detail' ></i>2021</a>
+          <a href="{{ route('policestation_user.reports2020')}}"  class="edit2"><i class='bx bx-detail' ></i>2020</a>
           
 
-          <table id="policestation_reports-table" class="table table-striped table-hover">
+          <table id="policestation_reports-table" class="table-responsive table-striped table-hover">
               <thead>
                   <tr>
 
@@ -80,9 +80,9 @@
 
           </table>
 
-          <a href="{{ route('user.logout') }}" class="log-out">
+          <!-- <a href="{{ route('user.logout') }}" class="log-out">
             <i class='text-light bx bx-log-out'></i>
-          </a>
+          </a> -->
 
   </div>
 </div>
@@ -98,7 +98,7 @@
       $('#policestation_reports-table').DataTable({
             processing: true,
             serverSide: true,
-            ordering: false,
+            order: [[4, 'desc'],[5, 'desc']],
             ajax: '{!! route('policestation_user.getPoliceStationReports2021') !!}',
             columns: [
               { data: 'id', name: 'id' },

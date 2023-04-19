@@ -13,7 +13,7 @@
   background-color: transparent;
   border:transparent;
   color: red;
-
+  font-size: 25px
   }
 
 
@@ -21,7 +21,7 @@
   background-color: transparent;
   border:transparent;
   color: rgb(255, 238, 0);
-
+  font-size: 25px
   }
 
   .pagination{
@@ -29,9 +29,9 @@
   }
 </style>
 
-@include('layouts.flash-messages')
+@include('layouts.flash-messages2')
 
-<div class="container-xl">
+<div class="container-xl" style = "margin-left: 120px;">
   <div class="table-responsive">
       <div class="table-wrapper">
           <div class="table-title">
@@ -46,7 +46,7 @@
 
               </div>
           </div>
-          <table id="user-table" class="table table-striped table-hover">
+          <table id="user-table" class="table-responsive table-striped table-hover">
               <thead>
                   <tr>
 

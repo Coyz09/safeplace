@@ -45,15 +45,16 @@ class LoginController extends Controller
             // }
         
             elseif(auth()->guard('web')->user()->role == 'barangay') {
-                return redirect()->route('barangay_user.index');
+                return redirect()->route('barangaydashboard');
             }
 
             elseif(auth()->guard('web')->user()->role == 'police_station') {
-                return redirect()->route('policestation_user.index');
+                return redirect()->route('policedashboard');
+
             }
 
             elseif(auth()->guard('web')->user()->role == 'superadmin') {
-                return redirect()->route('user.index');
+                return redirect()->route('admin_dashboard');
             }       
 
             elseif(auth()->guard('web')->user()->role == 'unverified_user' || auth()->guard('web')->user()->role == 'verified_user')  {

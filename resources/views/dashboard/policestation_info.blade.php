@@ -2,7 +2,7 @@
 @include('partials.sidebar')
 
 @section('body')
-<div class="container">
+<div class="container" style = "margin-left: 120px;y>
     <div class="row">
         <div class="col-md-12">
             <div class="content-box content-single">

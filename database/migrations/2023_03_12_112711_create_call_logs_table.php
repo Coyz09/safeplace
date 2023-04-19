@@ -16,6 +16,7 @@ class CreateCallLogsTable extends Migration
         Schema::create('call_logs', function (Blueprint $table) {
             $table->id();
             $table->string('user_name');
+            $table->string('user_contact');
             $table->string('name_contacted');
             $table->string('type_contacted');
             $table->string('date_contacted');

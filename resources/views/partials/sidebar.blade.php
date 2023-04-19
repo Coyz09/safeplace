@@ -1,9 +1,24 @@
 @section('navbar')
+<!-- <style>
+  .nav {
+  position: relative;
+  /*float: left;*/
+  width: 100%;
+  background: #1E1E1E;
+  /*    display: table; */
+  margin: 0;
+  text-align: center;
+  height: 250px;
+  border: none;
+  border-width: 0;
+  margin: 0;
+  padding: 10px 10px;
+}
+</style> -->
 
-
-<nav>
+<nav style = "position: fixed; height: 100%; left: 20px; overflow-x: hidden; overflow-y: scroll">
     <div class="sidebar-top">
-      <img  href="{{ asset('Images/Logo.png') }}" src="{{ asset('Images/Logo.png') }}" class="logo" alt="">
+      <img  href="{{ asset('Images/Logo.png') }}" src="{{ asset('Images/Logo.png') }}"  height= "150" width="200" class="logo" alt="">
     </div>
 
     <div class="Safeplace">

@@ -78,6 +78,11 @@ class User extends Authenticatable implements JWTSubject
     {
     	return $this->belongsToMany('App\Models\PoliceStation');
     }
+
+    public function notifications()
+    {
+    	return $this->hasMany('App\Models\Notification');
+    }
     
 
     public function isAdmin()

@@ -11,7 +11,7 @@ class CallLog extends Model
     use HasFactory;
 
     public $table = 'call_logs';
-    protected $fillable = ['user_name','name_contacted','type_contacted','date_contacted','time_contacted','user_id'];
+    protected $fillable = ['user_name','user_contact','name_contacted','type_contacted','date_contacted','time_contacted','user_id'];
     public $timestamps =true;
     public $primaryKey = 'id';
 
