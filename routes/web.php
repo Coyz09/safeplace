@@ -181,6 +181,17 @@ Route::group(['middleware' => 'role:superadmin'], function() {
         'uses'=>'UserPoliceStationController@show',
         'as' => 'policestation_user.report_details']);
 
+        Route::get('/barangayarchives', 'AdminController@barangayindex')->name('barangayarchives');
+        Route::get('/barangayedit/{id}',[ 'uses'=>'AdminController@barangayedit','as' => 'admin.barangayedit']);
+        Route::get('/get-barangay_archives',[
+               'uses'=>'AdminController@getBarangayArchives',
+               'as' => 'admin.getBarangayArchives']);
+   
+        Route::get('/policearchives', 'AdminController@policeindex')->name('policearchives');
+        Route::get('/policeedit/{id}',[ 'uses'=>'AdminController@policeedit','as' => 'admin.policeedit']);
+        Route::get('/get-police_archives',[
+               'uses'=>'AdminController@getPoliceArchives',
+               'as' => 'admin.getPoliceArchives']);
 
 
   });
@@ -213,6 +224,21 @@ Route::group(['middleware' => 'role:admin'], function() {
     Route::get('/hospitals/{hospitals}', 'DashboardController@showHospital')->name('hospital');
     Route::get('/barangays/{barangays}', 'DashboardController@showBarangay')->name('barangay');
     Route::get('/polices/{polices}', 'DashboardController@showPolice')->name('police');
+
+      
+  
+
+     Route::get('/barangayarchives', 'AdminController@barangayindex')->name('barangayarchives');
+     Route::get('/barangayedit/{id}',[ 'uses'=>'AdminController@barangayedit','as' => 'admin.barangayedit']);
+     Route::get('/get-barangay_archives',[
+            'uses'=>'AdminController@getBarangayArchives',
+            'as' => 'admin.getBarangayArchives']);
+
+     Route::get('/policearchives', 'AdminController@policeindex')->name('policearchives');
+     Route::get('/policeedit/{id}',[ 'uses'=>'AdminController@policeedit','as' => 'admin.policeedit']);
+     Route::get('/get-police_archives',[
+            'uses'=>'AdminController@getPoliceArchives',
+            'as' => 'admin.getPoliceArchives']);
 
   //   Route::resource('user', UserController::class);
   //   Route::get('/get-user',[ 'uses'=>'UserController@getUser','as' => 'users.getUser']);

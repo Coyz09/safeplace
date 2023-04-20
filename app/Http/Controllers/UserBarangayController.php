@@ -33,6 +33,13 @@ class UserBarangayController extends Controller
         ->where('barangay_accounts.user_id',(auth()->guard('web')->user()->id))
         ->get();
 
+        // $admin = DB::table('users')
+        // ->select('*',)
+        // ->where('id',(auth()->guard('web')->user()->id))
+        // ->first();
+         
+        // dd($admin->role);
+
             if (($users[0]->role == "barangay_centralbicutan"))
             {
                 $barangay_reports = DB::table('barangay_reports')

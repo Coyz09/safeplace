@@ -203,6 +203,26 @@
         </li>
 
         <li class="tooltip-element">
+          <a href="/barangayarchives">
+            <div class="icon">
+              <i class='bx bxs-archive' ></i>
+              <i class='bx bxs-archieve' ></i>
+            </div>
+            <span>Barangay Archieves</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element">
+          <a href="/policearchives">
+            <div class="icon">
+              <i class='bx bx-archive' ></i>
+              <i class='bx bx-archieve' ></i>
+            </div>
+            <span>Police Substation Archieves</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element">
           <a href="/user">
             <div class="icon">
               <i class='bx bxs-user' ></i>
@@ -271,6 +291,26 @@
               <i class='bx bxs-bank' ></i>
             </div>
             <span>Police Substations</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element">
+          <a href="/barangayarchives">
+            <div class="icon">
+              <i class='bx bxs-archive' ></i>
+              <i class='bx bxs-archieve' ></i>
+            </div>
+            <span>Barangay Archieves</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element">
+          <a href="/policearchives">
+            <div class="icon">
+              <i class='bx bx-archive' ></i>
+              <i class='bx bx-archieve' ></i>
+            </div>
+            <span>Police Substation Archieves</span>
           </a>
         </li>
 

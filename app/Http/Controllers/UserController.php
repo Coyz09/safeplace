@@ -304,18 +304,18 @@ class UserController extends Controller
     public function UpdateProfile(Request $request, $user) {
 
                $this->validate($request, [
-                'name' => 'required|min:2|max:200',
-                'email'=> 'required|min:2|max:200',
+                // 'name' => 'required|min:2|max:200',
+                // 'email'=> 'required|min:2|max:200',
                 'password'=> 'required|min:2|max:200',
-                'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
+                // 'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
             ]);
 
 
-                if($request->hasFile('img')){
-                  $img  = time().'.'.$request->file('img')->extension();
-                  $request->file('img')->move(public_path('storage/images'), $img);
+                // if($request->hasFile('img')){
+                  // $img  = time().'.'.$request->file('img')->extension();
+                  // $request->file('img')->move(public_path('storage/images'), $img);
 
-                  $input['img'] = 'storage/images/'.$img;
+                  // $input['img'] = 'storage/images/'.$img;
 
                   $id = User::find(auth()->guard('web')->user()->id);
                   // dd($id);
@@ -323,19 +323,19 @@ class UserController extends Controller
 
 
                   $data = [
-                    'name' => $request->input('name'),
-                    'email' => $request->input('email'),
+                    // 'name' => $request->input('name'),
+                    // 'email' => $request->input('email'),
                     'password' => bcrypt($request->input('password')),
-                    'role' => $id->role,
-                    'img' => $input['img'],
+                    // 'role' => $id->role,
+                    // 'img' => $input['img'],
                   ];
 
 
 
                 $user->update($data);
-               }
+              //  }
 
-              return Redirect::to('profile')->with('success','User updated!');
+              return Redirect::to('profile')->with('success','Your Password is updated!');
 
 
     }
