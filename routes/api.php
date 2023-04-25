@@ -75,3 +75,11 @@ Route::get('view_call_log', 'Api\CallLogController@user_call_log')->middleware('
 Route::post('barangay_report', 'Api\ReportController@barangay_report')->middleware('jwtAuth');
 Route::post('police_report', 'Api\ReportController@police_report')->middleware('jwtAuth');
 Route::get('view_reports', 'Api\ReportController@view_reports')->middleware('jwtAuth');
+
+Route::get('common_crime_year', 'Api\ReportController@common_crime_year');
+
+
+
+// //Statistics
+// Route::get('year_report', 'Api\PoliceSubstation_ReportAPIController@month_report');
+

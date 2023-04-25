@@ -114,7 +114,7 @@ class ReportController extends Controller
          ]);
          $notification->save();
 
-          
+
 
             $barangay  = DB::table('barangay_accounts')
             // ->join('users', 'verified_users.user_id',  '=', 'users.id')
@@ -130,7 +130,7 @@ class ReportController extends Controller
             {
                 $barangay_notification_message= "An anonymous person has sent a report, With the report ID of ".$barangayreport->id.". Please respond!";
             }
-            
+
 
             $barangay_notification_status = "unread";
 
@@ -140,7 +140,7 @@ class ReportController extends Controller
                 'user_id' =>$barangay->user_id,
             ]);
             $notification->save();
-   
+
 
 
 
@@ -234,8 +234,8 @@ class ReportController extends Controller
 
 
         $policesubstationreport ->save();
-     
-        // dd($policesubstationreport -> id); 
+
+        // dd($policesubstationreport -> id);
 
         $notification_message = "Your report has sent, With the report ID of ".$policesubstationreport->id.". Please wait for the update. Thank you!";
 
@@ -249,10 +249,10 @@ class ReportController extends Controller
          $notification->save();
 
 
-         
+
         // if($request->police_substation == "police_substation1")
         // {
-        
+
 
             $police  = DB::table('police_station_accounts')
             // ->join('users', 'verified_users.user_id',  '=', 'users.id')
@@ -268,7 +268,7 @@ class ReportController extends Controller
             {
                 $police_notification_message= "An anonymous person has sent a report, With the report ID of ".$policesubstationreport->id.". Please respond!";
             }
-            
+
 
             $police_notification_status = "unread";
 
@@ -280,7 +280,7 @@ class ReportController extends Controller
             $notification->save();
 
             // dd($police);
-        // }    
+        // }
 
         // dd($years);
 
@@ -336,6 +336,86 @@ class ReportController extends Controller
 
     }
 
+
+    public function common_crime_year(Request $request){
+
+        //Sub 1
+        $police_substation1 = DB::table('police_station_reports')
+        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->where('police_substation',"police_substation1")
+        ->where('year_reported', '2020')
+        ->groupBy('incident_type', 'month')
+        ->orderBy('total', 'desc')
+        ->limit(10)
+        ->get();
+
+
+        //Sub 2
+        $police_substation2 = DB::table('police_station_reports')
+        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->where('police_substation',"police_substation2")
+        ->where('year_reported', '2020')
+        ->groupBy('incident_type', 'month')
+        ->orderBy('total', 'desc')
+        ->limit(10)
+        ->get();
+
+
+        //Sub 3
+        $police_substation3 = DB::table('police_station_reports')
+        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->where('police_substation',"police_substation3")
+        ->where('year_reported', '2020')
+        ->groupBy('incident_type', 'month')
+        ->orderBy('total', 'desc')
+        ->limit(10)
+        ->get();
+
+        //Sub 4
+        $police_substation6 = DB::table('police_station_reports')
+        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->where('police_substation',"police_substation6")
+        ->where('year_reported', '2020')
+        ->groupBy('incident_type', 'month')
+        ->orderBy('total', 'desc')
+        ->limit(10)
+        ->get();
+
+        //Sub 5
+        $police_substation7 = DB::table('police_station_reports')
+        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->where('police_substation',"police_substation7")
+        ->where('year_reported', '2020')
+        ->groupBy('incident_type', 'month')
+        ->orderBy('total', 'desc')
+        ->limit(10)
+        ->get();
+
+        //Sub 6
+        $police_substation8 = DB::table('police_station_reports')
+        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->where('police_substation',"police_substation8")
+        ->where('year_reported', '2020')
+        ->groupBy('incident_type', 'month')
+        ->orderBy('total', 'desc')
+        ->limit(10)
+        ->get();
+
+
+        return response()->json([
+            'success' => true,
+            'policesub1' => $police_substation1,
+            'policesub2' => $police_substation2,
+            'policesub3' => $police_substation3,
+            'policesub6' => $police_substation6,
+            'policesub7' => $police_substation7,
+            'policesub8' => $police_substation8,
+
+
+        ]);
+
+
+    }
 
 
 
