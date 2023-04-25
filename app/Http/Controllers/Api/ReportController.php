@@ -337,15 +337,16 @@ class ReportController extends Controller
     }
 
 
+
     //Police Sub Staion Top Crime per Year
     public function psub_common_crime_year(Request $request){
 
         //Sub 1
         $police_substation1 = DB::table('police_station_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->where('police_substation',"police_substation1")
         ->where('year_reported', Carbon::now()->year)
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
@@ -353,10 +354,10 @@ class ReportController extends Controller
 
         //Sub 2
         $police_substation2 = DB::table('police_station_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->where('police_substation',"police_substation2")
         ->where('year_reported', Carbon::now()->year)
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
@@ -364,40 +365,40 @@ class ReportController extends Controller
 
         //Sub 3
         $police_substation3 = DB::table('police_station_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->where('police_substation',"police_substation3")
         ->where('year_reported', Carbon::now()->year)
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         //Sub 4
         $police_substation6 = DB::table('police_station_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->where('police_substation',"police_substation6")
         ->where('year_reported', Carbon::now()->year)
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         //Sub 5
         $police_substation7 = DB::table('police_station_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->where('police_substation',"police_substation7")
         ->where('year_reported', Carbon::now()->year)
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         //Sub 6
         $police_substation8 = DB::table('police_station_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->where('police_substation',"police_substation8")
         ->where('year_reported', Carbon::now()->year)
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
@@ -503,121 +504,121 @@ class ReportController extends Controller
     public function brgy_common_crime_year(Request $request){
 
         $barangay_centralbicutan = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_centralbicutan")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_centralsignalvillage = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_centralsignalvillage")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_fortbonifacio = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_fortbonifacio")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_katuparan = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_katuparan")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_maharlikavillage = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_maharlikavillage")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
 
         $barangay_northdaanghari = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_northdaanghari")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
 
         $barangay_northsignalvillage = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_northsignalvillage")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_pinagsama = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_pinagsama")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_southdaanghari = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_southdaanghari")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_southsignalvillage = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_southsignalvillage")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_tanyag = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_tanyag")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
 
         $barangay_upperbicutan = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_upperbicutan")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
 
         $barangay_westernbicutan = DB::table('barangay_reports')
-        ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        ->selectRaw('YEAR(date_reported) as year, incident_type, COUNT(incident_type) as total')
         ->whereYear('date_reported', Carbon::now()->year)
         ->where('barangay',"barangay_westernbicutan")
-        ->groupBy('incident_type', 'month')
+        ->groupBy('incident_type', 'year')
         ->orderBy('total', 'desc')
         ->limit(10)
         ->get();
@@ -640,7 +641,6 @@ class ReportController extends Controller
             'barangay_southdaanghari' => $barangay_southdaanghari,
             'barangay_southsignalvillage' => $barangay_southsignalvillage,
             'barangay_tanyag' => $barangay_tanyag,
-
             'barangay_upperbicutan' => $barangay_upperbicutan,
             'barangay_westernbicutan' => $barangay_westernbicutan,
 
@@ -664,7 +664,7 @@ class ReportController extends Controller
         ->limit(10)
         ->get();
 
-        
+
 
 
         $barangay_centralsignalvillage = DB::table('barangay_reports')
