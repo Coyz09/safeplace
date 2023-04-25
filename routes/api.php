@@ -76,11 +76,13 @@ Route::post('barangay_report', 'Api\ReportController@barangay_report')->middlewa
 Route::post('police_report', 'Api\ReportController@police_report')->middleware('jwtAuth');
 Route::get('view_reports', 'Api\ReportController@view_reports')->middleware('jwtAuth');
 
+
+//Police Sub Station Crime Report
 Route::get('psub_common_crime_year', 'Api\ReportController@psub_common_crime_year');
 Route::get('psub_common_crime_month', 'Api\ReportController@psub_common_crime_month');
 
+//Barangay Crime Report
+Route::get('brgy_common_crime_year', 'Api\ReportController@brgy_common_crime_year');
+Route::get('brgy_common_crime_month', 'Api\ReportController@brgy_common_crime_month');
 
-
-// //Statistics
-// Route::get('year_report', 'Api\PoliceSubstation_ReportAPIController@month_report');
 
