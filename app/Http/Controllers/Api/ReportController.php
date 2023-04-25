@@ -337,7 +337,7 @@ class ReportController extends Controller
     }
 
 
-    public function common_crime_year(Request $request){
+    public function psub_common_crime_year(Request $request){
 
         //Sub 1
         $police_substation1 = DB::table('police_station_reports')
@@ -417,6 +417,52 @@ class ReportController extends Controller
 
     }
 
+
+    public function psub_common_crime_month(Request $request){
+
+
+        $monthNames = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        $commoncrimetotal2023 = DB::table('police_station_reports')
+            ->selectRaw('MONTH(date_reported) as month, incident_type, COUNT(incident_type) as total')
+            ->whereMonth('date_reported', $monthNames->month)
+            ->where('police_substation',"police_substation1")
+            ->where('year_reported', '2023')
+            ->groupBy('incident_type', 'month')
+            ->orderBy('total', 'desc')
+            ->limit(10)
+            ->pluck('total');
+
+        // $police_substation1 = DB::table('police_station_reports')
+        // ->selectRaw('MONTH(date_reported) as month, incident_type, COUNT(incident_type) as total')
+        // ->whereMonth('date_reported', '02')
+        // ->where('police_substation',"police_substation1")
+        // ->where('year_reported', '2020')
+        // ->groupBy('incident_type', 'month')
+        // ->orderBy('total', 'desc')
+        // ->limit(10)
+        // ->pluck('total');
+
+
+                // //Sub 1
+                // $police_substation1 = DB::table('police_station_reports')
+                // ->selectRaw('YEAR(date_reported) as month, incident_type, COUNT(incident_type) as total')
+                // ->where('police_substation',"police_substation1")
+                // ->where('year_reported', '2020')
+                // ->groupBy('incident_type', 'month')
+                // ->orderBy('total', 'desc')
+                // ->limit(10)
+                // ->get();
+
+        return response()->json([
+            'success' => true,
+            'policesub1' => $police_substation1,
+        ]);
+
+    }
 
 
 

@@ -76,7 +76,8 @@ Route::post('barangay_report', 'Api\ReportController@barangay_report')->middlewa
 Route::post('police_report', 'Api\ReportController@police_report')->middleware('jwtAuth');
 Route::get('view_reports', 'Api\ReportController@view_reports')->middleware('jwtAuth');
 
-Route::get('common_crime_year', 'Api\ReportController@common_crime_year');
+Route::get('psub_common_crime_year', 'Api\ReportController@psub_common_crime_year');
+Route::get('psub_common_crime_month', 'Api\ReportController@psub_common_crime_month');
 
 
 
