@@ -72,8 +72,8 @@ class VerifiedUserController extends Controller
                 'birthdate'=> 'required',
                 'address' => 'required',
                 'contact' => 'numeric',             
-                'email'=> 'required|min:2|max:20',
-                'user_id'=> 'required|min:2|max:20',
+                'email'=> 'required|min:2|max:200',
+                'user_id'=> 'required|min:2|max:200',
                   ];
 
         $messages = [
