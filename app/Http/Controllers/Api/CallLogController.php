@@ -20,15 +20,27 @@ class CallLogController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $usercontact = DB::table('verified_users')
-        ->join('users', 'verified_users.user_id',  '=', 'users.id')
-        ->select('verified_users.*','users.img','users.role')
-        ->where('verified_users.user_id', '=',  $user->id )
-        ->first();
-      // dd( $usercontact);
+
+        if($user->role == "verified_user"){
+                $usercontact = DB::table('verified_users')
+                    ->join('users', 'verified_users.user_id',  '=', 'users.id')
+                    ->select('verified_users.*','users.img','users.role')
+                    ->where('verified_users.user_id', '=',  $user->id )
+                    ->first();
+            }
+        elseif($user->role == "unverified_user"){
+                $usercontact = DB::table('unverified_users')
+                    ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+                    ->select('unverified_users.*','users.img','users.role')
+                    ->where('unverified_users.user_id', '=',  $user->id )
+                    ->first();
+            }
+
+
+
 
         $date = Carbon::today()->format('F j, Y');
-       
+
         $time = Carbon::now()->format('g:i A');
 
         $type = "barangay";
@@ -43,8 +55,6 @@ class CallLogController extends Controller
             'date_contacted' => $date,
             'time_contacted' => $time,
             'user_id' => $user->id,
-
-
         ]);
 
         $user->save();
@@ -53,7 +63,7 @@ class CallLogController extends Controller
         return response()->json([
             'success' => true,
             'user' => $user,
-            'usercontact' => $usercontact 
+            'usercontact' => $usercontact
         ]);
 
 
@@ -63,11 +73,21 @@ class CallLogController extends Controller
     public function police_call_log(Request $request){
 
         $user = User::find(Auth::user()->id);
-        $usercontact = DB::table('verified_users')
-        ->join('users', 'verified_users.user_id',  '=', 'users.id')
-        ->select('verified_users.*','users.img','users.role')
-        ->where('verified_users.user_id', '=',  $user->id )
-        ->first();
+
+        if($user->role == "verified_user"){
+            $usercontact = DB::table('verified_users')
+                ->join('users', 'verified_users.user_id',  '=', 'users.id')
+                ->select('verified_users.*','users.img','users.role')
+                ->where('verified_users.user_id', '=',  $user->id )
+                ->first();
+        }
+        elseif($user->role == "unverified_user"){
+            $usercontact = DB::table('unverified_users')
+                ->join('users', 'unverified_users.user_id',  '=', 'users.id')
+                ->select('unverified_users.*','users.img','users.role')
+                ->where('unverified_users.user_id', '=',  $user->id )
+                ->first();
+        }
 
         $date = Carbon::today()->format('F j, Y');
 
@@ -97,7 +117,7 @@ class CallLogController extends Controller
         return response()->json([
             'success' => true,
             'user' => $user,
-            'usercontact' => $usercontact 
+            'usercontact' => $usercontact
         ]);
 
 
