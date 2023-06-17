@@ -64,7 +64,7 @@ class UnverifiedUserController extends Controller
             'mname' => 'required|min:2|max:200',
             'lname' => 'required|min:2|max:200',
             'gender'=> 'required|min:2|max:20',
-            'birthdate'=> 'required',
+            'birthdate'=> 'required|date|date_format:Y-m-d|before:'.now()->subYears(16)->toDateString(),
             'address' => 'required',
             'contact' => 'numeric',
             'email'=> 'required|min:2|max:200',
@@ -158,22 +158,7 @@ class UnverifiedUserController extends Controller
          ]);
          $notification->save();
 
-         if($username->verification_attempt == 5)
-            {
-                $notification_message = $username->name.", Your account is banned!, You exceeded the verification attempt, limit is 5.";
-                $notification = Notification::create([
-                    'message' =>  $notification_message,
-                    'status' =>  $notification_status,
-                    'user_id' =>$username->user_id,
-                ]);
-                $notification->save();
-
-                $unverifieduser = UnverifiedUser::find($id);
-
-                $unverifieduser->update(['status'=>'Banned']);
-            }
-
-         else {
+        if($username->verification_attempt == 2){
             $notification_message = $username->name.", Your account is rejected!";
             $notification = Notification::create([
                 'message' =>  $notification_message,
@@ -188,6 +173,21 @@ class UnverifiedUserController extends Controller
 
               $unverifieduser->update(['status'=>'Rejected', 'verification_attempt'=>$attempt]);
 
+          }
+
+         if($username->verification_attempt == 2)
+          {
+              $notification_message = $username->name.", Your account is banned!, You exceeded the verification attempt, limit is 3.";
+              $notification = Notification::create([
+                  'message' =>  $notification_message,
+                  'status' =>  $notification_status,
+                  'user_id' =>$username->user_id,
+              ]);
+              $notification->save();
+
+              $unverifieduser = UnverifiedUser::find($id);
+
+              $unverifieduser->update(['status'=>'Banned']);
           }
           
 

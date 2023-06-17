@@ -193,6 +193,21 @@ class AuthController extends Controller
              ]);
              $notification->save();
 
+             
+            $admin = DB::table('users')
+            ->select('id')
+            ->where('role',"admin")
+            ->first();
+
+            $admin_notification_message= "New user has registered. Name: ". $user->name.", With the user ID of ".$user->id;
+    
+            $admin_notification = Notification::create([
+                'message' =>  $admin_notification_message,
+                'status' =>  $notification_status,
+                'user_id' =>$admin->id,
+            ]);
+            $admin_notification->save();
+
 
             return $this->login($request);
 

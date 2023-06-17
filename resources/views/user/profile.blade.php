@@ -199,8 +199,9 @@ hr .new1 {
             </div>
 
             <h3 class="row mt-3 mb-4 p-2 text-center justify-content-center align-items-center"><strong>Scan to login</strong></h3>
-            <h4 class="row mt-1 text-center justify-content-center align-items-center">Scan the QR Code to log in</h4>
-            <h4 class="row mt-1 text-center justify-content-center align-items-center">instantly in your mobile device.</h4>
+            <h5 class="row mt-1 text-center justify-content-center align-items-center">Download and Install the mobile app first and then</h5>
+            <h5 class="row mt-1 text-center justify-content-center align-items-center"> Scan the QR Code to log in</h5>
+            <h5 class="row mt-1 text-center justify-content-center align-items-center">instantly in your mobile device.</h5>
         </div>
         </div>
 
@@ -232,7 +233,7 @@ hr .new1 {
 
                                         <div class="mb-3">
                                             <label for="contact" class="form-label">Phone Number:</label>
-                                            <input type="text" id="contact" name="contact" value= "{{ old('contact')}}"  class="form-control" placeholder="+639XXXXXXXXXX">
+                                            <input type="text" id="contact" name="contact" value= "{{$users->contact}}"  class="form-control" placeholder="+639XXXXXXXXXX">
                                         </div>
                                         <div id="recaptcha-container"></div>
                                         <button type="button" id="otp-button" class="btn btn-info" onclick="otpSend();">Verify Phone Number</button>
