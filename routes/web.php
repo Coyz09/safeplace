@@ -193,6 +193,14 @@ Route::group(['middleware' => 'role:superadmin'], function() {
                'uses'=>'AdminController@getPoliceArchives',
                'as' => 'admin.getPoliceArchives']);
 
+               Route::get('/admin_notifications',[
+                'uses'=>'UserController@notifications',
+                'as' => 'admin.notifications']);    
+
+        Route::post('/admin_mark-as-read',[ 'uses'=>'UserController@markNotification','as' => 'admin.markNotification']);
+    
+
+
 
   });
 
@@ -220,7 +228,9 @@ Route::group(['middleware' => 'role:admin'], function() {
   
 
     Route::get('/admin_dashboard', 'DashboardController@getCountandLocation')->name('admin_dashboard');
-    
+    Route::get('/admin_dashboard2', 'Dashboard2Controller@getData')->name('admin_dashboard2');
+    Route::get('/admin_dashboard3', 'Dashboard3Controller@getData')->name('admin_dashboard3');
+
     Route::get('/hospitals/{hospitals}', 'DashboardController@showHospital')->name('hospital');
     Route::get('/barangays/{barangays}', 'DashboardController@showBarangay')->name('barangay');
     Route::get('/polices/{polices}', 'DashboardController@showPolice')->name('police');
@@ -239,6 +249,13 @@ Route::group(['middleware' => 'role:admin'], function() {
      Route::get('/get-police_archives',[
             'uses'=>'AdminController@getPoliceArchives',
             'as' => 'admin.getPoliceArchives']);
+
+        Route::get('/admin_notifications',[
+                'uses'=>'UserController@notifications',
+                'as' => 'admin.notifications']);    
+
+        Route::post('/admin_mark-as-read',[ 'uses'=>'UserController@markNotification','as' => 'admin.markNotification']);
+    
 
   //   Route::resource('user', UserController::class);
   //   Route::get('/get-user',[ 'uses'=>'UserController@getUser','as' => 'users.getUser']);

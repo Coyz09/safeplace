@@ -222,21 +222,21 @@
           
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Name:')!!}
+                <span style="color: red">*</span>{!!Form::label('Name:')!!}
                   {!! Form::text('name',$user->name,['class' => 'form-control'])!!}
                 </div>
               </div>
 
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Email:')!!}
+                <span style="color: red">*</span>{!!Form::label('Email:')!!}
                   {!! Form::text('email',$user->email,['class' => 'form-control']) !!}
                 </div>
               </div>
 
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Password:')!!}
+                <span style="color: red">*</span>{!!Form::label('Password:')!!}
                   {!! Form::password('password',null,array('class' => 'form-control')) !!}
                 </div>
               </div>
@@ -250,7 +250,7 @@
 
               <div class="input-box">
               <div class="form-group">
-                    <label for="role">Role: </label>
+                    <label for="role"><span style="color: red">*</span>Role: </label>
                   
                     {!! Form::select('role',array('users_admin' => 'users_admin','unverified_user' => 'unverified_user', 'verified_user' => 'verified_user', 'hospital_admin' => 'hospital_admin', 'barangay_staff' => 'barangay_staff','barangay_admin' => 'barangay_admin', 'policestation_staff' => 'policestation_staff','policestation_admin' => 'policestation_admin','admin' => 'admin','superadmin' => 'superadmin'), $user->role,['placeholder' => 'Choose the role:','class' => 'form-control']) !!}
                 </div>

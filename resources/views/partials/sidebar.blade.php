@@ -143,6 +143,20 @@
      @if(auth()->guard('web')->user()->role == 'superadmin')
 
      <li class="tooltip-element">
+          <a href="/admin_notifications">
+            <div class="icon">
+        
+            <i class='bx bxs-bell'> </i>
+            <i class='bx bxs-bell'> </i>
+            
+            </div>
+            <!-- <button class="dowload_here"></button> -->
+            <span>Notifications</span><span class="badge badge-pill badge-danger" style = "font-size:20px; margin-left: 8px;">{{auth()->guard('web')->user()->notifications()->where('status', '=','unread')->count()}}</span>
+            
+          </a>
+        </li>
+
+     <li class="tooltip-element">
           <a href="/admin_dashboard">
             <div class="icon">
               <i class='bx bx-tachometer'></i>
@@ -233,6 +247,20 @@
         </li>
 
         @elseif(auth()->guard('web')->user()->role == 'admin')
+
+        <li class="tooltip-element">
+          <a href="/admin_notifications">
+            <div class="icon">
+        
+            <i class='bx bxs-bell'> </i>
+            <i class='bx bxs-bell'> </i>
+            
+            </div>
+            <!-- <button class="dowload_here"></button> -->
+            <span>Notifications</span><span class="badge badge-pill badge-danger" style = "font-size:20px; margin-left: 8px;">{{auth()->guard('web')->user()->notifications()->where('status', '=','unread')->count()}}</span>
+            
+          </a>
+        </li>
 
         <li class="tooltip-element">
           <a href="/admin_dashboard">

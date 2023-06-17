@@ -177,11 +177,12 @@ class UserController extends Controller
             'email'=> 'email|required|unique:users|min:2|max:200',
             'password' => 'required| min:4',
             'gender'=> 'required|min:2|max:20',
-            'birthdate'=> 'required',
+            'birthdate'=> 'required|date|date_format:Y-m-d|before:'.now()->subYears(16)->toDateString(),
             'address' => 'required',
             'contact' => 'required|numeric',
             'img' => 'required|image|mimes:jpg,png,gif,jpeg,jfif,svg|max:2048',
         ]);
+        
 
         //Create User Account
         if($request->hasFile('img')){
@@ -239,6 +240,21 @@ class UserController extends Controller
              'user_id' =>$id,
           ]);
           $notification->save();
+
+          $admin = DB::table('users')
+          ->select('id')
+          ->where('role',"admin")
+          ->first();
+          
+
+          $admin_notification_message= "New user has registered. Name: ". $user->name.", With the user ID of ".$user->id;
+ 
+          $admin_notification = Notification::create([
+              'message' =>  $admin_notification_message,
+              'status' =>  $notification_status,
+              'user_id' =>$admin->id,
+           ]);
+           $admin_notification->save();
 
          return redirect()->route('user.profile')->with('success',"Successfully Signup!");
     }
@@ -339,6 +355,35 @@ class UserController extends Controller
 
 
     }
+
+    public function notifications()
+    {
+        $users = DB::table('users')
+        ->select('id' )
+        ->where('id',(auth()->guard('web')->user()->id))
+        ->get();
+  
+   
+             $notifications =DB::table('notifications')
+            ->select('*')
+            ->where('user_id', '=',  (auth()->guard('web')->user()->id))
+            ->orderBy('created_at','desc')
+            ->get();
+
+      // dd(  $users,$notifications);
+
+        return View::make('admin_archives.admin_notif',compact('users','notifications'));
+    }
+
+        public function markNotification(Request $request)
+        {
+
+            $barangay_reports = Notification::find($request->input('id'));
+            $barangay_reports-> update(['status'=>'read']);
+            return response()->noContent();
+
+
+        }
 
 
     public function getLogout(Request $request){

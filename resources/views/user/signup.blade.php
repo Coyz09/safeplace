@@ -57,32 +57,32 @@
         {{ csrf_field() }}
 
         <div class="form-group">
-            <label for="fname">First Name: </label>
+            <label for="fname"><span style="color: red">*</span>First Name: </label>
             <input type="text" name="fname" id="fname" value= "{{ old('fname')}}"  class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="lname">Middle Name: </label>
+            <label for="lname"><span style="color: red">*</span>Middle Name: </label>
             <input type="text" name="mname" id="mname" value= "{{ old('mname')}}" class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="lname">Last Name: </label>
+            <label for="lname"><span style="color: red">*</span>Last Name: </label>
             <input type="text" name="lname" id="lname" value= "{{ old('lname')}}" class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="birthdate">Birthdate: </label>
+            <label for="birthdate"><span style="color: red">*</span>Birthdate: </label>
             <input type="date" name="birthdate" id="birthdate" value= "{{ old('birthdate')}}" class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="gender">Gender: </label>
+            <label for="gender"><span style="color: red">*</span>Gender: </label>
             {!! Form::select('gender',array('' => 'Choose your Gender:','Male' => 'Male', 'Female' => 'Female'), old('gender') ,['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            <label for="address">Address: </label>
+            <label for="address"><span style="color: red">*</span>Address: </label>
             <input type="text" name="address" id="address" value= "{{ old('address')}}" class="form-control">
         </div>
 
@@ -111,7 +111,7 @@
                                 <div class="card-body">
 
                                         <div class="mb-3">
-                                            <label for="contact" class="form-label">Phone Number:</label>
+                                            <label for="contact" class="form-label"><span style="color: red">*</span>Phone Number:</label>
                                             <input type="text" id="contact" name="contact" value= "{{ old('contact')}}"  class="form-control" placeholder="+639XXXXXXXXXX">
                                         </div>
                                         <div id="recaptcha-container"></div>
@@ -123,7 +123,7 @@
                                 <div class="card-body">
 
                                         <div class="mb-3">
-                                            <label for="otp-code" class="form-label">OTP code:</label>
+                                            <label for="otp-code" class="form-label"><span style="color: red">*</span>OTP code:</label>
                                             <input type="text" id="otp-code" class="form-control" placeholder="Enter OTP Code">
                                         </div>
                                         <button type="button" class="btn btn-info" onclick="otpVerify();">Verify OTP</button>
@@ -242,7 +242,7 @@
                     <div class="form-group">
                     <div class="card">
                     <div class="card-body">
-                        <label for="email">Email: </label>
+                        <label for="email"><span style="color: red">*</span>Email: </label>
                         <input type="text" name="email" id="email" value="{{ old('email')}}" class="form-control">
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                     <div class="form-group">
                     <div class="card">
                     <div class="card-body">
-                        <label for="password">Password: </label>
+                        <label for="password"><span style="color: red">*</span>Password: </label>
                         <input type="password" name="password" id="password" class="form-control">
                     </div>
                     </div>
@@ -261,7 +261,7 @@
                     <div class="form-group ">
                     <div class="card">
                     <div class="card-body">
-                        {!!Form::label('Select image to upload:')!!}
+                    <span style="color: red">*</span>{!!Form::label('Select image to upload:')!!}
                         {!! Form::file('img',['class' => 'form-control']); !!}
                         @if($errors->has('img'))
                         <a>{{ $errors->first('img') }}</a>

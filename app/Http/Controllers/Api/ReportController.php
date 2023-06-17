@@ -103,7 +103,7 @@ class ReportController extends Controller
         $barangayreport ->save();
 
         // $notification_message = "Your report is send! Please wait for the update. Thank you!";
-        $notification_message = "Your report has send, With the report ID of ".$barangayreport->id.". Please wait for the update. Thank you!";
+        $notification_message = "Your report has sent to ".$barangayreport->barangay.". With the report ID of ".$barangayreport->id.". Please wait for the update. Thank you!";
 
         $notification_status = "unread";
 
@@ -237,7 +237,7 @@ class ReportController extends Controller
 
         // dd($policesubstationreport -> id);
 
-        $notification_message = "Your report has sent, With the report ID of ".$policesubstationreport->id.". Please wait for the update. Thank you!";
+        $notification_message = "Your report has sent to ".$policesubstationreport->police_substation.". With the report ID of ".$policesubstationreport->id.". Please wait for the update. Thank you!";
 
         $notification_status = "unread";
 

@@ -311,14 +311,14 @@
                 <!-- </div> -->
 
                 <div class="form-group">
-                  {!!Form::label('Gender:')!!}
+                {!!Form::label('Gender:')!!}
                   {!! Form::text('gender',$unverifieduser->gender,['class' => 'form-control', 'readonly' => 'true'])!!}
                 </div>
               </div>
 
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Birthdate:')!!}
+                <span style="color: red">*</span>{!!Form::label('Birthdate:')!!}
                   {!! Form::date('birthdate',$unverifieduser->birthdate,['class' => 'form-control', 'readonly' => 'true'])!!}
                 </div>
               </div>
@@ -326,7 +326,7 @@
          
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Address:')!!}
+               {!!Form::label('Address:')!!}
                   {!! Form::text('address',$unverifieduser->address,['class' => 'form-control', 'readonly' => 'true'])!!}
                 </div>
               </div>
@@ -334,14 +334,14 @@
            
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Contact:')!!}
+             {!!Form::label('Contact:')!!}
                   {!! Form::text('contact',$unverifieduser->contact,['class' => 'form-control', 'readonly' => 'true'])!!}
                 </div>
               </div>
 
               <div class="input-box">
                 <div class="form-group">
-                  {!!Form::label('Email:')!!}
+                {!!Form::label('Email:')!!}
                   {!! Form::text('email',$unverifieduser->email,['class' => 'form-control', 'readonly' => 'true']) !!}
                 </div>
               </div>
@@ -353,13 +353,27 @@
                 </div>
               </div>
 
+     @if ($unverifieduser->status == "Banned" && $unverifieduser->verification_attempt == "3")
+      <div class="button">
+        {{ Form::submit('Banned',['class'=>'btn btn-danger','disabled' => 'disabled']) }}
+        <!-- <button type="submit" disabled class="btn btn-primary">Verify</button> -->
+      </div>
+      @elseif ($unverifieduser->status != "Banned")
       <div class="button">
         {{ Form::submit('Verify',['class'=>'btn btn-primary']) }}
-        <!-- <button type="submit" class="btn btn-primary">Verify</button> -->
+        <!-- <button type="submit"  class="btn btn-primary">Verify</button> -->
       </div>
+      @endif
      {!! Form::close() !!}
+
+     @if ($unverifieduser->status == "Banned" && $unverifieduser->verification_attempt == "3")
+      <form>
+        <div class="container">
+        <button type="button" hidden class="btn btn-danger btn-lg">Banned</button>
+      </div>
+     </form>
     
-     @if ($unverifieduser->status != "Rejected")
+     @elseif ($unverifieduser->status != "Rejected")
      <form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
         @csrf
         @method('PUT')
@@ -381,7 +395,7 @@
     	<div class="alert alert-danger" style="display:none"></div>
       <div class="modal-header">
       	
-        <h5 class="modal-title">Choose the reason:</h5>
+        <h5 class="modal-title"><span style="color: red">*</span>Choose the reason:</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -413,6 +427,9 @@
             
 
       </form> 
+      
+    
+
       @elseif ($unverifieduser->status == "Rejected")
       <form action="{{route('unverifieduser.reject',$unverifieduser->id)}}" method="POST" >
         @csrf
@@ -436,7 +453,7 @@
             <div class="alert alert-danger" style="display:none"></div>
             <div class="modal-header">
               
-              <h5 class="modal-title">Choose the reason:</h5>
+              <h5 class="modal-title"><span style="color: red">*</span>Choose the reason:</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -468,6 +485,7 @@
                   
 
             </form> 
+     
       @endif
 
       <a href="{{url()->previous()}}" class="btn btn-default" role="button">Back</a>

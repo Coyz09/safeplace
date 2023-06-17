@@ -246,12 +246,12 @@
               </div>
 
               <div class="input-box">
-              @foreach ($passwords as $password)
+      
                 <div class="form-group">
                   {!!Form::label('Password:')!!}
                   {!! Form::text('password',null,array('class' => 'form-control')) !!}
                 </div>
-                @endforeach
+ 
               </div>
 
               <div class="input-box">

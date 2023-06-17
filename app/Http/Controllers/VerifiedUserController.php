@@ -69,11 +69,11 @@ class VerifiedUserController extends Controller
                 'mname' => 'required|min:2|max:200',
                 'lname' => 'required|min:2|max:200',
                 'gender'=> 'required|min:2|max:200',
-                'birthdate'=> 'required',
+                'birthdate'=> 'required|date|date_format:Y-m-d|before:'.now()->subYears(16)->toDateString(),
                 'address' => 'required',
                 'contact' => 'numeric',             
-                'email'=> 'required|min:2|max:20',
-                'user_id'=> 'required|min:2|max:20',
+                'email'=> 'required|min:2|max:200',
+                'user_id'=> 'required|min:2|max:200',
                   ];
 
         $messages = [
