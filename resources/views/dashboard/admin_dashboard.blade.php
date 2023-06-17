@@ -162,20 +162,32 @@
     <br /> 
     <h2>Statistics: </h2> 
     <br /> 
-    <div class="container" id="container6" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <div class="container-xl" style = "margin-left: 40px;">
+        <p class="upper_text_button"><strong>Click Here to view:</strong></p>
+        <a href="{{ route('admin_dashboard2') }}">
+           <button class="btn btn-warning" style="font-weight:bold">Top Most Occured Crimes/Incident per Barangay</button>
+        </a>
+
+        <a href="{{ route('admin_dashboard3') }}">
+           <button class="btn btn-primary" style="font-weight:bold">Top Most Occured Crimes/Incidents per Police Station</button>
+        </a>
+    </div>
+    
+    <br /> 
+    <div class="container" id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
     <br />
     <div class="container" id="container1" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
     <br /> 
-    <div class="container" id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <div class="container" id="container6" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
     <br /> 
     <div class="container" id="container7" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
     <br />
-    <div class="container" id="container5" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+    <div class="container" id="container4" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
     <br />
     <div class="container" id="container3" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
     <br /> 
-    <div class="container" id="container4" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
-   
+    <div class="container" id="container5" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+ 
 
    
 
@@ -1139,6 +1151,7 @@
             
             
     });
+    
 
 </script>
 @endsection
